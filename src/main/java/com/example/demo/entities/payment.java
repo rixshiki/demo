@@ -3,9 +3,10 @@ package com.example.demo.entities;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,7 +14,7 @@ import javax.persistence.Table;
 
 public class payment {
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	private int idOrder;
 	private String userBank;
 	private String sellerBank;
@@ -23,6 +24,17 @@ public class payment {
 	private String photoPayment;
 	private LocalDateTime createdPayment;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idOrder",referencedColumnName = "idOrder", insertable = false, updatable = false)
+	private userorder userorder;
+	
+	public userorder getUserorder() {
+		return userorder;
+	}
+	public void setUserorder(userorder userorder) {
+		this.userorder = userorder;
+		this.userorder.getPayments().add(this);
+	}
 	public int getIdOrder() {
 		return idOrder;
 	}

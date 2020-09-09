@@ -1,21 +1,49 @@
 package com.example.demo.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
+@IdClass(orderdetailid.class)
 @Table(name = "orderdetail")
 
 public class orderdetail {
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	private int idOrder;
+	@Id
 	private int noOrder;
 	private int number;
 	private int idProduct;
 	private int realPrice;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idProduct")
+	private productdetail productdetail;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idOrder",referencedColumnName = "idOrder", insertable = false, updatable = false)
+	private userorder userorder;
+	
+	public userorder getUserorder() {
+		return userorder;
+	}
+	public void setUserorder(userorder userorder) {
+		this.userorder = userorder;
+		this.userorder.getOrderdetails().add(this);
+	}
+	
+	public productdetail getProductdetail() {
+		return productdetail;
+	}
+	public void setProductdetail(productdetail productdetail) {
+		this.productdetail = productdetail;
+		this.productdetail.getOrderdetails().add(this);
+	}
 	
 	public int getIdOrder() {
 		return idOrder;

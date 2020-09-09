@@ -1,11 +1,14 @@
 package com.example.demo.entities;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +29,20 @@ public class userprofile {
 	private String photoUser;
 	private String type;
 	private int coin;
+	
+	@OneToMany
+	private Set<userorder> userorders = new HashSet<userorder>();
+	
+	public Set<userorder> getUserorders() {
+		return userorders;
+	}
+	public void setUserorders(Set<userorder> userorders) {
+		this.userorders = userorders;
+		for(userorder userorder :userorders) {
+			userorder.setUserprofile(this);
+		}
+	}
+	
 	public int getIdUser() {
 		return idUser;
 	}

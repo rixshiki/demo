@@ -1,9 +1,16 @@
 package com.example.demo.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +25,44 @@ public class userorder {
 	private int idUser;
 	private int totalWeight;
 	private int cratedOrder;
+
+	@OneToMany
+	private Set<orderdetail> orderdetails = new HashSet<orderdetail>();
+	
+	@OneToMany
+	private Set<payment> payments = new HashSet<payment>();
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idUser")
+	private userprofile userprofile;
+	
+	public Set<orderdetail> getOrderdetails() {
+		return orderdetails;
+	}
+	public void setOrderdetails(Set<orderdetail> orderdetails) {
+		this.orderdetails = orderdetails;
+		for(orderdetail orderdetail :orderdetails) {
+			orderdetail.setUserorder(this);
+		}
+	}
+	public Set<payment> getPayments() {
+		return payments;
+	}
+	public void setPayments(Set<payment> payments) {
+		this.payments = payments;
+		for(payment payment :payments) {
+			payment.setUserorder(this);
+		}
+	}
+	
+	public userprofile getUserprofile() {
+		return userprofile;
+	}
+	public void setUserprofile(userprofile userprofile) {
+		this.userprofile = userprofile;
+		this.userprofile.getUserorders().add(this);
+	}
+	
 	public int getIdOrder() {
 		return idOrder;
 	}

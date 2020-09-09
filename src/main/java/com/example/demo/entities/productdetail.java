@@ -1,9 +1,13 @@
 package com.example.demo.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +22,19 @@ public class productdetail {
 	private int numberStock;
 	private String photoProduct;
 	private int weight;
+	
+	@OneToMany
+	private Set<orderdetail> orderdetails = new HashSet<orderdetail>();
+	
+	public Set<orderdetail> getOrderdetails() {
+		return orderdetails;
+	}
+	public void setOrderdetails(Set<orderdetail> orderdetails) {
+		this.orderdetails = orderdetails;
+		for(orderdetail orderdetail :orderdetails) {
+			orderdetail.setProductdetail(this);
+		}
+	}
 	
 	public int getIdProduct() {
 		return idProduct;
