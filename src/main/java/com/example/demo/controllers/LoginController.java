@@ -1,22 +1,23 @@
 package com.example.demo.controllers;
 
-import java.time.LocalDate;
-
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.demo.entities.userprofile;
-import com.example.demo.repositories.UserProfileRepository;
-
 @Controller
 public class LoginController {
 	
-	@Autowired
-	private UserProfileRepository userprofileRepo;
+	//@Autowired
+	//private UserProfileRepository userprofileRepo;
 	
 	@GetMapping("/")
+	public String login(Model model) {
+		return "login";
+	}
+	
+	/*
+	@GetMapping("/login")
 	 public String login(Model model) {
 		userprofile user = new userprofile();
 		user.setEmail("nice@mail.com");
@@ -32,7 +33,7 @@ public class LoginController {
 		userprofileRepo.save(user);
 	  return "login";
 	 }
-	/*@GetMapping("/")
+	@GetMapping("/")
 	public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
 		model.addAttribute("name", name);
 		return "greeting";

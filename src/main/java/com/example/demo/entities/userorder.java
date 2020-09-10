@@ -33,7 +33,7 @@ public class userorder {
 	private Set<payment> payments = new HashSet<payment>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idUser")
+	@JoinColumn(name = "idUser", insertable = false, updatable = false)
 	private userprofile userprofile;
 	
 	public Set<orderdetail> getOrderdetails() {

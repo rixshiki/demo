@@ -22,7 +22,7 @@ public class orderdetail {
 	private int realPrice;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idProduct")
+	@JoinColumn(name = "idProduct", insertable = false, updatable = false)
 	private productdetail productdetail;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
