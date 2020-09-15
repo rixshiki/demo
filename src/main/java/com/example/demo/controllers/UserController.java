@@ -17,7 +17,7 @@ import com.example.demo.entities.userprofile;
 import com.example.demo.repositories.UserProfileRepository;
 
 @Controller
-public class UserController {
+public class UserController {					//เกี่ยวกับ user กับ ตารางuser
 	@Autowired
 	private UserProfileRepository userprofileRepo;
 	
