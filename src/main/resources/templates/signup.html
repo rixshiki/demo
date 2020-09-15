@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	h1{
+		background-color: orange;
+	}
+table {
+	margin: 5px;
+	margin-left: 40%;
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+	border-radius: 6px;
+}
+input[type="submit"]{
+	background-color: #8aff8a;
+	border: none;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+</style>
+</head>
+<body>
+	<h1 align="center">USER INSERET</h1>
+	<form action="#" th:action="@{/savemem}" th:object="${user}" method="post" enctype="multipart/form-data">
+		<table>
+			<tr>
+				<td>Email:*</td>
+				<td><input type="email" th:field="*{email}" placeholder="abc@def.com" required></td>
+			</tr>
+			<tr>
+				<td>Password:*</td>
+				<td><input type="text" th:field="*{password}" required></td>
+			</tr>
+			<tr>
+				<td>Name:*</td>
+				<td><input type="text" th:field="*{name}" placeholder="John Smith" required></td>
+			</tr>
+			<tr>
+				<td>Gender:*</td>
+				<td>
+					<select th:field="*{gender}" required>
+						<option value="Male">Male</option>
+						<option value="Female">Female</option>
+						<option value="Other">Other</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Birthday:*</td>
+				<td><input type="date" th:field="*{birthday}" required></td>
+			</tr>
+			<tr>
+				<td>Telephone:*</td>
+				<td><input type="tel" th:field="*{tel}" pattern="[0-9]{10}" placeholder="ex. 0123456789" required></td>
+			</tr>
+			<tr>
+				<td>Address:*</td>
+				<td><textarea row="4" column="50" th:field="*{address}" placeholder="ที่อยู่" required></textarea></td>
+			</tr>
+			<tr>
+				<td>Line:</td>
+				<td><input type="text" th:field="*{line}" placeholder="ex. @tijnuehc"></td>
+			</tr>
+			<tr>
+				<td>Profile Photo:</td>
+				<td><input type="file" name="imageFile"></td>
+			</tr>
+			
+			<tr><td colspan="3">&nbsp;</td></tr>
+			<tr>
+				<td><input type="submit" value="Submit" name="button"></td>
+				<td><a href="http://localhost:7070/">Back to Login</a></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

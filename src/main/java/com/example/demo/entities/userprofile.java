@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "userprofile")
 
@@ -20,7 +22,10 @@ public class userprofile {
 	private int idUser;
 	private String name;
 	private String gender;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthday;
+	
 	private String tel;
 	private String address;
 	private String email;
