@@ -52,7 +52,7 @@ public class LoginController {
 					mem.setPhotoUser(user.getPhotoUser());
 					mem.setTel(user.getTel());
 					mem.setType(user.getType());
-					web = "firstpage";
+					web = "redirect:/firstpage";
 					correct = true;
 			}
 		}
