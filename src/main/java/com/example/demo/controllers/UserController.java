@@ -41,6 +41,7 @@ public class UserController {
 		user.setCoin(0);
 		userprofileRepo.save(user);
 		model.addAttribute("message", "You have already signed.");
-		return "redirect:/";
+		model.addAttribute("user", new userprofile());
+		return "signup";
 	}
 }
