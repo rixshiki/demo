@@ -17,11 +17,11 @@ import com.example.demo.entities.userprofile;
 import com.example.demo.repositories.UserProfileRepository;
 
 @Controller
-public class UserController {					//เกี่ยวกับ user กับ ตารางuser
+public class UserController {					// about user and user tables
 	@Autowired
 	private UserProfileRepository userprofileRepo;
 	
-	@GetMapping("/greeting")
+	@GetMapping("/signup")
 	public String greeting(Model model) {
 		model.addAttribute("user", new userprofile());
 		return "signup";
