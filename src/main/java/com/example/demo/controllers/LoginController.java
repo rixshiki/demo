@@ -34,13 +34,15 @@ public class LoginController {
 	}
 	
 	@PostMapping("/dologin")
-	public String doLogin(@ModelAttribute("user") userprofile mem
+	public String doLogin(@ModelAttribute("user") userprofile mem		//sessions
 			, Model model) {
+
 		List<userprofile> userList = new ArrayList<userprofile>();
-		boolean correct = false;
 		userList = userprofileRepo.findByemail(mem.getEmail());
 		String web = "login";
+		// check user from db
 		for(userprofile user : userList) {
+			// set user data to sessions
 			if(user.getEmail().equalsIgnoreCase(mem.getEmail()) && user.getPassword().equalsIgnoreCase(mem.getPassword())) {
 					mem.setIdUser(user.getIdUser());
 					mem.setAddress(user.getAddress());
@@ -53,10 +55,8 @@ public class LoginController {
 					mem.setTel(user.getTel());
 					mem.setType(user.getType());
 					web = "firstpage";
-					correct = true;
 			}
 		}
-		model.addAttribute("correct", correct);
 		return web;
 	}
 	
