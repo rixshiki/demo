@@ -30,7 +30,7 @@ input[type="submit"]{
 </style>
 </head>
 <body>
-	<h1 align="center">USER INSERET</h1>
+	<h1 align="center">Register</h1>
 	<form action="#" th:action="@{/savemem}" th:object="${user}" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
@@ -75,11 +75,13 @@ input[type="submit"]{
 				<td>Profile Photo:</td>
 				<td><input type="file" name="imageFile"></td>
 			</tr>
-			
 			<tr><td colspan="3">&nbsp;</td></tr>
 			<tr>
 				<td><input type="submit" value="Submit" name="button"></td>
 				<td><a href="http://localhost:7070/">Back to Login</a></td>
+			</tr>
+			<tr th:if="${message != null}">
+					<td colspan="2" th:text="${message}" style="color:green"></td>
 			</tr>
 		</table>
 	</form>

@@ -17,7 +17,7 @@ import com.example.demo.entities.userprofile;
 import com.example.demo.repositories.UserProfileRepository;
 
 @Controller
-public class UserController {
+public class UserController {					//เกี่ยวกับ user กับ ตารางuser
 	@Autowired
 	private UserProfileRepository userprofileRepo;
 	
@@ -41,6 +41,7 @@ public class UserController {
 		user.setCoin(0);
 		userprofileRepo.save(user);
 		model.addAttribute("message", "You have already signed.");
-		return "redirect:/";
+		model.addAttribute("user", new userprofile());
+		return "signup";
 	}
 }
