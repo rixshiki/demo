@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title>Insert title here</title>
+<style>
+h1{
+		background-color: orange;
+	}
+.incorrect{
+		color: red;
+}
+table {
+	margin: 5px;
+	margin-left: 40%;
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+	border-radius: 6px;
+}
+input[type="submit"]{
+	background-color: #8aff8a;
+	border: none;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+</style>
 </head>
 <body>
-	<h1>Login</h1>
+	<h1 align="center">LOG IN</h1>
+	<form action="#" th:action="@{/dologin}" method="post" th:object="${user}"> 
+		<table>
+			<tbody>
+				<tr>
+					<td>E-mail:</td>
+					<td><input type="text" name="email" th:field="*{email}"></td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type="password" name="password" th:field="*{password}"></td>
+				</tr>
+				<tr><td colspan="3">&nbsp;</td></tr>
+				<tr>
+					<td><input type="submit" value="login"></td>
+					<td><a href="/greeting">Sign up</a> </td>
+				</tr>
+			</tbody>
+		</table> 
+	</form>  
+	<p th:if="${correct == false}" class="incorrect">Your name or password is incorrect.</p>
 </body>
 </html>

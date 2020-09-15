@@ -3,7 +3,7 @@
 #spring.datasource.password=Aommy07092541
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/sme
+    url: jdbc:mysql://localhost:3306/sme?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: Aommy
     password: Aommy07092541
   jpa:
