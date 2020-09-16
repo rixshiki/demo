@@ -12,7 +12,12 @@ public class GeneralController {
 	
 	@GetMapping("/firstpage")
 	public String showuser(@SessionAttribute("user") userprofile user, Model model) {
-		model.addAttribute("user", user);
-		return "firstpage";
+		String web = "";
+		if(user.getType().equalsIgnoreCase("Customer")) {
+			web = "firstpage";
+		}else if(user.getType().equalsIgnoreCase("Seller")) {
+			web = "Sfirstpage";
+		}
+		return web;
 	}
 }
