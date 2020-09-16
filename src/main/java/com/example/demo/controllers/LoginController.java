@@ -30,7 +30,7 @@ public class LoginController {
 	
 	@GetMapping("/")
 	public String login(Model model) {
-		return "Sfirstpage";
+		return "login";
 	}
 	
 	@PostMapping("/dologin")
