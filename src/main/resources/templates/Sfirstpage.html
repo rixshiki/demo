@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/CSS/Sfirstpage.css}">
+<style type="text/css">
+
+:root {
+  --brown: #c7b198;
+  --brown2: #f4ebc1;
+}
+
+body{
+	height: 100vh;
+	display: flex;
+	background-color: var(--brown2);
+}
+
+.center{
+  	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btnseller {
+	box-sizing: border-box;
+	appearance: none;
+	background-color: transparent;
+	border: 2px solid var(--brown);
+	border-radius: 50px;
+	color: var(--brown);
+	cursor: pointer;
+	align-self: center;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1;
+	margin: 20px;
+	padding: 1.2em 2.8em;
+	text-decoration: none;
+	text-align: center;
+	text-transform: uppercase;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 700;
+	height: 15%;
+	width: 40%;
+}
+.btn:hover{
+	color: white;
+  	transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+  	box-shadow: 0 0 40px 40px var(--brown) inset;
+}
+
+.whitebg{
+	flex-direction: column;
+	background-color: rgba(255,255,255,0.75);
+	border-radius: 10px;
+	width: 40%;
+	height: 70%;
+	box-shadow: 5px 5px 5px gray;
+}
+
+ul {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #f5b971;
+}
+
+li {
+	float: left;
+	height: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 4px 16px;
+	text-decoration: none;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+.profilepicture{
+	border-radius: 50px;
+	width: 50px;
+	height: 50px;
+}
+
+.nav{
+	height: 50px;
+}
+
+</style>
+</head>
+<body class="center">
+	<ul>
+		<li><a href="#home"><img class="profilepicture" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625"></a></li>
+		<li><a href="#contact">ร้านขายของน้องหมา </a></li>
+		<li style="float:right"><a href="#about">ชื่อ คุณ AAA</a></li>
+		<li style="float:right"><a href="#profile"><img class="profilepicture" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625"></a></li>
+
+	</ul>
+	<div class="whitebg center">
+		<button class="btnseller btn">ตรวจสอบ </button><br>
+		<button class="btnseller btn">ต้องจัดส่ง </button><br>
+		<button class="btnseller btn">จัดส่งแล้ว </button><br>
+	</div>
+</body>
+</html>
