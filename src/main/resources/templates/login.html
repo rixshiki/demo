@@ -3,56 +3,170 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400&display=swap" rel="stylesheet">
 <style>
-h1{
-		background-color: orange;
-	}
-.incorrect{
-		color: red;
+:root {
+  --brown: #cbaf87;
+  --x: #c7b198;
+  --brown2: #f4ebc1;
 }
+
+body{
+	font-family: 'Bai Jamjuree', sans-serif;
+	height: 100vh;
+	display: flex;
+	background-color: var(--brown2);
+	color: gray;
+}
+
+.center{
+  	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+h1{
+	margin: -5% 0 0 0;
+}
+
+.incorrect{
+	color: red;
+}
+
 table {
-	margin: 5px;
-	margin-left: 40%;
+	/*margin: 5px;
+	margin-left: 40%;*/
 	border: none;
-	padding: 10px 20px;
+	/*padding: 10px 20px;*/
 	cursor: pointer;
 	border-radius: 6px;
 }
+
+input[type="text"],input[type="password"]{
+	height: 16pt;
+	border-radius: 16pt;
+	border: 1px solid gray;
+}
 input[type="submit"]{
-	background-color: #8aff8a;
+	font-family: 'Bai Jamjuree', sans-serif;
+	background-color: #1592E6;
 	border: none;
-	padding: 10px 20px;
+	padding: 5px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 14px;
+	font-size: 14pt;
 	margin: 4px 2px;
 	cursor: pointer;
-	border-radius: 5px;
+	border-radius: 10px;
+	width: 100%;
+	color: white;
+}
+tr{
+	height: 14pt;
+}
+
+ul {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: var(--brown);
+	box-shadow: 2px 2px 5px gray; 
+}
+
+li {
+	float: left;
+	height: 60px;
+}
+
+li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 4px 16px;
+	text-decoration: none;
+}
+
+.profilepicture{
+	border-radius: 50px;
+	width: 50px;
+	height: 50px;
+}
+
+.loginwhitebg{
+	flex-direction: column;
+	background-color: rgba(255,255,255,0.75);
+	border-radius: 0 100px;
+	width: 60%;
+	height: 80%;
+	box-shadow: 5px 5px 5px gray;
+	margin-top: 6%; 
+}
+.col1{
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+.col2{
+	width: 50%;
+	height: 100%;
+	float: right;
+	flex-direction: column;
+}
+
+.forgotpw{
+	font-size: 10pt;
+	float: right;
+}
+.newuser{
+	width: 100%;
+	height: 40%;
+}
+.signup{
+	color: #1592E6;
+	text-decoration: none;
+	font-size: 14pt;
 }
 </style>
 </head>
-<body>
-	<h1 align="center">LOG IN</h1>
-	<form action="#" th:action="@{/dologin}" method="post" th:object="${user}"> 
-		<table>
+<body class="center">
+	<ul>
+		<li><a href="#home"><img class="profilepicture" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625"></a></li>
+		<li class="center"><a href="#contact">ร้านขายของน้องหมา </a></li>
+	</ul>
+	<div class="loginwhitebg">
+	<div class="col1 center">
+		<p>ข้อมูลผู้ก่อตั้ง</p>
+	</div>
+	<div class="col2 center">
+		<h1>เข้าสู่ระบบ</h1>
+		<form action="#" th:action="@{/dologin}" method="post" th:object="${user}"> 
+			<table>
 			<tbody>
+				<tr></tr>
 				<tr>
-					<td>E-mail:</td>
+					<td>อีเมล </td>
 					<td><input type="text" name="email" th:field="*{email}"></td>
 				</tr>
+				<tr></tr>
 				<tr>
-					<td>Password:</td>
+					<td>รหัสผ่าน </td>
 					<td><input type="password" name="password" th:field="*{password}"></td>
 				</tr>
 				<tr><td colspan="3">&nbsp;</td></tr>
-				<tr>
-					<td><input type="submit" value="login"></td>
-					<td><a href="/signup">Sign up</a> </td>
-				</tr>
 			</tbody>
-		</table> 
-	</form>  
-	<p th:if="${correct == false}" class="incorrect">Your name or password is incorrect.</p>
+			</table>
+			<input type="submit" value="เข้าสู่ระบบ" >
+			<a href="/forgotpw" class="forgotpw">ลืมรหัสผ่าน </a>
+			<p class="center newuser">ผู้ใช้งานใหม่?... <a href="/signup" class="signup">สร้างบัญชี </a></p>
+		</form>  
+		<!-- <p th:if="${correct == false}" class="incorrect">Your name or password is incorrect.</p> -->
+	</div>
+	
+	</div>
 </body>
 </html>

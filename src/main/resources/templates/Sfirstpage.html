@@ -3,12 +3,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ร้านขายของน้องหมา </title>
 <link rel="stylesheet" th:href="@{/CSS/Sfirstpage.css}">
 <style type="text/css">
 
 :root {
-  --brown: #c7b198;
+  --brown: #cbaf87;
+  --x: #c7b198;
   --brown2: #f4ebc1;
 }
 
@@ -24,7 +25,7 @@ body{
 	justify-content: center;
 }
 
-.btnseller {
+.btnfirstpage {
 	box-sizing: border-box;
 	appearance: none;
 	background-color: transparent;
@@ -46,7 +47,7 @@ body{
 	height: 15%;
 	width: 40%;
 }
-.btn:hover{
+.btnfirstpage:hover{
 	color: white;
   	transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
   	box-shadow: 0 0 40px 40px var(--brown) inset;
@@ -59,6 +60,7 @@ body{
 	width: 40%;
 	height: 70%;
 	box-shadow: 5px 5px 5px gray;
+	margin-top: 6%; 
 }
 
 ul {
@@ -69,15 +71,13 @@ ul {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
-	background-color: #f5b971;
+	background-color: var(--brown);
+	box-shadow: 2px 2px 5px gray; 
 }
 
 li {
 	float: left;
 	height: 60px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 
 li a {
@@ -88,18 +88,25 @@ li a {
 	text-decoration: none;
 }
 
-.active {
-  background-color: #4CAF50;
-}
-
 .profilepicture{
 	border-radius: 50px;
 	width: 50px;
 	height: 50px;
 }
 
-.nav{
-	height: 50px;
+.logout{
+	position: fixed;
+	top: 35px;
+	right: 100px;
+	color: #30475e;
+}
+
+.editproduct{
+	position: fixed;
+	top: 80px;
+	right: 20px;
+	color: red;
+	font-size: 18px;
 }
 
 </style>
@@ -107,15 +114,16 @@ li a {
 <body class="center">
 	<ul>
 		<li><a href="#home"><img class="profilepicture" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625"></a></li>
-		<li><a href="#contact">ร้านขายของน้องหมา </a></li>
-		<li style="float:right"><a href="#about">ชื่อ คุณ AAA</a></li>
+		<li class="center"><a href="#contact">ร้านขายของน้องหมา </a></li>
 		<li style="float:right"><a href="#profile"><img class="profilepicture" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625"></a></li>
-
+		<li style="float:right"><a href="#about">ชื่อ คุณ AAA</a></li>
+		<a href="/logout" class="logout">logout</a>
+		<a href="/editproduct" class="editproduct">แก้ไขรายการสินค้า </a>
 	</ul>
 	<div class="whitebg center">
-		<button class="btnseller btn">ตรวจสอบ </button><br>
-		<button class="btnseller btn">ต้องจัดส่ง </button><br>
-		<button class="btnseller btn">จัดส่งแล้ว </button><br>
+		<button class="btnfirstpage">ตรวจสอบ </button><br>
+		<button class="btnfirstpage">ต้องจัดส่ง </button><br>
+		<button class="btnfirstpage">จัดส่งแล้ว </button><br>
 	</div>
 </body>
 </html>
