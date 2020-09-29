@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>ร้านขายของน้องหมา </title>
 <link rel="stylesheet" th:href="@{/CSS/Sfirstpage.css}">
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400&display=swap" rel="stylesheet">
 <style type="text/css">
 
 :root {
@@ -25,6 +26,50 @@ body{
 	justify-content: center;
 }
 
+/* Nav */
+ul {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: var(--brown);
+	box-shadow: 2px 2px 5px gray; 
+}
+li {
+	float: left;
+	height: 60px;
+}
+li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 4px 16px;
+	text-decoration: none;
+}
+.profilepicture{
+	border-radius: 50px;
+	width: 50px;
+	height: 50px;
+}
+.logout{
+	position: fixed;
+	top: 35px;
+	right: 100px;
+	color: #30475e;
+}
+
+
+/* Seller First page */
+.editproduct{
+	position: fixed;
+	top: 80px;
+	right: 20px;
+	color: red;
+	font-size: 18px;
+}
 .btnfirstpage {
 	box-sizing: border-box;
 	appearance: none;
@@ -52,7 +97,6 @@ body{
   	transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
   	box-shadow: 0 0 40px 40px var(--brown) inset;
 }
-
 .whitebg{
 	flex-direction: column;
 	background-color: rgba(255,255,255,0.75);
@@ -61,52 +105,6 @@ body{
 	height: 70%;
 	box-shadow: 5px 5px 5px gray;
 	margin-top: 6%; 
-}
-
-ul {
-	position: fixed;
-	top: 0;
-	width: 100%;
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	background-color: var(--brown);
-	box-shadow: 2px 2px 5px gray; 
-}
-
-li {
-	float: left;
-	height: 60px;
-}
-
-li a {
-	display: block;
-	color: white;
-	text-align: center;
-	padding: 4px 16px;
-	text-decoration: none;
-}
-
-.profilepicture{
-	border-radius: 50px;
-	width: 50px;
-	height: 50px;
-}
-
-.logout{
-	position: fixed;
-	top: 35px;
-	right: 100px;
-	color: #30475e;
-}
-
-.editproduct{
-	position: fixed;
-	top: 80px;
-	right: 20px;
-	color: red;
-	font-size: 18px;
 }
 
 </style>
