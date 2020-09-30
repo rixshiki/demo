@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ร้านขายของน้องหมา </title>
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400&display=swap" rel="stylesheet">
+<style type="text/css">
+/* Color Variables */
+:root {
+  --brown: #cbaf87;
+  --x: #c7b198;
+  --brown2: #f4ebc1;
+}
+
+body{
+	font-family: 'Bai Jamjuree', sans-serif;
+	/*height: 100vh;*/
+	display: flex;
+	background-color: var(--brown2);
+	color: gray;
+}
+
+.center{
+  	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+
+.sellerheader{
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: var(--brown);
+	color: white;
+	font-size: 20pt;
+	height: 60px;
+	width: 100%;
+	box-shadow: 2px 2px 5px gray;
+}
+details {
+	margin-top: 60px;
+	width: 100%;
+	border: 2px gray solid;
+}
+summary{
+	background-color: #e7d39f;
+	height: 30pt;
+	display: flex;
+	align-items: center;
+	padding-left: 2%;
+}
+.tableheader{
+	background-color: #e4e4e4;
+}
+.maintable{
+	background-color: gray;
+	width: 100%;
+}
+.maintable tr, .maintable td {
+	background-color: var(--brown2);
+}
+
+.btncheck{
+	background-color: #79d70f;
+	color: white;
+	width: 60pt;
+	height: 22pt;
+	border: none;
+	border-radius: 22px;
+	box-shadow: 2px 2px 5px gray;
+	cursor: pointer;
+}
+
+#overlay {
+  position: fixed;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+.checked{
+	position: relative;
+	background-color: white;
+	width: 50%;
+	height: 80%;
+	cursor: default;
+	flex-flow: column;
+}
+.checked iframe{
+	width: 99%;
+	height: 100%;
+	margin: 60px 0 60px 0;
+	border: none;
+}
+.overlayheader{
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 16pt;
+	text-align: center;
+	padding: 2% 0 2% 0;
+	width: 100%;
+	background-color: var(--brown);
+	color: white;
+	box-shadow: 2px 2px 2px gray;
+}
+.overlayconfirm{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	font-size: 16pt;
+	text-align: center;
+	padding: 2% 0 2% 0;
+	width: 100%;
+	background-color:  #79d70f;
+	border: none;
+	color: white;
+	box-shadow: 2px -2px 2px gray;
+}
+#detaildata{
+	position: absolute;
+	font-size: 10pt;
+	right: 2%;
+	bottom: 2%;
+	text-decoration: underline;
+	cursor: pointer;
+}
+</style>
+<script>
+function on() {
+  document.getElementById("overlay").style.visibility = "visible";
+}
+
+function off() {
+  document.getElementById("overlay").style.visibility = "hidden";
+}
+</script>
+</head>
+<body>
+	<div class="sellerheader center">ตรวจสอบ </div>
+	<!-- List order from database -->
+	<div class="center" id="overlay" onclick="off()">
+		<div class="checked center">
+			<div class="overlayheader">ตรวจสอบ </div>
+				<iframe src="ovlaycheck.html"></iframe>
+			<button class="overlayconfirm">ยืนยัน </button>
+		</div>
+	</div>
+	<details>
+		<summary>กันยายน 2563</summary>
+		<table class="maintable">
+		<tr class="tableheader">
+			<th style="height:30pt; width: 10%" > รหัสสั่งซื้อ </th>
+			<th style="height:30pt; width: 60%">  รายการ </th>
+			<th style="height:30pt; width: 15%">วันเวลาที่โอน </th>
+			<th style="height:30pt; width: 15%">ตรวจสอบ </th>
+		</tr>
+		<tr>
+			<td>#รหัสสั่งซื้อ </td>
+			<td style="position: relative;" >
+			<ul>
+  				<li> Item one </li>
+  				<li> Item two </li>
+			</ul>
+			<div id="detaildata">รายละเอียด </div>
+			</td>
+			<td>xx/xx/xx xx.xx น. </td>
+			<td style="text-align: center;">
+				<button class="btncheck" onclick="on()">ตรวจสอบ </button>
+			</td>
+		</tr>
+		</table>
+	</details>
+</body>
+</html>
