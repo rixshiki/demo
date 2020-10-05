@@ -15,7 +15,9 @@
 }
 
 body{
+	font-family: 'Bai Jamjuree', sans-serif;
 	height: 100vh;
+	margin: 0;
 	display: flex;
 	background-color: var(--brown2);
 }
@@ -69,6 +71,8 @@ li a {
 	right: 20px;
 	color: red;
 	font-size: 18px;
+	cursor: pointer;
+	text-decoration: underline;
 }
 .btnfirstpage {
 	box-sizing: border-box;
@@ -107,7 +111,82 @@ li a {
 	margin-top: 6%; 
 }
 
+.edited{
+	position: relative;
+	background-color: white;
+	width: 50%;
+	height: 80%;
+	cursor: default;
+	flex-flow: column;
+}
+.edited iframe{
+	width: 99%;
+	height: 100%;
+	margin: 60px 0 60px 0;
+	border: none;
+}
+#overlay {
+  position: fixed;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+.overlayheader{
+	position: absolute;
+	display: flex;
+	flex-flow: row;
+	top: 0;
+	left: 0;
+	font-size: 16pt;
+	text-align: center;
+	/*padding: 2% 0 2% 0;*/
+	height: 50px;
+	width: 100%;
+	background-color: var(--brown);
+	color: white;
+	box-shadow: 2px 2px 2px gray;
+}
+.overlayconfirm{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	font-size: 16pt;
+	text-align: center;
+	padding: 2% 0 2% 0;
+	width: 100%;
+	background-color:  #79d70f;
+	border: none;
+	color: white;
+	box-shadow: 2px -2px 2px gray;
+}
+.categories{
+	width: 20%;
+	top: 0;
+	cursor: pointer;
+	height: 55px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.look{
+	color: var(--brown);
+	background-color: white;
+}
 </style>
+<script>
+function on() {
+  document.getElementById("overlay").style.visibility = "visible";
+}
+
+function off() {
+  document.getElementById("overlay").style.visibility = "hidden";
+}
+</script>
 </head>
 <body class="center">
 	<ul>
@@ -116,8 +195,18 @@ li a {
 		<li style="float:right"><a href="#profile"><img class="profilepicture" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625"></a></li>
 		<li style="float:right"><a href="#about">ชื่อ คุณ AAA</a></li>
 		<a href="/logout" class="logout">logout</a>
-		<a href="/editproduct" class="editproduct">แก้ไขรายการสินค้า </a>
+		<div class="editproduct" onclick="on()">แก้ไขรายการสินค้า </div>
 	</ul>
+	<div class="center" id="overlay" onclick="off()">
+		<div class="edited center">
+			<div class="overlayheader">
+				<div class="categories look">เสื้อ </div>
+				<div class="categories">+</div>
+			 </div>
+			<iframe src="editproduct.html"></iframe>
+			<button class="overlayconfirm">ยืนยัน </button>
+		</div>
+	</div>
 	<div class="whitebg center">
 		<button class="btnfirstpage">ตรวจสอบ </button><br>
 		<button class="btnfirstpage">ต้องจัดส่ง </button><br>
