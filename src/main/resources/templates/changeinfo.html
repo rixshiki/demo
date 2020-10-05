@@ -155,37 +155,47 @@ function togglePW() {
 	<div class="left">
 		<img class="editprofilepicture" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625">
 	</div>
+	<form action="#" th:action="@{/updatemem}" th:object="${mem}" method="post" enctype="multipart/form-data">
+		<table th:each="mem : ${mem}">
+			<tr>
+				<td>ชื่อผู้ใช้งาน :*</td>
+				<td><input class="inputinfo" type="text" th:value="${mem.getName()}" th:field="*{name}" required></td>
+			</tr>
+			<tr>
+				<td>รหัสผ่าน:*</td>
+				<td><input class="inputinfo" type="password" id="password" th:value="${mem.getPassword()}" th:field="*{password}" required></td>
+				<td><input type="checkbox" onclick="togglePW()">Show</td>
+			</tr>
+			<tr>
+				<td>เบอร์โทรศัพท์:*</td>
+				<td><input class="inputinfo" type="text" th:value="${mem.getTel()}" th:field="*{tel}" required></td>
+			</tr>
+			<tr>
+				<td>เพศ:*</td>
+				<td>
+					<select th:field="*{gender}" required>
+						<option value="Male">Male</option>
+						<option value="Female">Female</option>
+						<option value="Other">Other</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>รูปโปรไฟล์:</td>
+				<td><input type="file" name="imageFile"></td>
+			</tr>
+			<tr>
+				<td>ที่อยู่:*</td>
+				<td><textarea class="inputaddress" th:value="${mem.getAddress()}" row="4" column="50" th:field="*{address}"></textarea></td>
+			</tr>
+			<tr><td colspan="2">&nbsp;</td></tr>
+			<tr>
+				<td><a href="#">Back</a></td>
+				<td><input type="submit" class="btnconfirm" value="Submit" name="button"></td>
+			</tr>
+		</table>
+	</form>
 	
-	<table>
-	<tr>
-		<td>ชื่อผู้ใช้งาน </td>
-		<td><input class="inputinfo" type="text" placeholder="ex. เมตตา อารี" ></td>
-	</tr>
-	<tr>
-		<td>แก้ไขรหัสผ่าน </td>
-		<td><input class="inputinfo" type="password" id="password"></td>
-		<td><input type="checkbox" onclick="togglePW()">Show</td>
-	</tr>
-	<tr>
-		<td>เบอร์โทรศัพท์</td>
-		<td><input class="inputinfo" type="text" placeholder="ex. 0800000000" ></td>
-	</tr>
-	<tr>
-		<td>เพศ</td>
-		<td><select class="inputinfo">
-		<option>หญิง </option>
-		<option>ชาย </option>
-		<option>ไม่ระบุ </option>
-		</select></td>
-	</tr>
-	
-	
-	<tr>
-		<td>ที่อยู่</td>
-		<td><textarea class="inputaddress"></textarea></td>
-	</tr>
-	</table>
-	<button class="btnconfirm">ยืนยัน </button>
 	</div>
 </body>
 </html>
