@@ -94,39 +94,41 @@ h3{
 	width: 100px;
 	height: 100px;
 	left: 0;
+	box-shadow: 2px 2px 5px gray;
 }
 table{
 	width: 80%;
 	padding-left: 20%;
-	margin-top: 5%;
 	cursor: default;
+	margin-top: 2%;
 }
-.inputinfo{
+.outputinfo{
 	width: 90%;
 	height: 20pt;
 	cursor: text;
+	word-wrap: break-word;
 }
-.inputaddress{
-	width: 90%;
-	height: 80pt;
+.outputaddress{
+	width: 200pt;
 	cursor: text;
 	resize: none;
+	word-wrap: break-word;
+}
+td p{
+	margin: 2pt;
 }
 .left{
 	position: absolute;
 	left: 10%;
 	top: 20%;
 }
-.btnconfirm{
+.btneditinfo{
 	position: absolute;
-	background-color: #79d70f;
-	color: white;
-	width: 60pt;
+	/*color: #79d70f;*/
 	height: 22pt;
 	right: 14%;
 	bottom: 8%;
 	border: none;
-	box-shadow: 2px 2px 5px gray;
 	cursor: pointer;
 }
 
@@ -151,41 +153,32 @@ function togglePW() {
 		<a href="/logout" class="logout">logout</a>
 	</ul>
 	<div class="brownbg center">
-	<h3> ข้อมูลผู้ใช้งาน </h3>
-	<div class="left">
-		<img class="editprofilepicture" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625">
-	</div>
+	<img class="editprofilepicture" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625">
+	
 	
 	<table>
 	<tr>
 		<td>ชื่อผู้ใช้งาน </td>
-		<td><input class="inputinfo" type="text" placeholder="ex. เมตตา อารี" ></td>
-	</tr>
-	<tr>
-		<td>แก้ไขรหัสผ่าน </td>
-		<td><input class="inputinfo" type="password" id="password"></td>
-		<td><input type="checkbox" onclick="togglePW()">Show</td>
+		<td><p class="outputinfo"></p></td>
 	</tr>
 	<tr>
 		<td>เบอร์โทรศัพท์ </td>
-		<td><input class="inputinfo" type="text" placeholder="ex. 0800000000" ></td>
+		<td><p class="outputinfo"></p></td>
 	</tr>
 	<tr>
 		<td>เพศ </td>
-		<td><select class="inputinfo">
-		<option>หญิง </option>
-		<option>ชาย </option>
-		<option>ไม่ระบุ </option>
-		</select></td>
+		<td><p class="outputinfo"></p></td>
 	</tr>
-	
-	
 	<tr>
-		<td>ที่อยู่</td>
-		<td><textarea class="inputaddress"></textarea></td>
+		<td>วันเกิด </td>
+		<td><p class="outputinfo"></p></td>
+	</tr>
+	<tr>
+		<td>ที่อยู่ </td>
+		<td><p class="outputaddress"></p></td>
 	</tr>
 	</table>
-	<button class="btnconfirm">ยืนยัน </button>
+	<a href="#" class="btneditinfo">แก้ไขข้อมูลผู้ใช้งาน </a>
 	</div>
 </body>
 </html>
