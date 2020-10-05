@@ -37,7 +37,7 @@ public class UserController {					// about user and user tables
 			String image = bFile.invertfile(file);
 			user.setPhotoUser(image);
 		}
-		user.setType("Seller");
+		user.setType("Customer");
 		user.setCoin(0);
 		userprofileRepo.save(user);
 		model.addAttribute("message", "You have already signed.");
