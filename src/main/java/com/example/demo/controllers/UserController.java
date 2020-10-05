@@ -46,6 +46,11 @@ public class UserController {					// about user and user tables
 		return "signup";
 	}
 	
+	@GetMapping("/myinfo")
+	public String myinfo() {
+		return "myinfo";
+	}
+	
 	@GetMapping("/edit")
 	public String editProfile(@SessionAttribute("user") userprofile user, Model model) {
 		System.out.println("Edit id:"+ user.getIdUser());
@@ -57,7 +62,7 @@ public class UserController {					// about user and user tables
 	public String updateMember(@ModelAttribute userprofile member
 			,@SessionAttribute("user") userprofile user
 			,@RequestParam("imageFile") MultipartFile file) throws IOException {
-		int id = member.getIdUser();
+		int id = user.getIdUser();
 		System.out.println("Update id:");
 		System.out.println(id);
 		userprofile mem = new userprofile();
@@ -82,6 +87,6 @@ public class UserController {					// about user and user tables
 		}
 		userprofileRepo.save(mem);
 		System.out.println("Update!!");
-		return "redirect:/chooseuser";
+		return "redirect:/myinfo";
 	}
 }

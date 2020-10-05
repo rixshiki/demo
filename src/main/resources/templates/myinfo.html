@@ -148,37 +148,45 @@ function togglePW() {
 	<ul>
 		<li><a href="#home"><img class="profilepicture" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625"></a></li>
 		<li class="center"><a href="#contact">ร้านขายของน้องหมา </a></li>
-		<li style="float:right"><a href="#profile"><img class="profilepicture" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625"></a></li>
-		<li style="float:right"><a href="#about">ชื่อ คุณ AAA</a></li>
+		<li style="float:right"><a href="#profile">
+			<img class="profilepicture" th:if="${session.user.getPhotoUser() == null}" alt="can't download" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625">
+			<img class="profilepicture" th:if="${session.user.getPhotoUser() != null}" alt="can't download" th:src="@{'data:image/jpeg;base64,'+${session.user.getPhotoUser()}}">
+		</a></li>
+		<li style="float:right"><a href="#about" th:text="${session.user.getName()}"></a></li>
 		<a href="/logout" class="logout">logout</a>
 	</ul>
 	<div class="brownbg center">
-	<img class="editprofilepicture" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625">
-	
+	<img class="editprofilepicture" th:if="${session.user.getPhotoUser() == null}" alt="can't download" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625">
+	<img class="editprofilepicture" th:if="${session.user.getPhotoUser() != null}" alt="can't download" th:src="@{'data:image/jpeg;base64,'+${session.user.getPhotoUser()}}">
+		
 	
 	<table>
 	<tr>
 		<td>ชื่อผู้ใช้งาน </td>
-		<td><p class="outputinfo"></p></td>
+		<td><p class="outputinfo" th:text="${session.user.getName()}"></p></td>
+	</tr>
+	<tr>
+		<td>E-mail </td>
+		<td><p class="outputinfo" th:text="${session.user.getEmail()}"></p></td>
 	</tr>
 	<tr>
 		<td>เบอร์โทรศัพท์ </td>
-		<td><p class="outputinfo"></p></td>
+		<td><p class="outputinfo" th:text="${session.user.getTel()}"></p></td>
 	</tr>
 	<tr>
 		<td>เพศ </td>
-		<td><p class="outputinfo"></p></td>
+		<td><p class="outputinfo" th:text="${session.user.getGender()}"></p></td>
 	</tr>
 	<tr>
 		<td>วันเกิด </td>
-		<td><p class="outputinfo"></p></td>
+		<td><p class="outputinfo" th:text="${session.user.getBirthday()}"></p></td>
 	</tr>
 	<tr>
 		<td>ที่อยู่ </td>
-		<td><p class="outputaddress"></p></td>
+		<td><p class="outputaddress" th:text="${session.user.getAddress()}"></p></td>
 	</tr>
 	</table>
-	<a href="#" class="btneditinfo">แก้ไขข้อมูลผู้ใช้งาน </a>
+	<a href="/edit" class="btneditinfo">แก้ไขข้อมูลผู้ใช้งาน </a>
 	</div>
 </body>
 </html>
