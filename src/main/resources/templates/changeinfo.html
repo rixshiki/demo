@@ -164,16 +164,16 @@ function togglePW() {
 		<table th:each="mem : ${mem}">
 			<tr>
 				<td>ชื่อผู้ใช้งาน :*</td>
-				<td><input class="inputinfo" type="text" th:value="${mem.getName()}" th:field="*{name}" required></td>
+				<td><input class="inputinfo" type="text" th:value="${session.user.getName()}" th:field="*{name}" required></td>
 			</tr>
 			<tr>
 				<td>รหัสผ่าน:*</td>
-				<td><input class="inputinfo" type="password" id="password" th:value="${mem.getPassword()}" th:field="*{password}" required></td>
+				<td><input class="inputinfo" type="password" th:value="${session.user.getPassword()}" th:field="*{password}" id="password" required></td>
 				<td><input type="checkbox" onclick="togglePW()">Show</td>
 			</tr>
 			<tr>
 				<td>เบอร์โทรศัพท์:*</td>
-				<td><input class="inputinfo" type="text" th:value="${mem.getTel()}" th:field="*{tel}" required></td>
+				<td><input class="inputinfo" type="text" th:value="${session.user.getTel()}" th:field="*{tel}" pattern="[0-9]{10}" required></td>
 			</tr>
 			<tr>
 				<td>เพศ:*</td>
@@ -191,7 +191,7 @@ function togglePW() {
 			</tr>
 			<tr>
 				<td>ที่อยู่:*</td>
-				<td><textarea class="inputaddress" th:value="${mem.getAddress()}" row="4" column="50" th:field="*{address}"></textarea></td>
+				<td><textarea class="inputaddress" th:value="${session.user.getAddress()}" row="4" column="50" th:field="*{address}"></textarea></td>
 			</tr>
 			<tr><td colspan="2">&nbsp;</td></tr>
 			<tr>
