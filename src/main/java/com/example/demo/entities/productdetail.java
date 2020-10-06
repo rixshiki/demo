@@ -22,6 +22,7 @@ public class productdetail {
 	private int numberStock;
 	private String photoProduct;
 	private int weight;
+	private String category;
 	
 	@OneToMany
 	private Set<orderdetail> orderdetails = new HashSet<orderdetail>();
@@ -72,10 +73,17 @@ public class productdetail {
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + idProduct;
 		result = prime * result + ((nameProduct == null) ? 0 : nameProduct.hashCode());
 		result = prime * result + numberStock;
@@ -93,6 +101,11 @@ public class productdetail {
 		if (getClass() != obj.getClass())
 			return false;
 		productdetail other = (productdetail) obj;
+		if (category == null) {
+			if (other.category != null)
+				return false;
+		} else if (!category.equals(other.category))
+			return false;
 		if (idProduct != other.idProduct)
 			return false;
 		if (nameProduct == null) {
