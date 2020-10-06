@@ -38,6 +38,8 @@ public class UserController {					// about user and user tables
 			String image = bFile.invertfile(file);
 			user.setPhotoUser(image);
 		}
+		String tel = "0"+user.getTel();
+		user.setTel(tel);
 		user.setType("Customer");				//Customer
 		user.setCoin(0);
 		userprofileRepo.save(user);
@@ -65,6 +67,8 @@ public class UserController {					// about user and user tables
 		int id = user.getIdUser();
 		System.out.println("Update id:");
 		System.out.println(id);
+		String tel = "0" + member.getTel();
+		member.setTel(tel);
 		userprofile mem = new userprofile();
 		mem = userprofileRepo.findById(id).get();
 		mem.setName(member.getName());
