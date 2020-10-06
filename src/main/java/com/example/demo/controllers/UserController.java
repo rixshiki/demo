@@ -63,7 +63,7 @@ public class UserController {					// about user and user tables
 			,@SessionAttribute("user") userprofile user
 			,@RequestParam("imageFile") MultipartFile file) throws IOException {
 		int id = user.getIdUser();
-		System.out.println("Update id:");
+		System.out.print("Update id:");
 		System.out.println(id);
 		userprofile mem = new userprofile();
 		mem = userprofileRepo.findById(id).get();
