@@ -2,8 +2,59 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+td{
+	border: 2px solid black;
+}
+.center{
+  	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+</style>
 </head>
+
 <body>
-	
+<table>
+	<tr>
+		<td>เลือก Category</td>
+		<td>
+			<button>เสื้อ </button>
+			<button>แก้ว </button>
+			<button>พวงกุญแจ </button>
+			<a href="/addoneproduct">เพิ่ม </a>
+		</td>
+	</tr>
+	<tr>
+		<td>สินค้าที่มีตอนนี้ </td>
+		<td>
+			<div class="center">
+				<button>เพิ่มสินค้า </button>
+			</div>
+			<div>
+				เสื้อ 1<br>
+				S <input type="number">
+				M <input type="number"><br>
+				L <input type="number">
+				XL <input type="number"><br>
+			</div>
+			<div>
+				เสื้อ 2<br>
+				S <input type="number">
+				M <input type="number"><br>
+				L <input type="number">
+				XL <input type="number"><br>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td>รายละเอียดเพิ่มเติม </td>
+		<td>
+			<textarea rows="10" cols="20"></textarea><br>
+			<input type="file">
+		</td>
+	</tr>
+</table>
+<input type="submit">
 </body>
 </html>

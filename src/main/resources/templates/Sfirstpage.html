@@ -178,15 +178,6 @@ li a {
 	background-color: white;
 }
 </style>
-<script>
-function on() {
-  document.getElementById("overlay").style.visibility = "visible";
-}
-
-function off() {
-  document.getElementById("overlay").style.visibility = "hidden";
-}
-</script>
 </head>
 <body class="center">
 	<ul>		
@@ -198,18 +189,8 @@ function off() {
 		</li>
 		<li style="float:right"><a href="/myinfo" th:text="${session.user.getName()}"></a></li>
 		<a href="/logout" class="logout">logout</a>
-		<div class="editproduct" onclick="on()">แก้ไขรายการสินค้า </div>
+		<a href="#editproduct" class="editproduct">แก้ไขรายการสินค้า </a>
 	</ul>
-	<div class="center" id="overlay" onclick="off()">
-		<div class="edited center">
-			<div class="overlayheader">
-				<div class="categories look">เสื้อ </div>
-				<div class="categories">+</div>
-			 </div>
-			<iframe src="editproduct.html"></iframe>
-			<button class="overlayconfirm">ยืนยัน </button>
-		</div>
-	</div>
 	<div class="whitebg center">
 		<a href="/transfercheck" class="btnfirstpage center">ตรวจสอบ </a><br>
 		<a href="#mustsend" class="btnfirstpage center">ต้องจัดส่ง </a><br>
