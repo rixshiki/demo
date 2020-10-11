@@ -18,6 +18,7 @@ public class productdetail {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idProduct;
 	private String nameProduct;
+	private String size;
 	private int price;
 	private int numberStock;
 	private String photoProduct;
@@ -79,6 +80,12 @@ public class productdetail {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -89,6 +96,7 @@ public class productdetail {
 		result = prime * result + numberStock;
 		result = prime * result + ((photoProduct == null) ? 0 : photoProduct.hashCode());
 		result = prime * result + price;
+		result = prime * result + ((size == null) ? 0 : size.hashCode());
 		result = prime * result + weight;
 		return result;
 	}
@@ -122,8 +130,14 @@ public class productdetail {
 			return false;
 		if (price != other.price)
 			return false;
+		if (size == null) {
+			if (other.size != null)
+				return false;
+		} else if (!size.equals(other.size))
+			return false;
 		if (weight != other.weight)
 			return false;
 		return true;
 	}
+	
 }

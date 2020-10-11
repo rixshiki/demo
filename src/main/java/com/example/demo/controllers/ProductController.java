@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -13,8 +14,8 @@ public class ProductController {
 	}
 	
 	@GetMapping("/addcategory")
-	public String addcategory() {
-		
+	public String addcategory(Model model) {
+		//model.addAttribute("category", new )
 		return "addcategory";
 	}
 	
