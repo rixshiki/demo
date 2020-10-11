@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.example.demo.entities.category;
+
 @Controller
 public class ProductController {
 
@@ -15,7 +17,7 @@ public class ProductController {
 	
 	@GetMapping("/addcategory")
 	public String addcategory(Model model) {
-		//model.addAttribute("category", new )
+		model.addAttribute("category", new category());
 		return "addcategory";
 	}
 	

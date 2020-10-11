@@ -3,20 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <title>ร้านขายของน้องหมา </title>
+<link rel="stylesheet" th:href="@{/CSS/Sfirstpage.css}">
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400&display=swap" rel="stylesheet">
 <style>
-	h1{
-		background-color: orange;
-	}
+:root {
+  --brown: #cbaf87;
+  --x: #c7b198;
+  --brown2: #f4ebc1;
+}
+
+body{
+	font-family: 'Bai Jamjuree', sans-serif;
+	height: 100vh;
+	margin: 0;
+	display: flex;
+	background-color: var(--brown2);
+	color: gray;
+}
+
+.center{
+  	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Nav */
+ul {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: var(--brown);
+	box-shadow: 2px 2px 5px gray; 
+}
+li {
+	float: left;
+	height: 60px;
+}
+li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 4px 16px;
+	text-decoration: none;
+}
+.profilepicture{
+	border-radius: 50px;
+	width: 50px;
+	height: 50px;
+}
+.logout{
+	position: fixed;
+	top: 35px;
+	right: 100px;
+	color: #30475e;
+}
+
+/* Signup */	
+.signupwhitebg{
+	position: relative;
+	flex-direction: column;
+	background-color: rgba(255,255,255,0.75);
+	border-radius: 0 100px;
+	width: 60%;
+	height: 80%;
+	box-shadow: 5px 5px 5px gray;
+	margin-top: 6%; 
+}
+h1{
+	position: absolute;
+	top: 2%;
+}
+
+red{
+	color: red;
+}
+	
 table {
 	margin: 5px;
-	margin-left: 40%;
 	border: none;
 	padding: 10px 20px;
-	cursor: pointer;
 	border-radius: 6px;
+	margin-top: 12%;
+}
+.inputinfo{
+	width: 90%;
+	height: 16pt;
+	cursor: text;
+	margin-top: 2%;
+}
+.inputaddress{
+	width: 90%;
+	height: 60pt;
+	cursor: text;
+	resize: none;
 }
 input[type="submit"]{
-	background-color: #8aff8a;
+	background-color: #1592E6;
+	color: white;
 	border: none;
 	padding: 10px 20px;
 	text-align: center;
@@ -29,24 +116,30 @@ input[type="submit"]{
 }
 </style>
 </head>
-<body>
-	<h1 align="center">Register</h1>
+<body class="center">
+	<ul>
+		<li><a href="/firstpage"><img class="profilepicture" th:src="@{/Pembroke-Welsh-Corgi-Puppies-Lying-Down.jpg}"></a></li>
+		<li class="center"><a href="/firstpage">ร้านขายของน้องหมา </a></li>
+	</ul>
+	<div class="signupwhitebg center">
+	<h1 align="center">สร้างบัญชี </h1>
 	<form action="#" th:action="@{/savemem}" th:object="${user}" method="post" enctype="multipart/form-data">
+		
 		<table>
 			<tr>
-				<td>Email:*</td>
-				<td><input type="email" th:field="*{email}" placeholder="abc@def.com" required></td>
+				<td>อีเมล: <red>*</red></td>
+				<td><input class="inputinfo" type="email" th:field="*{email}" placeholder="abc@def.com" required></td>
 			</tr>
 			<tr>
-				<td>Password:*</td>
-				<td><input type="text" th:field="*{password}" required></td>
+				<td>รหัสผ่าน: <red>*</red></td>
+				<td><input class="inputinfo" type="text" th:field="*{password}" required></td>
 			</tr>
 			<tr>
-				<td>Name:*</td>
-				<td><input type="text" th:field="*{name}" placeholder="John Smith" required></td>
+				<td>ชื่อ: <red>*</red></td>
+				<td><input class="inputinfo" type="text" th:field="*{name}" placeholder="John Smith" required></td>
 			</tr>
 			<tr>
-				<td>Gender:*</td>
+				<td>เพศ: <red>*</red></td>
 				<td>
 					<select th:field="*{gender}" required>
 						<option value="Male">Male</option>
@@ -56,34 +149,35 @@ input[type="submit"]{
 				</td>
 			</tr>
 			<tr>
-				<td>Birthday:*</td>
+				<td>วันเกิด: <red>*</red></td>
 				<td><input type="date" th:field="*{birthday}" required></td>
 			</tr>
 			<tr>
-				<td>Telephone:*</td>
-				<td><input type="tel" th:field="*{tel}" pattern="[0-9]{10}" placeholder="ex. 0123456789" required></td>
+				<td>เบอร์โทรศัพท์: <red>*</red></td>
+				<td><input class="inputinfo" type="tel" th:field="*{tel}" pattern="[0-9]{10}" placeholder="ex. 0123456789" required></td>
 			</tr>
 			<tr>
-				<td>Address:*</td>
-				<td><textarea row="4" column="50" th:field="*{address}" placeholder="ที่อยู่" required></textarea></td>
+				<td>ที่อยู่: <red>*</red></td>
+				<td><textarea class="inputaddress" th:field="*{address}" placeholder="ที่อยู่" required></textarea></td>
 			</tr>
 			<tr>
 				<td>Line:</td>
-				<td><input type="text" th:field="*{line}" placeholder="ex. @tijnuehc"></td>
+				<td><input class="inputinfo" type="text" th:field="*{line}" placeholder="ex. @tijnuehc"></td>
 			</tr>
 			<tr>
-				<td>Profile Photo:</td>
+				<td>รูปโปรไฟล์: </td>
 				<td><input type="file" name="imageFile"></td>
 			</tr>
-			<tr><td colspan="3">&nbsp;</td></tr>
+			<!-- <tr><td colspan="3">&nbsp;</td></tr> -->
 			<tr>
-				<td><input type="submit" value="Submit" name="button"></td>
-				<td><a href="http://localhost:7070/">Back to Login</a></td>
+				<td></td>
+				<td><input style="float: right;" type="submit" value="Submit" name="button"></td>
 			</tr>
 			<tr th:if="${message != null}">
 					<td colspan="2" th:text="${message}" style="color:green"></td>
 			</tr>
 		</table>
 	</form>
+	</div>
 </body>
 </html>

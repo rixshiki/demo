@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ร้านขายของน้องหมา </title>
+</head>
+<body>
+<a href="/editproduct">back</a>
+<table>
+	<tr>
+		<td>ใส่รูป </td>
+		<td><input type="file"></td>
+	</tr>
+	<tr>
+		<td>ราคา </td>
+		<td><input type="number"></td>
+	</tr>
+	<!-- ต้อง input S/M/L/"(ไม่มี)" ลงใน Name สินค้าก่อน -->
+	<tr>
+		<td>จำนวน </td>
+		<td>
+		
+			<!-- if product.getSize == Null -->
+			<div id="num">
+				<input type="number">
+			</div>
+			
+			<!-- if product.getSize != Null -->
+			<div id="num">
+				S <input type="number" value="s">
+				M <input type="number" value="m"><br>
+				L <input type="number" value="l">
+				XL <input type="number" value="xl">
+			</div>
+			
+		</td>
+	</tr>
+</table>
+<input type="submit">
+</body>
+</html>
