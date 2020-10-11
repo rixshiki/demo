@@ -114,6 +114,14 @@ input[type="submit"]{
 	cursor: pointer;
 	border-radius: 5px;
 }
+.back{
+	position: absolute;
+	top: 0;
+	left: 10pt;
+	text-decoration: none;
+	font-size: 30pt;
+	color: var(--brown);
+}
 </style>
 </head>
 <body class="center">
@@ -122,6 +130,7 @@ input[type="submit"]{
 		<li class="center"><a href="/firstpage">ร้านขายของน้องหมา </a></li>
 	</ul>
 	<div class="signupwhitebg center">
+	<a href="/login" class="back"><</a>
 	<h1 align="center">สร้างบัญชี </h1>
 	<form action="#" th:action="@{/savemem}" th:object="${user}" method="post" enctype="multipart/form-data">
 		
