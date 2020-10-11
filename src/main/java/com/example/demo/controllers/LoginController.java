@@ -36,10 +36,10 @@ public class LoginController {
 	@PostMapping("/dologin")
 	public String doLogin(@ModelAttribute("user") userprofile mem		//sessions
 			, Model model) {
-
 		List<userprofile> userList = new ArrayList<userprofile>();
 		userList = userprofileRepo.findByemail(mem.getEmail());
 		String web = "login";
+		boolean message = false;
 		// check user from db
 		for(userprofile user : userList) {
 			// set user data to sessions
@@ -55,6 +55,9 @@ public class LoginController {
 					mem.setTel(user.getTel());
 					mem.setType(user.getType());
 					web = "redirect:/firstpage";
+			}else {
+				message = true;
+				model.addAttribute("message", message);
 			}
 		}
 		return web;

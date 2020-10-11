@@ -1,15 +1,18 @@
 package com.example.demo.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "category")
 public class category {
-
+	
+	@Id
 	private String nameCat;
 	private String detailCat;
 	private String photoCat;
+	
 	public String getNameCat() {
 		return nameCat;
 	}

@@ -2,24 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>ร้านขายของน้องหมา </title>
+<title>ร้านขายของน้องหมา</title>
 </head>
 <body>
-<a href="/editproduct">back</a>
-<table>
-	<tr>
-		<td>ชื่อ Category </td>
-		<td><input type="text"></td>
-	</tr>
-	<!-- ต้อง input S/M/L/"(ไม่มี)" ลงใน Name สินค้าก่อน -->
-	<tr>
-		<td>รายละเอียดเพิ่มเติม </td>
-		<td>
-			<textarea rows="10" cols="20"></textarea><br>
-			<input type="file">
-		</td>
-	</tr>
-</table>
-<input type="submit">
+	<a href="/editproduct">back</a>
+	<form action="#">
+		<table>
+			<tr>
+				<td>ชื่อ Category</td>
+				<td><input type="text"></td>
+			</tr>
+			<!-- ต้อง input S/M/L/"(ไม่มี)" ลงใน Name สินค้าก่อน -->
+			<tr>
+				<td>รายละเอียดเพิ่มเติม</td>
+				<td><textarea rows="10" cols="20"></textarea><br> <input
+					type="file"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input style="float: right;" type="submit" value="Submit" name="button"></td>
+			</tr>
+		</table>
+	</form>
+
 </body>
 </html>
