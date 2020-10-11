@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>ร้านขายของน้องหมา </title>
+<style type="text/css">
+td{
+	border: solid 2px gray;
+}
+</style>
 </head>
 <body>
 <a href="/editproduct">back</a>
@@ -10,6 +15,10 @@
 	<tr>
 		<td>ใส่รูป </td>
 		<td><input type="file"></td>
+	</tr>
+	<tr>
+		<td>ชื่อสินค้า </td>
+		<td><input type="text"></td>
 	</tr>
 	<tr>
 		<td>ราคา </td>
@@ -21,19 +30,24 @@
 		<td>
 		
 			<!-- if product.getSize == Null -->
+			if product.getSize == Null
 			<div id="num">
 				<input type="number">
 			</div>
 			
 			<!-- if product.getSize != Null -->
+			if product.getSize != Null
 			<div id="num">
 				S <input type="number" value="s">
 				M <input type="number" value="m"><br>
 				L <input type="number" value="l">
 				XL <input type="number" value="xl">
 			</div>
-			
 		</td>
+	</tr>
+	<tr>
+		<td>น้ำหนักสินค้า </td>
+		<td><input type="number"> กก.</td>
 	</tr>
 </table>
 <input type="submit">
