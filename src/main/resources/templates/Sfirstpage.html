@@ -74,6 +74,15 @@ li a {
 	cursor: pointer;
 	text-decoration: underline;
 }
+.editdelivery{
+	position: fixed;
+	top: 120px;
+	right: 20px;
+	color: gray;
+	font-size: 18px;
+	cursor: pointer;
+	text-decoration: underline;
+}
 .btnfirstpage {
 	box-sizing: border-box;
 	appearance: none;
@@ -177,6 +186,17 @@ li a {
 	color: var(--brown);
 	background-color: white;
 }
+.othedit{
+	background-color: white;
+	position: fixed;
+	top: 65px;
+	right: 0;
+	display: flex;
+	flex-flow: column;
+	height: 80px;
+	padding: 4px 10px;
+	justify-content: space-around;
+}
 </style>
 </head>
 <body class="center">
@@ -189,7 +209,10 @@ li a {
 		</li>
 		<li style="float:right"><a href="/myinfo" th:text="${session.user.getName()}"></a></li>
 		<a href="/logout" class="logout">logout</a>
+		<div class="white">
 		<a href="/editproduct" class="editproduct">แก้ไขรายการสินค้า </a>
+		<a href="/editdelivery" class="editdelivery">แก้ไขราคาค่าจัดส่ง </a>
+		</div>
 	</ul>
 	<div class="whitebg center">
 		<a href="/transfercheck" class="btnfirstpage center">ตรวจสอบ </a><br>
