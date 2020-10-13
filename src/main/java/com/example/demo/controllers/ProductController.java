@@ -19,11 +19,15 @@ import com.example.demo.CreateFile;
 import com.example.demo.entities.category;
 import com.example.demo.entities.productdetail;
 import com.example.demo.repositories.CategoryRepository;
+import com.example.demo.repositories.ProductDetailRepository;
 
 @Controller
 public class ProductController {
 	@Autowired
 	private CategoryRepository categoryRepo;
+	
+	@Autowired
+	private ProductDetailRepository productdetailRepo;
 	
 	@GetMapping("/editproduct/{idcat}")
 	public String editproduct(@PathVariable("idcat") String idcat
@@ -47,12 +51,60 @@ public class ProductController {
 	}
 	
 	@PostMapping("/saveproduct")
-	public String saveProduct(@ModelAttribute category category
+	public String saveProduct(@ModelAttribute productdetail product
 			, BindingResult errors
 			, Model model
+			,@RequestParam("have") String size
+			,@RequestParam(name = "numS", defaultValue = "0") int numS
+			,@RequestParam(name = "numM", defaultValue = "0") int numM
+			,@RequestParam(name = "numL", defaultValue = "0") int numL
+			,@RequestParam(name = "numXL", defaultValue = "0") int numXL
+			,@RequestParam(name = "num", defaultValue = "0") int num
 			,@RequestParam("imageFile") MultipartFile file) throws IOException{
-		
-		return "";
+		if(!file.isEmpty()) {
+			CreateFile bFile = new CreateFile();
+			String image = bFile.invertfile(file);
+			product.setPhotoProduct(image);
+		}
+		if(size.equalsIgnoreCase("y")) {
+			product.setSize("s");
+			product.setNumberStock(numS);
+			productdetailRepo.save(product);
+			
+			productdetail pM = new productdetail();
+			pM.setSize("m");
+			pM.setNumberStock(numM);
+			pM.setNameProduct(product.getNameProduct());
+			pM.setCategory(product.getCategory());
+			pM.setPhotoProduct(product.getPhotoProduct());
+			pM.setPrice(product.getPrice());
+			pM.setWeight(product.getWeight());
+			productdetailRepo.save(pM);
+			
+			productdetail pL = new productdetail();
+			pL.setSize("l");
+			pL.setNumberStock(numL);
+			pL.setNameProduct(product.getNameProduct());
+			pL.setCategory(product.getCategory());
+			pL.setPhotoProduct(product.getPhotoProduct());
+			pL.setPrice(product.getPrice());
+			pL.setWeight(product.getWeight());
+			productdetailRepo.save(pL);
+			
+			productdetail pXL = new productdetail();
+			pXL.setSize("xl");
+			pXL.setNumberStock(numXL);
+			pXL.setNameProduct(product.getNameProduct());
+			pXL.setCategory(product.getCategory());
+			pXL.setPhotoProduct(product.getPhotoProduct());
+			pXL.setPrice(product.getPrice());
+			pXL.setWeight(product.getWeight());
+			productdetailRepo.save(pXL);
+		}else {
+			product.setNumberStock(num);
+			productdetailRepo.save(product);
+		}
+		return "redirect:/editproduct/1";
 	}
 	
 	@GetMapping("/addcategory")
