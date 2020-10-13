@@ -21,13 +21,9 @@ td{
 	<tr>
 		<td>เลือก Category</td>
 		<td>
-			<div th:each="cat: ${catlist}">
-				<button th:value="${cat.getNameCat()}"></button>
+			<div th:each="cat: ${catlist}" style="display: inline">
+				<a th:href="@{'/editproduct/' + ${cat.getIdCategory()}}" th:value="${cat.getNameCat()}" th:text="${cat.getNameCat()}"></a>
 			</div>
-			<!-- <button>เสื้อ </button>
-			<button>แก้ว </button>
-			<button>พวงกุญแจ </button> -->
-			
 			<a href="/addcategory">เพิ่ม </a>
 		</td>
 	</tr>
@@ -54,13 +50,20 @@ td{
 		</td>
 	</tr>
 	<tr>
-		<td>รายละเอียดเพิ่มเติม </td>
+		<td>แก้ไขรายละเอียดเพิ่มเติม </td>
 		<td>
-			<textarea rows="10" cols="20"></textarea><br>
-			<input type="file">
+			<form action="#" th:action="@{/updatecat}" th:object="${cat}" method="post" enctype="multipart/form-data">
+				<input type="hidden" th:value="${cat.getIdCategory()}" th:field="*{idCategory}">
+				<input type="hidden" th:value="${cat.getNameCat()}" th:field="*{nameCat}">
+				<textarea th:value="${cat.getDetailCat()}" rows="10" cols="20" th:field="*{detailCat}"></textarea><br>
+				<img style="width=200px;" alt="can't download" th:src="@{'data:image/jpeg;base64,'+${cat.getPhotoCat()}}">
+				<br><input type="file" name="imageFile"><br>
+				<input type="submit" value="Submit" name="button">
+			</form>
+			
 		</td>
 	</tr>
 </table>
-<input type="submit">
+
 </body>
 </html>
