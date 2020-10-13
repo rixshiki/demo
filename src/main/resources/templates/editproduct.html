@@ -21,9 +21,13 @@ td{
 	<tr>
 		<td>เลือก Category</td>
 		<td>
-			<button>เสื้อ </button>
+			<div th:each="cat: ${catlist}">
+				<button th:value="${cat.getNameCat()}"></button>
+			</div>
+			<!-- <button>เสื้อ </button>
 			<button>แก้ว </button>
-			<button>พวงกุญแจ </button>
+			<button>พวงกุญแจ </button> -->
+			
 			<a href="/addcategory">เพิ่ม </a>
 		</td>
 	</tr>
