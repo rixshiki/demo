@@ -97,7 +97,31 @@ summary{
   z-index: 2;
   cursor: pointer;
 }
-
+.overlayheader{
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 16pt;
+	text-align: center;
+	padding: 2% 0 2% 0;
+	width: 100%;
+	background-color: var(--brown);
+	color: white;
+	box-shadow: 2px 2px 2px gray;
+}
+.overlayconfirm{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	font-size: 16pt;
+	text-align: center;
+	padding: 2% 0 2% 0;
+	width: 100%;
+	background-color:  #79d70f;
+	border: none;
+	color: white;
+	box-shadow: 2px -2px 2px gray;
+}
 #detaildata{
 	position: absolute;
 	font-size: 10pt;
@@ -126,12 +150,12 @@ function off() {
 </script>
 </head>
 <body>
-	<div class="sellerheader center">ตรวจสอบ </div>
+	<div class="sellerheader center">จัดส่งแล้ว </div>
 	<a href="/firstpage" class="back"><</a>
 	<!-- List order from database -->
 	<div class="center" id="overlay" onclick="off()">
 		<div class="checked center">
-			<iframe src="ovlaycheck.html"></iframe>
+			<iframe src="ovlaytrack.html"></iframe>
 		</div>
 	</div>
 	<details>
@@ -139,9 +163,7 @@ function off() {
 		<table class="maintable">
 		<tr class="tableheader">
 			<th style="height:30pt; width: 10%" > รหัสสั่งซื้อ </th>
-			<th style="height:30pt; width: 60%">  รายการ </th>
-			<th style="height:30pt; width: 15%">วันเวลาที่โอน </th>
-			<th style="height:30pt; width: 15%">ตรวจสอบ </th>
+			<th style="height:30pt; width: 90%">  รายการ </th>
 		</tr>
 		<tr>
 			<td>#รหัสสั่งซื้อ </td>
@@ -151,10 +173,6 @@ function off() {
   				<li> Item two </li>
 			</ul>
 			<div id="detaildata">รายละเอียด </div>
-			</td>
-			<td>xx/xx/xx xx.xx น. </td>
-			<td style="text-align: center;">
-				<button class="btncheck" onclick="on()">ตรวจสอบ </button>
 			</td>
 		</tr>
 		</table>

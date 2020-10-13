@@ -13,7 +13,7 @@
 body{
 	font-family: 'Bai Jamjuree', sans-serif;
 	display: flex;
-	background-color: var(--brown2);
+	/*background-color: var(--brown2);*/
 	color: gray;
 	margin: 10% 0 10% 0;
 }
@@ -35,10 +35,7 @@ table{
 }
 th, td{
 	text-align: left;
-	padding: 2% 0 2% 14%;
-}
-td{
-	width: 60%;
+	padding: 2% 0 2% 0;
 }
 .img{
 	background-color: gray;
@@ -52,9 +49,10 @@ td{
 	font-size: 16pt;
 	text-align: center;
 	height: 50pt;
+	/*padding: 2% 0 2% 0;*/
 	width: 100%;
-	background-color: var(--brown);
-	color: white;
+	background-color: white/*var(--brown)*/;
+	color: gray/*white*/;
 	box-shadow: 2px 2px 2px gray;
 }
 .overlayconfirm{
@@ -70,45 +68,60 @@ td{
 	color: white;
 	box-shadow: 2px -2px 2px gray;
 }
+
+.idproduct{
+	position: fixed;
+	top: 2pt;
+	left: 2pt;
+	color: gray;
+	z-index: 2;
+}
+.imgproduct{
+	border-radius: 50px;
+	background-color: white;
+	width: 50px;
+	height: 50px;
+	box-shadow: 2px 2px 5px gray; 
+}
+.right{
+	text-align: right;
+}
+.left{
+	text-align: left;
+}
+hr {
+  border: 0;
+  display: block;
+  background-color: gray;
+  height: 2px;
+}
+.container{
+	width: 80%
+}
 </style>
 </head>
 <body class="centercol">
-	<div class="overlayheader center">ตรวจสอบ </div>
-	<table>
+	<div class="idproduct">#รหัสสั่งซื้อ </div>
+	<div class="overlayheader center">รายการคำสั่งซื้อ </div>
+	<div class="container">
+	 <table>
 				<tr>
-					<th>รหัสสั่งซื้อ</th>
-					<td>#รหัสสั่งซื้อ</td>
-				</tr>
-				<tr>
-					<th>ชื่อ-สกุล</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>จำนวนเงินที่ต้องโอน</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>จำนวนเงินที่โอนมา</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>จากธนาคาร</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>เข้าธนาคาร</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>วันเวลาที่โอน</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>บัญชี 4 ตัวท้าย</th>
-					<td></td>
+					<td style="width: 50px;"><img class="imgproduct" src=""> </td>
+					<td><ul>
+					  <li> Item one </li>
+					  <li> Item two </li>
+					 </ul></td>
+					<td style="text-align: right;">150 </td>
 				</tr>
 			</table>
-			<div class="img"></div>
-		<button class="overlayconfirm">ยืนยัน </button>
+			<hr>
+			<div class="right">
+				ยอดรวม <price>150</price>
+			</div>
+			<div class="left">
+				ที่อยู่ <address>xxx xxx xxx</address>
+			</div>
+	</div>
+		<button class="overlayconfirm">เพิ่มเลข Track </button>
 </body>
 </html>
