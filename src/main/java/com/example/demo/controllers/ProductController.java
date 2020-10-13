@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.CreateFile;
 import com.example.demo.entities.category;
+import com.example.demo.entities.productdetail;
 import com.example.demo.repositories.CategoryRepository;
 
 @Controller
@@ -34,10 +35,24 @@ public class ProductController {
 		return "editproduct";
 	}
 	
-	@GetMapping("/addoneproduct")
-	public String addoneproduct() {
-		
+	@GetMapping("/addoneproduct/{idcat}")
+	public String addoneproduct(@PathVariable("idcat") String idcat
+			,Model model) {
+		category cat = new category();
+		cat = categoryRepo.getOne(idcat);
+		productdetail product = new productdetail();
+		product.setCategory(cat.getNameCat());
+		model.addAttribute("product", product);
 		return "addoneproduct";
+	}
+	
+	@PostMapping("/saveproduct")
+	public String saveProduct(@ModelAttribute category category
+			, BindingResult errors
+			, Model model
+			,@RequestParam("imageFile") MultipartFile file) throws IOException{
+		
+		return "";
 	}
 	
 	@GetMapping("/addcategory")

@@ -31,7 +31,7 @@ td{
 		<td>สินค้าที่มีตอนนี้ </td>
 		<td>
 			<div class="center">
-				<a href="/addoneproduct">เพิ่มสินค้า </a>
+				<a th:href="@{'/addoneproduct/' + ${cat.getIdCategory()}}">เพิ่มสินค้า </a>
 			</div>
 			<div>
 				เสื้อ 1 <input type="button" value="delete"><br>
@@ -60,7 +60,6 @@ td{
 				<br><input type="file" name="imageFile"><br>
 				<input type="submit" value="Submit" name="button">
 			</form>
-			
 		</td>
 	</tr>
 </table>
