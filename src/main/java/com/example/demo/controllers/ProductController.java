@@ -52,6 +52,7 @@ public class ProductController {
 		productdetail product = new productdetail();
 		product.setCategory(cat.getNameCat());
 		model.addAttribute("product", product);
+		model.addAttribute("idcat", idcat);
 		return "addoneproduct";
 	}
 	
@@ -60,6 +61,7 @@ public class ProductController {
 			, BindingResult errors
 			, Model model
 			,@RequestParam("have") String size
+			,@RequestParam("idcat") String idcat
 			,@RequestParam(name = "numS", defaultValue = "0") Integer numS
 			,@RequestParam(name = "numM", defaultValue = "0") Integer numM
 			,@RequestParam(name = "numL", defaultValue = "0") Integer numL
@@ -81,7 +83,7 @@ public class ProductController {
 			product.setNumberStock(num);
 			productdetailRepo.save(product);
 		}
-		return "redirect:/editproduct/1";
+		return "redirect:/editproduct/" + idcat;
 	}
 	
 	@GetMapping("/deleteoneproduct/{idproduct}/{idcat}")
