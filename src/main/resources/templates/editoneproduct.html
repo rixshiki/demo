@@ -10,46 +10,49 @@ td{
 </style>
 </head>
 <body>
-<a href="/editproduct">back</a>
-<table>
-	<tr>
-		<td>ใส่รูป </td>
-		<td><input type="file"></td>
-	</tr>
-	<tr>
-		<td>ชื่อสินค้า </td>
-		<td><input type="text"></td>
-	</tr>
-	<tr>
-		<td>ราคา </td>
-		<td><input type="number"></td>
-	</tr>
-	<!-- ต้อง input S/M/L/"(ไม่มี)" ลงใน Name สินค้าก่อน -->
-	<tr>
-		<td>จำนวน </td>
-		<td>
-		
-			<!-- if product.getSize == Null -->
-			if product.getSize == Null
-			<div id="num">
-				<input type="number">
-			</div>
-			
-			<!-- if product.getSize != Null -->
-			if product.getSize != Null
-			<div id="num">
-				S <input type="number" value="s">
-				M <input type="number" value="m"><br>
-				L <input type="number" value="l">
-				XL <input type="number" value="xl">
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<td>น้ำหนักสินค้า </td>
-		<td><input type="number"> กก.</td>
-	</tr>
-</table>
-<input type="submit">
+	<a href="/editproduct">back</a>
+	<form action="#" th:action="@{/updateproduct}" th:object="${product}" method="post" enctype="multipart/form-data">
+		<table>
+			<tr>
+				<td>ใส่รูป </td>
+				<td><input type="file"  name="imageFile"></td>
+			</tr>
+			<tr>
+				<td>ชื่อสินค้า </td>
+				<td><input type="text" th:value="${product.getNameProduct()}" th:field="*{nameProduct}"></td>
+			</tr>
+			<tr>
+				<td>ราคา </td>
+				<td><input type="number" th:value="${product.getPrice()}" th:field="*{price}"></td>
+			</tr>
+			<!-- ต้อง input S/M/L/"(ไม่มี)" ลงใน Name สินค้าก่อน -->
+			<tr>
+				<td>จำนวน </td>
+				<td>
+				
+					<!-- if product.getSize == Null -->
+					<div id="num" th:if="${product.getNumberStock() != null}">
+						<input type="number" th:value="${product.getNumberStock()}" name="num">
+					</div>
+					
+					<!-- if product.getSize != Null -->
+					<div id="num" th:if="${product.getNumberStock() == null}">
+						S <input type="number" th:value="${product.getS()}" name="numS">
+						M <input type="number" th:value="${product.getM()}" name="numM"><br>
+						L <input type="number" th:value="${product.getL()}" name="numL">
+						XL <input type="number" th:value="${product.getXl()}" name="numXL">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>น้ำหนักสินค้า </td>
+				<td><input type="number" th:value="${product.getWeight()}" th:field="*{weight}"> กก.</td>
+			</tr>
+		</table>
+		<input type="hidden" th:value="${product.getIdProduct()}" name="idproduct">
+		<input type="hidden" th:value="${product.getCategory()}" th:field="*{category}">
+		<input type="submit" value="Submit" name="button">
+	</form>
+
 </body>
 </html>

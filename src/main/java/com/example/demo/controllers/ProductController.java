@@ -86,6 +86,48 @@ public class ProductController {
 		return "redirect:/editproduct/" + idcat;
 	}
 	
+	@GetMapping("/editoneproduct/{idproduct}")
+	public String editoneproduct(@PathVariable("idproduct") Integer idproduct
+			,Model model) {
+		model.addAttribute("product", productdetailRepo.getOne(idproduct));
+		return "editoneproduct";
+	}
+
+	@PostMapping("/updateproduct")
+	public String updateproduct(@ModelAttribute productdetail product
+			, BindingResult errors
+			, Model model
+			,@RequestParam("idproduct") Integer idproduct
+			,@RequestParam(name = "numS", defaultValue = "0") Integer numS
+			,@RequestParam(name = "numM", defaultValue = "0") Integer numM
+			,@RequestParam(name = "numL", defaultValue = "0") Integer numL
+			,@RequestParam(name = "numXL", defaultValue = "0") Integer numXL
+			,@RequestParam(name = "num", defaultValue = "0") Integer num
+			,@RequestParam("imageFile") MultipartFile file) throws IOException {
+		productdetail pro = new productdetail();
+		pro = productdetailRepo.findById(idproduct).get();
+		pro.setCategory(product.getCategory());
+		pro.setNameProduct(product.getNameProduct());
+		pro.setPrice(product.getPrice());
+		pro.setWeight(product.getWeight());
+		if(!file.isEmpty()) {
+			CreateFile bFile = new CreateFile();
+			String image = bFile.invertfile(file);
+			pro.setPhotoProduct(image);
+		}
+		if(pro.getNumberStock() == null) {
+			pro.setS(numS);
+			pro.setM(numM);
+			pro.setL(numL);
+			pro.setXl(numXL);
+			productdetailRepo.save(pro);
+		}else if(pro.getNumberStock() != null){
+			pro.setNumberStock(num);
+			productdetailRepo.save(pro);
+		}
+		return "redirect:/editproduct/1";
+	}
+	
 	@GetMapping("/deleteoneproduct/{idproduct}/{idcat}")
 	public String deleteoneproduct(@PathVariable("idcat") String idcat
 			,@PathVariable("idproduct") String idproduct
