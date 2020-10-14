@@ -18,9 +18,12 @@ public class productdetail {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idProduct;
 	private String nameProduct;
-	private String size;
+	private Integer s;
+	private Integer m;
+	private Integer l;
+	private Integer xl;
 	private int price;
-	private int numberStock;
+	private Integer numberStock;
 	private String photoProduct;
 	private int weight;
 	private String category;
@@ -56,12 +59,6 @@ public class productdetail {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public int getNumberStock() {
-		return numberStock;
-	}
-	public void setNumberStock(int numberStock) {
-		this.numberStock = numberStock;
-	}
 	public String getPhotoProduct() {
 		return photoProduct;
 	}
@@ -80,11 +77,36 @@ public class productdetail {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public String getSize() {
-		return size;
+	
+	public Integer getS() {
+		return s;
 	}
-	public void setSize(String size) {
-		this.size = size;
+	public void setS(Integer s) {
+		this.s = s;
+	}
+	public Integer getM() {
+		return m;
+	}
+	public void setM(Integer m) {
+		this.m = m;
+	}
+	public Integer getL() {
+		return l;
+	}
+	public void setL(Integer l) {
+		this.l = l;
+	}
+	public Integer getXl() {
+		return xl;
+	}
+	public void setXl(Integer xl) {
+		this.xl = xl;
+	}
+	public Integer getNumberStock() {
+		return numberStock;
+	}
+	public void setNumberStock(Integer numberStock) {
+		this.numberStock = numberStock;
 	}
 	@Override
 	public int hashCode() {
@@ -92,12 +114,15 @@ public class productdetail {
 		int result = 1;
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + idProduct;
+		result = prime * result + ((l == null) ? 0 : l.hashCode());
+		result = prime * result + ((m == null) ? 0 : m.hashCode());
 		result = prime * result + ((nameProduct == null) ? 0 : nameProduct.hashCode());
-		result = prime * result + numberStock;
+		result = prime * result + ((numberStock == null) ? 0 : numberStock.hashCode());
 		result = prime * result + ((photoProduct == null) ? 0 : photoProduct.hashCode());
 		result = prime * result + price;
-		result = prime * result + ((size == null) ? 0 : size.hashCode());
+		result = prime * result + ((s == null) ? 0 : s.hashCode());
 		result = prime * result + weight;
+		result = prime * result + ((xl == null) ? 0 : xl.hashCode());
 		return result;
 	}
 	@Override
@@ -116,12 +141,25 @@ public class productdetail {
 			return false;
 		if (idProduct != other.idProduct)
 			return false;
+		if (l == null) {
+			if (other.l != null)
+				return false;
+		} else if (!l.equals(other.l))
+			return false;
+		if (m == null) {
+			if (other.m != null)
+				return false;
+		} else if (!m.equals(other.m))
+			return false;
 		if (nameProduct == null) {
 			if (other.nameProduct != null)
 				return false;
 		} else if (!nameProduct.equals(other.nameProduct))
 			return false;
-		if (numberStock != other.numberStock)
+		if (numberStock == null) {
+			if (other.numberStock != null)
+				return false;
+		} else if (!numberStock.equals(other.numberStock))
 			return false;
 		if (photoProduct == null) {
 			if (other.photoProduct != null)
@@ -130,12 +168,17 @@ public class productdetail {
 			return false;
 		if (price != other.price)
 			return false;
-		if (size == null) {
-			if (other.size != null)
+		if (s == null) {
+			if (other.s != null)
 				return false;
-		} else if (!size.equals(other.size))
+		} else if (!s.equals(other.s))
 			return false;
 		if (weight != other.weight)
+			return false;
+		if (xl == null) {
+			if (other.xl != null)
+				return false;
+		} else if (!xl.equals(other.xl))
 			return false;
 		return true;
 	}

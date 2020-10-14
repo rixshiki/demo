@@ -34,7 +34,12 @@ public class ProductController {
 			,Model model) {
 		List<category> catlist = new ArrayList<category>();
 		catlist = categoryRepo.findAll();
-		model.addAttribute("cat", categoryRepo.getOne(idcat));
+		category cat = new category();
+		cat = categoryRepo.getOne(idcat);
+		List<productdetail> products = new ArrayList<productdetail>();
+		products = productdetailRepo.getByCategory(cat.getNameCat());
+		model.addAttribute("products", products);
+		model.addAttribute("cat", cat);
 		model.addAttribute("catlist", catlist);
 		return "editproduct";
 	}
@@ -55,11 +60,11 @@ public class ProductController {
 			, BindingResult errors
 			, Model model
 			,@RequestParam("have") String size
-			,@RequestParam(name = "numS", defaultValue = "0") int numS
-			,@RequestParam(name = "numM", defaultValue = "0") int numM
-			,@RequestParam(name = "numL", defaultValue = "0") int numL
-			,@RequestParam(name = "numXL", defaultValue = "0") int numXL
-			,@RequestParam(name = "num", defaultValue = "0") int num
+			,@RequestParam(name = "numS", defaultValue = "0") Integer numS
+			,@RequestParam(name = "numM", defaultValue = "0") Integer numM
+			,@RequestParam(name = "numL", defaultValue = "0") Integer numL
+			,@RequestParam(name = "numXL", defaultValue = "0") Integer numXL
+			,@RequestParam(name = "num", defaultValue = "0") Integer num
 			,@RequestParam("imageFile") MultipartFile file) throws IOException{
 		if(!file.isEmpty()) {
 			CreateFile bFile = new CreateFile();
@@ -67,40 +72,12 @@ public class ProductController {
 			product.setPhotoProduct(image);
 		}
 		if(size.equalsIgnoreCase("y")) {
-			product.setSize("s");
-			product.setNumberStock(numS);
+			product.setS(numS);
+			product.setM(numM);
+			product.setL(numL);
+			product.setXl(numXL);
 			productdetailRepo.save(product);
-			
-			productdetail pM = new productdetail();
-			pM.setSize("m");
-			pM.setNumberStock(numM);
-			pM.setNameProduct(product.getNameProduct());
-			pM.setCategory(product.getCategory());
-			pM.setPhotoProduct(product.getPhotoProduct());
-			pM.setPrice(product.getPrice());
-			pM.setWeight(product.getWeight());
-			productdetailRepo.save(pM);
-			
-			productdetail pL = new productdetail();
-			pL.setSize("l");
-			pL.setNumberStock(numL);
-			pL.setNameProduct(product.getNameProduct());
-			pL.setCategory(product.getCategory());
-			pL.setPhotoProduct(product.getPhotoProduct());
-			pL.setPrice(product.getPrice());
-			pL.setWeight(product.getWeight());
-			productdetailRepo.save(pL);
-			
-			productdetail pXL = new productdetail();
-			pXL.setSize("xl");
-			pXL.setNumberStock(numXL);
-			pXL.setNameProduct(product.getNameProduct());
-			pXL.setCategory(product.getCategory());
-			pXL.setPhotoProduct(product.getPhotoProduct());
-			pXL.setPrice(product.getPrice());
-			pXL.setWeight(product.getWeight());
-			productdetailRepo.save(pXL);
-		}else {
+		}else if(size.equalsIgnoreCase("n")){
 			product.setNumberStock(num);
 			productdetailRepo.save(product);
 		}
