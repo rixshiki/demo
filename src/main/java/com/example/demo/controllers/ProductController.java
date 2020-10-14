@@ -84,6 +84,14 @@ public class ProductController {
 		return "redirect:/editproduct/1";
 	}
 	
+	@GetMapping("/deleteoneproduct/{idproduct}/{idcat}")
+	public String deleteoneproduct(@PathVariable("idcat") String idcat
+			,@PathVariable("idproduct") String idproduct
+			,Model model) {
+		productdetailRepo.deleteByIdProduct(idproduct);
+		return "redirect:/editproduct/" + idcat;
+	}
+	
 	@GetMapping("/addcategory")
 	public String addcategory(Model model) {
 		model.addAttribute("category", new category());

@@ -40,7 +40,8 @@ td{
 				</a>
 				<a th:href="@{'/editoneproduct/' + ${product.getIdProduct()}}">
 					<span th:text="${product.getNameProduct()}"></span>
-				</a><input type="button" value="delete"><br>
+				</a>
+				<a th:href="@{'/deleteoneproduct/' + ${product.getIdProduct()} +'/' + ${cat.getIdCategory()}}">>Delete</a><br>
 				
 				<div th:if="${product.getNumberStock() == null}">
 					S <span th:text="${product.getS()}"></span><br>
