@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,9 +23,15 @@ public class userorder {
 	private int totalOrder;
 	private String track;
 	private String status;
-	private int idUser;
 	private int totalWeight;
+	private String userBank;
+	private String sellerBank;
+	private int lastNum;
+	private int payTotal;
+	private LocalDateTime payTime;
+	private String photoPay;
 	private int cratedOrder;
+	//private int idUser;
 
 	@OneToMany
 	private Set<orderdetail> orderdetails = new HashSet<orderdetail>();
@@ -87,12 +94,6 @@ public class userorder {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public int getIdUser() {
-		return idUser;
-	}
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
-	}
 	public int getTotalWeight() {
 		return totalWeight;
 	}
@@ -105,17 +106,58 @@ public class userorder {
 	public void setCratedOrder(int cratedOrder) {
 		this.cratedOrder = cratedOrder;
 	}
+	public String getUserBank() {
+		return userBank;
+	}
+	public void setUserBank(String userBank) {
+		this.userBank = userBank;
+	}
+	public String getSellerBank() {
+		return sellerBank;
+	}
+	public void setSellerBank(String sellerBank) {
+		this.sellerBank = sellerBank;
+	}
+	public int getLastNum() {
+		return lastNum;
+	}
+	public void setLastNum(int lastNum) {
+		this.lastNum = lastNum;
+	}
+	public int getPayTotal() {
+		return payTotal;
+	}
+	public void setPayTotal(int payTotal) {
+		this.payTotal = payTotal;
+	}
+	public LocalDateTime getPayTime() {
+		return payTime;
+	}
+	public void setPayTime(LocalDateTime payTime) {
+		this.payTime = payTime;
+	}
+	public String getPhotoPay() {
+		return photoPay;
+	}
+	public void setPhotoPay(String photoPay) {
+		this.photoPay = photoPay;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + cratedOrder;
 		result = prime * result + idOrder;
-		result = prime * result + idUser;
+		result = prime * result + lastNum;
+		result = prime * result + ((payTime == null) ? 0 : payTime.hashCode());
+		result = prime * result + payTotal;
+		result = prime * result + ((photoPay == null) ? 0 : photoPay.hashCode());
+		result = prime * result + ((sellerBank == null) ? 0 : sellerBank.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + totalOrder;
 		result = prime * result + totalWeight;
 		result = prime * result + ((track == null) ? 0 : track.hashCode());
+		result = prime * result + ((userBank == null) ? 0 : userBank.hashCode());
 		return result;
 	}
 	@Override
@@ -131,7 +173,24 @@ public class userorder {
 			return false;
 		if (idOrder != other.idOrder)
 			return false;
-		if (idUser != other.idUser)
+		if (lastNum != other.lastNum)
+			return false;
+		if (payTime == null) {
+			if (other.payTime != null)
+				return false;
+		} else if (!payTime.equals(other.payTime))
+			return false;
+		if (payTotal != other.payTotal)
+			return false;
+		if (photoPay == null) {
+			if (other.photoPay != null)
+				return false;
+		} else if (!photoPay.equals(other.photoPay))
+			return false;
+		if (sellerBank == null) {
+			if (other.sellerBank != null)
+				return false;
+		} else if (!sellerBank.equals(other.sellerBank))
 			return false;
 		if (status == null) {
 			if (other.status != null)
@@ -146,6 +205,11 @@ public class userorder {
 			if (other.track != null)
 				return false;
 		} else if (!track.equals(other.track))
+			return false;
+		if (userBank == null) {
+			if (other.userBank != null)
+				return false;
+		} else if (!userBank.equals(other.userBank))
 			return false;
 		return true;
 	}
