@@ -30,8 +30,8 @@ public class userorder {
 	private int payTotal;
 	private LocalDateTime payTime;
 	private String photoPay;
-	private int cratedOrder;
-	//private int idUser;
+	private LocalDateTime cratedOrder;
+	private int idUser;
 
 	@OneToMany
 	private Set<orderdetail> orderdetails = new HashSet<orderdetail>();
@@ -40,7 +40,7 @@ public class userorder {
 	private Set<payment> payments = new HashSet<payment>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idUser", insertable = false, updatable = false)
+	@JoinColumn(name = "idUser", referencedColumnName = "idUser",insertable = false, updatable = false)
 	private userprofile userprofile;
 	
 	public Set<orderdetail> getOrderdetails() {
@@ -100,10 +100,10 @@ public class userorder {
 	public void setTotalWeight(int totalWeight) {
 		this.totalWeight = totalWeight;
 	}
-	public int getCratedOrder() {
+	public LocalDateTime getCratedOrder() {
 		return cratedOrder;
 	}
-	public void setCratedOrder(int cratedOrder) {
+	public void setCratedOrder(LocalDateTime cratedOrder) {
 		this.cratedOrder = cratedOrder;
 	}
 	public String getUserBank() {
@@ -142,12 +142,19 @@ public class userorder {
 	public void setPhotoPay(String photoPay) {
 		this.photoPay = photoPay;
 	}
+	public int getIdUser() {
+		return idUser;
+	}
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + cratedOrder;
+		result = prime * result + ((cratedOrder == null) ? 0 : cratedOrder.hashCode());
 		result = prime * result + idOrder;
+		result = prime * result + idUser;
 		result = prime * result + lastNum;
 		result = prime * result + ((payTime == null) ? 0 : payTime.hashCode());
 		result = prime * result + payTotal;
@@ -169,9 +176,14 @@ public class userorder {
 		if (getClass() != obj.getClass())
 			return false;
 		userorder other = (userorder) obj;
-		if (cratedOrder != other.cratedOrder)
+		if (cratedOrder == null) {
+			if (other.cratedOrder != null)
+				return false;
+		} else if (!cratedOrder.equals(other.cratedOrder))
 			return false;
 		if (idOrder != other.idOrder)
+			return false;
+		if (idUser != other.idUser)
 			return false;
 		if (lastNum != other.lastNum)
 			return false;

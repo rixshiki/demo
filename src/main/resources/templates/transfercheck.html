@@ -137,26 +137,30 @@ function off() {
 	<details>
 		<summary>กันยายน 2563</summary>
 		<table class="maintable">
-		<tr class="tableheader">
-			<th style="height:30pt; width: 10%" > รหัสสั่งซื้อ </th>
-			<th style="height:30pt; width: 60%">  รายการ </th>
-			<th style="height:30pt; width: 15%">วันเวลาที่โอน </th>
-			<th style="height:30pt; width: 15%">ตรวจสอบ </th>
-		</tr>
-		<tr>
-			<td>#รหัสสั่งซื้อ </td>
-			<td style="position: relative;" >
-			<ul>
-  				<li> Item one </li>
-  				<li> Item two </li>
-			</ul>
-			<div id="detaildata">รายละเอียด </div>
-			</td>
-			<td>xx/xx/xx xx.xx น. </td>
-			<td style="text-align: center;">
-				<button class="btncheck" onclick="on()">ตรวจสอบ </button>
-			</td>
-		</tr>
+			<tr class="tableheader">
+				<th style="height:30pt; width: 10%" > รหัสสั่งซื้อ </th>
+				<th style="height:30pt; width: 60%">  รายการ </th>
+				<th style="height:30pt; width: 15%">วันเวลาที่โอน </th>
+				<th style="height:30pt; width: 15%">ตรวจสอบ </th>
+			</tr>
+			<tr th:each="userorder: ${userorders}">
+				<td th:text="${'#'+ userorder.getIdOrder()}"></td>
+				<td style="position: relative;" >
+					<ul>
+						<li th:each="orderlist: ${orderlists}"> 
+							<div th:if="${orderlist.getIdOrder()==userorder.getIdOrder()}">
+								<span th:text="${orderlist.getProductdetail().getNameProduct()}"> x</span>
+								<span th:text="${orderlist.getNumber()}"></span>
+							</div>
+			  			</li>
+					</ul>
+					<div id="detaildata">รายละเอียด </div>
+				</td>
+				<td th:text="${userorder.getPayTime()}"></td>
+				<td style="text-align: center;">
+					<button class="btncheck" onclick="on()">ตรวจสอบ </button>
+				</td>
+			</tr>
 		</table>
 	</details>
 </body>
