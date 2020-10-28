@@ -165,14 +165,15 @@ function off() {
 			<th style="height:30pt; width: 10%" > รหัสสั่งซื้อ </th>
 			<th style="height:30pt; width: 90%">  รายการ </th>
 		</tr>
-		<tr>
-			<td>#รหัสสั่งซื้อ </td>
-			<td style="position: relative;" >
-			<ul>
-  				<li> Item one </li>
-  				<li> Item two </li>
-			</ul>
-			<div id="detaildata">รายละเอียด </div>
+		<tr th:each="userorder: ${userorders}">
+				<td th:text="${'#'+ userorder.getIdOrder()}"></td>
+				<td style="position: relative;" >
+					<ul>
+						<li th:each="orderlist: ${orderlists}" th:if="${orderlist.getIdOrder()==userorder.getIdOrder()}"> 
+							<span th:text="${orderlist.getProductdetail().getNameProduct()}"></span>
+							<span th:text="${' x'+ orderlist.getNumber()}"></span>
+			  			</li>
+					</ul>
 			</td>
 		</tr>
 		</table>

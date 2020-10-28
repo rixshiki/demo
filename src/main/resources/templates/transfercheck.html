@@ -240,14 +240,11 @@ function off() {
 				<td th:text="${'#'+ userorder.getIdOrder()}"></td>
 				<td style="position: relative;" >
 					<ul>
-						<li th:each="orderlist: ${orderlists}"> 
-							<div th:if="${orderlist.getIdOrder()==userorder.getIdOrder()}">
-								<span th:text="${orderlist.getProductdetail().getNameProduct()}"> x</span>
-								<span th:text="${orderlist.getNumber()}"></span>
-							</div>
+						<li th:each="orderlist: ${orderlists}" th:if="${orderlist.getIdOrder()==userorder.getIdOrder()}"> 
+							<span th:text="${orderlist.getProductdetail().getNameProduct()}"></span>
+							<span th:text="${' x'+ orderlist.getNumber()}"></span>
 			  			</li>
 					</ul>
-					<div id="detaildata">รายละเอียด </div>
 				</td>
 				<td th:text="${userorder.getPayTime()}"></td>
 				<td style="text-align: center;">

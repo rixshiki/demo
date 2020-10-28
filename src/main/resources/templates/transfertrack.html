@@ -166,14 +166,15 @@ function off() {
 			<th style="height:30pt; width: 75%">  รายการ </th>
 			<th style="height:30pt; width: 15%">เพิ่ม Track </th>
 		</tr>
-		<tr>
-			<td>#รหัสสั่งซื้อ </td>
-			<td style="position: relative;" >
-			<ul>
-  				<li> Item one </li>
-  				<li> Item two </li>
-			</ul>
-			<div id="detaildata">รายละเอียด </div>
+		<tr th:each="userorder: ${userorders}">
+				<td th:text="${'#'+ userorder.getIdOrder()}"></td>
+				<td style="position: relative;" >
+					<ul>
+						<li th:each="orderlist: ${orderlists}" th:if="${orderlist.getIdOrder()==userorder.getIdOrder()}"> 
+							<span th:text="${orderlist.getProductdetail().getNameProduct()}"></span>
+							<span th:text="${' x'+ orderlist.getNumber()}"></span>
+			  			</li>
+					</ul>
 			</td>
 			<td style="text-align: center;">
 				<button class="btncheck" onclick="on()">+ Track </button>

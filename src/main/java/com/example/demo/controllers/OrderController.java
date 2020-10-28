@@ -41,16 +41,32 @@ public class OrderController {
 	}
 	
 	@GetMapping("/tracking")
-public String findtracking() {
-		//List<userorder> userorders = new ArrayList<userorder>();
-		//userorders = userorderRepo.getByStatus("tracking");
+public String findtracking(Model model) {
+		List<userorder> userorders = new ArrayList<userorder>();
+		List<orderdetail> orderlists = new ArrayList<orderdetail>();
+		userorders = userorderRepo.getByStatus("tracking");
+		for(userorder userorder : userorders) {
+			List<orderdetail> orderdetails = new ArrayList<orderdetail>();
+			orderdetails = orderdetailRepo.getByIdorder(userorder.getIdOrder());
+			orderlists.addAll(orderdetails);
+		}
+		model.addAttribute("orderlists", orderlists);
+		model.addAttribute("userorders", userorders);
 		return "transfertrack";
 	}
 	
 	@GetMapping("/complete")
-public String findcomplete() {
-		//List<userorder> userorders = new ArrayList<userorder>();
-		//userorders = userorderRepo.getByStatus("complete");
+public String findcomplete(Model model) {
+		List<userorder> userorders = new ArrayList<userorder>();
+		List<orderdetail> orderlists = new ArrayList<orderdetail>();
+		userorders = userorderRepo.getByStatus("complete");
+		for(userorder userorder : userorders) {
+			List<orderdetail> orderdetails = new ArrayList<orderdetail>();
+			orderdetails = orderdetailRepo.getByIdorder(userorder.getIdOrder());
+			orderlists.addAll(orderdetails);
+		}
+		model.addAttribute("orderlists", orderlists);
+		model.addAttribute("userorders", userorders);
 		return "transfercomplete";
 	}
 }
