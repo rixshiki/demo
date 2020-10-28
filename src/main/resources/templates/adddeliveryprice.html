@@ -7,6 +7,20 @@
 <style type="text/css">
 
 </style>
+<script type="text/javascript">
+	function adddelivery(){
+		var check = document.getElementById("choosedelivery");
+		var adddeliverybtn = document.getElementById("adddelivery").value;
+		if(check.innerHTML == "<select><option>xxx</option></select>"){
+			check.innerHTML = '<input type="text">';
+			adddeliverybtn = "เลือกบริการขนส่ง";;
+		}
+		else{
+			check.innerHTML = '<select><option>xxx</option></select>';
+			adddeliverybtn = "เพิ่มชื่อบริการขนส่ง";
+		}
+	}
+</script>
 </head>
 <body>
 <a href="/myinfo" class="back"><</a>
@@ -15,11 +29,13 @@
 	<tr>
 		<td>ชื่อบริการขนส่ง </td>
 		<td>
-		<select>
-			<option>xxx</option>
-		</select>
+		<div id="choosedelivery">
+			<select>
+				<option>xxx</option>
+			</select>
+		</div>
 		</td>
-		<td><input type="button" value="เพิ่มชื่อบริการขนส่ง "></td>
+		<td><input id="adddelivery" type="button" onclick="adddelivery()" value="เพิ่มชื่อบริการขนส่ง "></td>
 	</tr>
 	<tr>
 		<td>น้ำหนักสูงสุด </td>
