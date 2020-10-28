@@ -162,6 +162,10 @@ function togglePW() {
 		<li style="float:right"><a href="/myinfo" th:text="${session.user.getName()}"></a></li>
 		<a href="/logout" class="logout">logout</a>
 	</ul>
+	<div th:if="${session.user.getType() == 'Seller'}">
+		<a href="/editaccount" class="editaccount">แก้ไขบัญชีผู้ขาย </a>
+		<a href="/editdelivery" class="editdelivery">แก้ไขราคาค่าจัดส่ง </a>
+	</div>
 	<div class="brownbg center">
 	<a href="/firstpage" class="back"><</a>
 	
