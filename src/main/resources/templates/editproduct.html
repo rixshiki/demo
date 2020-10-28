@@ -59,6 +59,7 @@ td{
 		<td>แก้ไขรายละเอียดเพิ่มเติม </td>
 		<td>
 			<form action="#" th:action="@{/updatecat}" th:object="${cat}" method="post" enctype="multipart/form-data">
+				<input style="float: right;" type="button" value="ลบ category">
 				<input type="hidden" th:value="${cat.getIdCategory()}" th:field="*{idCategory}">
 				<input type="hidden" th:value="${cat.getNameCat()}" th:field="*{nameCat}">
 				<textarea th:value="${cat.getDetailCat()}" rows="10" cols="20" th:field="*{detailCat}"></textarea><br>
