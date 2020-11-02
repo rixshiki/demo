@@ -15,6 +15,7 @@ public interface ProductDetailRepository extends JpaRepository<productdetail, In
 	@Query("from productdetail p where p.category = :namecat order by p.nameProduct")
 	List<productdetail> getByCategory(@Param("namecat")String namecat);
 	
+
 	@Modifying
 	@Transactional
 	@Query (nativeQuery = true, value="DELETE FROM productdetail WHERE id_product = :idProduct")

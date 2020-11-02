@@ -26,6 +26,7 @@ public class productdetail {
 	private Integer numberStock;
 	private String photoProduct;
 	private int weight;
+	private int enable;
 	private String category;
 	
 	@OneToMany
@@ -108,11 +109,18 @@ public class productdetail {
 	public void setNumberStock(Integer numberStock) {
 		this.numberStock = numberStock;
 	}
+	public int getEnable() {
+		return enable;
+	}
+	public void setEnable(int enable) {
+		this.enable = enable;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
+		result = prime * result + enable;
 		result = prime * result + idProduct;
 		result = prime * result + ((l == null) ? 0 : l.hashCode());
 		result = prime * result + ((m == null) ? 0 : m.hashCode());
@@ -138,6 +146,8 @@ public class productdetail {
 			if (other.category != null)
 				return false;
 		} else if (!category.equals(other.category))
+			return false;
+		if (enable != other.enable)
 			return false;
 		if (idProduct != other.idProduct)
 			return false;

@@ -73,6 +73,7 @@ public class ProductController {
 			String image = bFile.invertfile(file);
 			product.setPhotoProduct(image);
 		}
+		product.setEnable(1);
 		if(size.equalsIgnoreCase("y")) {
 			product.setS(numS);
 			product.setM(numM);
@@ -128,11 +129,14 @@ public class ProductController {
 		return "redirect:/editproduct/1";
 	}
 	
-	@GetMapping("/deleteoneproduct/{idproduct}/{idcat}")
-	public String deleteoneproduct(@PathVariable("idcat") String idcat
-			,@PathVariable("idproduct") String idproduct
+	@GetMapping("/editshowproduct/{idproduct}/{idcat}")
+	public String editshowproduct(@PathVariable("idcat") String idcat
+			,@PathVariable("idproduct") Integer idproduct
 			,Model model) {
-		productdetailRepo.deleteByIdProduct(idproduct);
+		productdetail product = new productdetail();
+		product = productdetailRepo.findById(idproduct).get();
+		product.setEnable(0);
+		productdetailRepo.save(product);
 		return "redirect:/editproduct/" + idcat;
 	}
 	

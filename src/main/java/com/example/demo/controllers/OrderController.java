@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.example.demo.entities.orderdetail;
 import com.example.demo.entities.userorder;
 import com.example.demo.repositories.OrderDetailRepository;
-import com.example.demo.repositories.PaymentRepository;
 import com.example.demo.repositories.UserOrderRepository;
 
 @Controller
@@ -21,9 +20,6 @@ public class OrderController {
 	
 	@Autowired
 	private OrderDetailRepository orderdetailRepo;
-	
-	@Autowired
-	private PaymentRepository paymentRepo;
 	
 	@GetMapping("/checking")
 	public String findchecking(Model model) {
