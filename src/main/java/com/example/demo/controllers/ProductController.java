@@ -50,11 +50,11 @@ public class ProductController {
 		catlist = categoryRepo.findAll();
 		category cat = new category();
 		String idcat = categoryRepo.getMinIdcategory();
+		List<productdetail> products = new ArrayList<productdetail>();
 		if(idcat != null) {
 			cat = categoryRepo.getOne(idcat);
+			products = productdetailRepo.getByCategory(cat.getNameCat());
 		}
-		List<productdetail> products = new ArrayList<productdetail>();
-		products = productdetailRepo.getByCategory(cat.getNameCat());
 		model.addAttribute("products", products);
 		model.addAttribute("cat", cat);
 		model.addAttribute("catlist", catlist);
