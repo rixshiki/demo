@@ -3,7 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>ร้านขายของน้องหมา </title>
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400&display=swap" rel="stylesheet">
 <style>
+:root {
+  --brown: #cbaf87;
+  --x: #c7b198;
+  --brown2: #f4ebc1;
+}
+
+body{
+	font-family: 'Bai Jamjuree', sans-serif;
+	height: 100vh;
+	margin: 0;
+	display: flex;
+	background-color: var(--brown2);
+}
+
 td{
 	border: 2px solid black;
 }
@@ -12,19 +27,43 @@ td{
 	align-items: center;
 	justify-content: center;
 }
+.back{
+	position: absolute;
+	top: 0;
+	left: 10pt;
+	text-decoration: none;
+	font-size: 30pt;
+	color: white;
+}
+
+.sellerheader{
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: var(--brown);
+	color: white;
+	font-size: 20pt;
+	height: 60px;
+	width: 100%;
+	box-shadow: 2px 2px 5px gray;
+}
+.tablecat{
+	margin-top: 60pt;
+}
 </style>
 </head>
 
 <body>
-<a href="/firstpage">back</a>
-<table>
+<div class="sellerheader center">เพิ่มสินค้า </div>
+<a class="back" href="/firstpage"><</a>
+<table class="tablecat">
 	<tr>
 		<td>เลือก Category</td>
 		<td>
 			<div th:each="cat: ${catlist}" style="display: inline" th:if="${catlist != null}">
 				<a th:href="@{'/editproduct/' + ${cat.getIdCategory()}}" th:value="${cat.getNameCat()}" th:text="${cat.getNameCat()}"></a>
 			</div>
-			<a href="/addcategory">เพิ่ม </a>
+			<a class="cat" href="/addcategory">เพิ่ม </a>
 		</td>
 	</tr>
 	<tr th:if="${cat != null}">
