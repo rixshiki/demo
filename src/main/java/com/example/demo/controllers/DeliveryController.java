@@ -31,16 +31,16 @@ public class DeliveryController {
 	
 	@PostMapping("/savedelivery")
 	public String savedelivery(@ModelAttribute delivery delivery
-			,@RequestParam("textname") String textname
-			,@RequestParam("selectname") String selectname
-			,@RequestParam("hidden") String hidden) {
-		if(hidden.equalsIgnoreCase("text")) {
+			,@RequestParam(name = "textname", defaultValue = "") String textname
+			,@RequestParam(name = "selectname", defaultValue = "") String selectname
+			,@RequestParam(name = "hidetext", defaultValue = "select") String hidetext) {
+		if(hidetext.equalsIgnoreCase("text")) {
 			delivery.setNameDelivery(textname);
-		}else if(hidden.equalsIgnoreCase("select")) {
+		}else if(hidetext.equalsIgnoreCase("select")) {
 			delivery.setNameDelivery(selectname);
 		}
 		deliveryRepo.save(delivery);
-		return "redirect:/editaccount";
+		return "redirect:/editdelivery";
 	}
 	
 }

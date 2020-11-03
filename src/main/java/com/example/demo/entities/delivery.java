@@ -1,6 +1,8 @@
 package com.example.demo.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -9,11 +11,18 @@ import javax.persistence.Table;
 
 public class delivery {
 	
-	@Id
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idDelivery;
 	private String nameDelivery;
 	private int maxWeight;
 	private int priceDelivery;
 	
+	public int getIdDelivery() {
+		return idDelivery;
+	}
+	public void setIdDelivery(int idDelivery) {
+		this.idDelivery = idDelivery;
+	}
 	public String getNameDelivery() {
 		return nameDelivery;
 	}
@@ -32,17 +41,16 @@ public class delivery {
 	public void setPriceDelivery(int priceDelivery) {
 		this.priceDelivery = priceDelivery;
 	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + idDelivery;
 		result = prime * result + maxWeight;
 		result = prime * result + ((nameDelivery == null) ? 0 : nameDelivery.hashCode());
 		result = prime * result + priceDelivery;
 		return result;
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -52,6 +60,8 @@ public class delivery {
 		if (getClass() != obj.getClass())
 			return false;
 		delivery other = (delivery) obj;
+		if (idDelivery != other.idDelivery)
+			return false;
 		if (maxWeight != other.maxWeight)
 			return false;
 		if (nameDelivery == null) {
@@ -63,6 +73,5 @@ public class delivery {
 			return false;
 		return true;
 	}
-	
 	
 }
