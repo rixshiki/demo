@@ -66,7 +66,7 @@ td{
 			<a class="cat" href="/addcategory">เพิ่ม </a>
 		</td>
 	</tr>
-	<tr>
+	<tr th:if="${cat != null}">
 		<td>สินค้าที่มีตอนนี้ </td>
 		<td>
 			<div class="center">
@@ -96,7 +96,7 @@ td{
 			</div>
 		</td>
 	</tr>
-	<tr>
+	<tr th:if="${cat != null}">
 		<td>แก้ไขรายละเอียดเพิ่มเติม </td>
 		<td>
 			<form action="#" th:action="@{/updatecat}" th:object="${cat}" method="post" enctype="multipart/form-data">
