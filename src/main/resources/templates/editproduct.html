@@ -82,7 +82,6 @@ td{
 						<span th:text="${product.getNameProduct()}"></span>
 					</a>
 					<a th:href="@{'/editshowproduct/' + ${product.getIdProduct()} +'/' + ${cat.getIdCategory()}}">>Delete</a><br>
-					
 					<div th:if="${product.getNumberStock() == null}">
 						S <span th:text="${product.getS()}"></span><br>
 						M <span th:text="${product.getM()}"></span><br>

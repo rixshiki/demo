@@ -11,47 +11,50 @@
 <body>
 	<a href="/myinfo" class="back"><</a>
 	<h3>เพิ่มบัญชีผู้ขาย </h3>
-<table>
-	<tr>
-		<th>ธนาคาร </th>
-		<th>เลขที่บัญชี </th>
-		<th>ชื่อบัญชี </th>
-	</tr>
-	<tr>
-		<td>
-		<select>
-			<option value="ธนาคารแห่งประเทศไทย">ธนาคารแห่งประเทศไทย (BOT)</option>
-			<option value="ธนาคารกรุงศรีอยุธยา">ธนาคารกรุงศรีอยุธยา (BAY)</option>
-			<option value="ธนาคารกรุงเทพ">ธนาคารกรุงเทพ (BBL)</option>
-			<option value="ธนาคารกรุงไทย">ธนาคารกรุงไทย (KTB)</option>
-			<option value="ธนาคารกสิกร">ธนาคารกสิกร (KBANK)</option>
-			<option value="ธนาคารซิตี้แบงค์">ธนาคารซิตี้แบงค์ (CITIBANK)</option>
-			<option value="ธนาคารซีไอเอ็มบี">ธนาคารซีไอเอ็มบี (CIMB)</option>
-			<option value="ธนาคารทหารไทย">ธนาคารทหารไทย (TMB)</option>
-			<option value="ธนาคารทิสโก้">ธนาคารทิสโก้ (TISCO)</option>
-			<option value="ธนาคารธนชาต">ธนาคารธนชาต (Thanachart)</option>
-			<option value="ธนาคารออมสิน">ธนาคารออมสิน (GSB)</option>
-			<option value="ธนาคารยูโอบี">ธนาคารยูโอบี (UOB)</option>
-			<option value="ธนาคารเกียรตินาคินภัทร">ธนาคารเกียรตินาคินภัทร (Kiatnakin)</option>
-			<option value="ธนาคารสแตนดาร์ดชาร์เตอร์ด">ธนาคารสแตนดาร์ดชาร์เตอร์ด (Standard Chartered)</option>
-			<option value="ธนาคารอาคารสงเคราะห์">ธนาคารอาคารสงเคราะห์ (GHB)</option>
-			<option value="ธนาคารอิสลามแห่งประเทศไทย">ธนาคารอิสลามแห่งประเทศไทย (ISBT)</option>
-			<option value="ธนาคารเพื่อการเกษตร">ธนาคารเพื่อการเกษตร (BAAC)</option>
-			<option value="ธนาคารไทยพาณิชย์">ธนาคารไทยพาณิชย์ (SCB)</option>
-			<option value="ธนาคารไทยเครดิตเพื่อรายย่อย">ธนาคารไทยเครดิตเพื่อรายย่อย (TCD)</option>
-			<option value="ธนาคารไอซีบีซี">ธนาคารไอซีบีซี (ICBC)</option>
-		</select>
-		</td>
-		<td><input type="text"></td>
-		<td><input type="text"></td>
-		<td><input type="submit" value="ยืนยัน "></td>
-	</tr>
-	<tr>
-		<td>bank</td>
-		<td>0123456789</td>
-		<td>คุณxxx xxxx</td>
-		<td><input type="button" value="ลบ "></td>
-	</tr>
-</table>
+	<form action="#" th:action="@{/saveaccount}" th:object="${account}" method="post">
+		<table>
+			<tr>
+				<th>ธนาคาร </th>
+				<th>เลขที่บัญชี </th>
+				<th>ชื่อบัญชี </th>
+			</tr>
+			<tr>
+				<td>
+				<select th:field="*{nameBank}" required>
+					<option value="ธนาคารกรุงศรีอยุธยา (BAY)">ธนาคารกรุงศรีอยุธยา (BAY)</option>
+					<option value="ธนาคารกรุงเทพ (BBL)">ธนาคารกรุงเทพ (BBL)</option>
+					<option value="ธนาคารกรุงไทย (KTB)">ธนาคารกรุงไทย (KTB)</option>
+					<option value="ธนาคารกสิกร (KBANK)">ธนาคารกสิกร (KBANK)</option>
+					<option value="ธนาคารซิตี้แบงค์ (CITIBANK)">ธนาคารซิตี้แบงค์ (CITIBANK)</option>
+					<option value="ธนาคารซีไอเอ็มบี (CIMB)">ธนาคารซีไอเอ็มบี (CIMB)</option>
+					<option value="ธนาคารทหารไทย (TMB)">ธนาคารทหารไทย (TMB)</option>
+					<option value="ธนาคารทิสโก้ (TISCO)">ธนาคารทิสโก้ (TISCO)</option>
+					<option value="ธนาคารธนชาต (Thanachart)">ธนาคารธนชาต (Thanachart)</option>
+					<option value="ธนาคารออมสิน (GSB)">ธนาคารออมสิน (GSB)</option>
+					<option value="ธนาคารยูโอบี (UOB)">ธนาคารยูโอบี (UOB)</option>
+					<option value="ธนาคารเกียรตินาคินภัทร (Kiatnakin)">ธนาคารเกียรตินาคินภัทร (Kiatnakin)</option>
+					<option value="ธนาคารแห่งประเทศไทย (BOT)">ธนาคารแห่งประเทศไทย (BOT)</option>
+					<option value="ธนาคารสแตนดาร์ดชาร์เตอร์ด (Standard Chartered)">ธนาคารสแตนดาร์ดชาร์เตอร์ด (Standard Chartered)</option>
+					<option value="ธนาคารอาคารสงเคราะห์  (GHB)">ธนาคารอาคารสงเคราะห์ (GHB)</option>
+					<option value="ธนาคารอิสลามแห่งประเทศไทย (ISBT)">ธนาคารอิสลามแห่งประเทศไทย (ISBT)</option>
+					<option value="ธนาคารเพื่อการเกษตร (BAAC)">ธนาคารเพื่อการเกษตร (BAAC)</option>
+					<option value="ธนาคารไทยพาณิชย์ (SCB)">ธนาคารไทยพาณิชย์ (SCB)</option>
+					<option value="ธนาคารไทยเครดิตเพื่อรายย่อย (TCD)">ธนาคารไทยเครดิตเพื่อรายย่อย (TCD)</option>
+					<option value="ธนาคารไอซีบีซี (ICBC)">ธนาคารไอซีบีซี (ICBC)</option>
+				</select>
+				</td>
+				<td><input type="text" th:field="*{numAccount}" placeholder="0000000000" required></td>
+				<td><input type="text" th:field="*{nameAccount}" placeholder="ชื่อ นามสกุล" required></td>
+				<td><input type="submit" value="ยืนยัน "></td>
+			</tr>
+			<tr th:each="acc: ${accountList}">
+				<td><p th:text="${acc.getNameBank()}"></p></td>
+				<td><p th:text="${acc.getNumAccount()}"></p></td>
+				<td><p th:text="${acc.getNameAccount()}"></p></td>
+				<td><a th:href="@{'/deleteaccount/' + ${acc.getNumAccount()}}">ลบ</a></td>
+			</tr>
+		</table>
+	</form>
+
 </body>
 </html>
