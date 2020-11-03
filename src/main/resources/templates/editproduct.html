@@ -9,6 +9,7 @@
   --brown: #cbaf87;
   --x: #c7b198;
   --brown2: #f4ebc1;
+  --green: #79d70f;
 }
 
 body{
@@ -19,16 +20,13 @@ body{
 	background-color: var(--brown2);
 }
 
-td{
-	border: 2px solid black;
-}
 .center{
   	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 .back{
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 10pt;
 	text-decoration: none;
@@ -47,68 +45,105 @@ td{
 	width: 100%;
 	box-shadow: 2px 2px 5px gray;
 }
-.catheader{
+a.catheader{
+	text-decoration: none;
 	background-color: var(--brown);
+	color: white;
 	display: inline-block;
 	width: 40pt;
-	height: 20pt;
+	height: 40pt;
 	text-align: center;
+	line-height: 40pt;
 }
-.catheader > a{
-	text-decoration: none;
-	color: white;
-	vertical-align: middle;
-}
-.cataddheader{
-	display: inline-block;
-	width: 20pt;
-	height: 20pt;
-	text-align: center;
-}
-.cataddheader > a{
+a.cataddheader{
 	color: var(--brown);
 	text-decoration: none;
 	vertical-align: middle;
+	font-size: 30pt;
+	line-height: 40pt;
+	margin: 0 5pt 0 5pt;
 }
-.catdelete{
-	color: red;
+a.catdelete{
+	background-color: red;
+	text-align: center;
 	text-decoration: none;
+	border-radius: 5pt;
+	width: 100pt;
+	height: 20pt;
+	line-height: 20pt;
+	color: white;
 	float: right;
 }
+a.catdelete:hover{
+	background-color: darkred;
+	width: 98pt;
+	height: 18pt;
+	line-height: 18pt;
+	font-weight: bolder;
+	border: outset 1pt white;
+}
 .tablecat{
-	margin-top: 60pt;
+	margin: 60pt 10% 0 10%;
+	width: 100%;
+	background-color: white;
 }
 .imgproduct{
-	width: 100pt;
-	background-color: white;
+	width: 60pt;
+	height: 60pt;
+	border-radius: 60pt;
+	background-color: black;
+}
+.btnsubmit{
+font-family: 'Bai Jamjuree', sans-serif;
+	background-color: var(--green);
+	height: 20pt;
+	width: 50pt;
+	border-radius: 5pt;
+	text-align: center;
+	color: white;
+	border: none;
+	float: right;
+	cursor: pointer;
+}
+.btnsubmit:hover{
+	background-color: darkgreen;
+	width: 50pt;
+	height: 20pt;
+	line-height: 20pt;
+	font-weight: bolder;
+	border: outset 1pt white;
+}
+.sep>td{
+	border: 4pt solid var(--brown);
+	padding: 5%;
 }
 </style>
 </head>
 
 <body>
-<div class="sellerheader center">เพิ่มสินค้า </div>
+<div class="sellerheader center">
+	<div th:each="cat: ${catlist}" style="display: inline" th:if="${catlist != null}">
+		<a th:href="@{'/editproduct/' + ${cat.getIdCategory()}}" th:value="${cat.getNameCat()}" th:text="${cat.getNameCat()}"></a>
+	</div>
+	<a class="catheader" href="#">เสื้อ </a>
+	<a class="catheader" href="#">แก้ว </a>
+	<a class="cataddheader" href="/addcategory">+</a>
+</div>
 <a class="back" href="/firstpage"><</a>
 <table class="tablecat">
-	<tr>
-		<td>เลือก Category</td>
+	<!-- <tr>
 		<td>
 			<div th:each="cat: ${catlist}" style="display: inline" th:if="${catlist != null}">
 				<a th:href="@{'/editproduct/' + ${cat.getIdCategory()}}" th:value="${cat.getNameCat()}" th:text="${cat.getNameCat()}"></a>
 			</div>
-			<div class="catheader">
-				<a href="#">เสื้อ</a>
-			</div>
-			<div class="catheader">
-				<a href="#">แก้ว</a>
-			</div>
-			<div class="cataddheader">
-				<a href="/addcategory">+</a>
-			</div>
+			<a class="catheader" href="#">เสื้อ </a>
+			<a class="catheader" href="#">แก้ว </a>
+			<a class="cataddheader" href="/addcategory">+</a>
 		</td>
-	</tr>
-	<tr th:if="${cat != null}">
-		<td>แก้ไขรายละเอียดเพิ่มเติม </td>
+	</tr> -->
+	<tr class="sep" th:if="${cat != null}">
 		<td>
+			<p>แก้ไขรายละเอียดเพิ่มเติม </p>
 			<form action="#" th:action="@{/updatecat}" th:object="${cat}" method="post" enctype="multipart/form-data">
 				<a href="#catdelete" class="catdelete">ลบ category</a>
 				<input type="hidden" th:value="${cat.getIdCategory()}" th:field="*{idCategory}">
@@ -116,12 +151,11 @@ td{
 				<textarea th:value="${cat.getDetailCat()}" rows="10" cols="20" th:field="*{detailCat}"></textarea><br>
 				<img style="width=200px;" alt="can't download" th:src="@{'data:image/jpeg;base64,'+${cat.getPhotoCat()}}">
 				<br><input type="file" name="imageFile"><br>
-				<input type="submit" value="Submit" name="button">
+				<input class="btnsubmit" type="submit" value="Submit" name="button">
 			</form>
 		</td>
 	</tr>
-	<tr th:if="${cat != null}">
-		<td>สินค้าที่มีตอนนี้ </td>
+	<tr class="sep" th:if="${cat != null}">
 		<td>
 			<div class="center">
 				<a th:href="@{'/addoneproduct/' + ${cat.getIdCategory()}}">เพิ่มสินค้า </a>
@@ -129,8 +163,9 @@ td{
 			<div th:each="product: ${products}">
 				<div th:if="${product.getEnable()==1}">
 					<a th:href="@{'/editoneproduct/' + ${product.getIdProduct()}}">
-						<img class="imgproduct" style="width=100px;" th:if="${product.getPhotoProduct() == null}" alt="can't download" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625">
-						<img class="imgproduct" style="width=100px;" th:if="${product.getPhotoProduct() != null}" alt="can't download" th:src="@{'data:image/jpeg;base64,'+${product.getPhotoProduct()}}">
+						<img class="imgproduct" src="">
+						<!--<img class="imgproduct" style="width=100px;" th:if="${product.getPhotoProduct() == null}" alt="can't download" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625">
+						<img class="imgproduct" style="width=100px;" th:if="${product.getPhotoProduct() != null}" alt="can't download" th:src="@{'data:image/jpeg;base64,'+${product.getPhotoProduct()}}"> -->
 					</a>
 					<a th:href="@{'/editoneproduct/' + ${product.getIdProduct()}}">
 						<span th:text="${product.getNameProduct()}"></span>
