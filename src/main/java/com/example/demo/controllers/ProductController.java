@@ -44,6 +44,21 @@ public class ProductController {
 		return "editproduct";
 	}
 	
+	@GetMapping("/editproduct")
+	public String editminproduct(Model model) {
+		List<category> catlist = new ArrayList<category>();
+		catlist = categoryRepo.findAll();
+		category cat = new category();
+		String idcat = categoryRepo.getMinIdcategory();
+		cat = categoryRepo.getOne(idcat);
+		List<productdetail> products = new ArrayList<productdetail>();
+		products = productdetailRepo.getByCategory(cat.getNameCat());
+		model.addAttribute("products", products);
+		model.addAttribute("cat", cat);
+		model.addAttribute("catlist", catlist);
+		return "editproduct";
+	}
+	
 	@GetMapping("/addoneproduct/{idcat}")
 	public String addoneproduct(@PathVariable("idcat") String idcat
 			,Model model) {
@@ -126,7 +141,7 @@ public class ProductController {
 			pro.setNumberStock(num);
 			productdetailRepo.save(pro);
 		}
-		return "redirect:/editproduct/1";
+		return "redirect:/editproduct";
 	}
 	
 	@GetMapping("/editshowproduct/{idproduct}/{idcat}")
@@ -157,7 +172,7 @@ public class ProductController {
 			category.setPhotoCat(image);
 		}
 		categoryRepo.save(category);
-		return "redirect:/editproduct/1";
+		return "redirect:/editproduct";
 	}
 	
 	@PostMapping("/updatecat")
@@ -174,7 +189,7 @@ public class ProductController {
 		}
 		categoryRepo.save(cat);
 		System.out.println("Category Update!!");
-		return "redirect:/editproduct/1";
+		return "redirect:/editproduct";
 	}
 	
 }

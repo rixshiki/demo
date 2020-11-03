@@ -21,7 +21,7 @@ td{
 	<tr>
 		<td>เลือก Category</td>
 		<td>
-			<div th:each="cat: ${catlist}" style="display: inline">
+			<div th:each="cat: ${catlist}" style="display: inline" th:if="${catlist != null}">
 				<a th:href="@{'/editproduct/' + ${cat.getIdCategory()}}" th:value="${cat.getNameCat()}" th:text="${cat.getNameCat()}"></a>
 			</div>
 			<a href="/addcategory">เพิ่ม </a>
