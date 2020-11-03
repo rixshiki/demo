@@ -47,8 +47,40 @@ td{
 	width: 100%;
 	box-shadow: 2px 2px 5px gray;
 }
+.catheader{
+	background-color: var(--brown);
+	display: inline-block;
+	width: 40pt;
+	height: 20pt;
+	text-align: center;
+}
+.catheader > a{
+	text-decoration: none;
+	color: white;
+	vertical-align: middle;
+}
+.cataddheader{
+	display: inline-block;
+	width: 20pt;
+	height: 20pt;
+	text-align: center;
+}
+.cataddheader > a{
+	color: var(--brown);
+	text-decoration: none;
+	vertical-align: middle;
+}
+.catdelete{
+	color: red;
+	text-decoration: none;
+	float: right;
+}
 .tablecat{
 	margin-top: 60pt;
+}
+.imgproduct{
+	width: 100pt;
+	background-color: white;
 }
 </style>
 </head>
@@ -63,7 +95,29 @@ td{
 			<div th:each="cat: ${catlist}" style="display: inline" th:if="${catlist != null}">
 				<a th:href="@{'/editproduct/' + ${cat.getIdCategory()}}" th:value="${cat.getNameCat()}" th:text="${cat.getNameCat()}"></a>
 			</div>
-			<a class="cat" href="/addcategory">เพิ่ม </a>
+			<div class="catheader">
+				<a href="#">เสื้อ</a>
+			</div>
+			<div class="catheader">
+				<a href="#">แก้ว</a>
+			</div>
+			<div class="cataddheader">
+				<a href="/addcategory">+</a>
+			</div>
+		</td>
+	</tr>
+	<tr th:if="${cat != null}">
+		<td>แก้ไขรายละเอียดเพิ่มเติม </td>
+		<td>
+			<form action="#" th:action="@{/updatecat}" th:object="${cat}" method="post" enctype="multipart/form-data">
+				<a href="#catdelete" class="catdelete">ลบ category</a>
+				<input type="hidden" th:value="${cat.getIdCategory()}" th:field="*{idCategory}">
+				<input type="hidden" th:value="${cat.getNameCat()}" th:field="*{nameCat}">
+				<textarea th:value="${cat.getDetailCat()}" rows="10" cols="20" th:field="*{detailCat}"></textarea><br>
+				<img style="width=200px;" alt="can't download" th:src="@{'data:image/jpeg;base64,'+${cat.getPhotoCat()}}">
+				<br><input type="file" name="imageFile"><br>
+				<input type="submit" value="Submit" name="button">
+			</form>
 		</td>
 	</tr>
 	<tr th:if="${cat != null}">
@@ -75,8 +129,8 @@ td{
 			<div th:each="product: ${products}">
 				<div th:if="${product.getEnable()==1}">
 					<a th:href="@{'/editoneproduct/' + ${product.getIdProduct()}}">
-						<img style="width=100px;" th:if="${product.getPhotoProduct() == null}" alt="can't download" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625">
-						<img style="width=100px;" th:if="${product.getPhotoProduct() != null}" alt="can't download" th:src="@{'data:image/jpeg;base64,'+${product.getPhotoProduct()}}">
+						<img class="imgproduct" style="width=100px;" th:if="${product.getPhotoProduct() == null}" alt="can't download" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625">
+						<img class="imgproduct" style="width=100px;" th:if="${product.getPhotoProduct() != null}" alt="can't download" th:src="@{'data:image/jpeg;base64,'+${product.getPhotoProduct()}}">
 					</a>
 					<a th:href="@{'/editoneproduct/' + ${product.getIdProduct()}}">
 						<span th:text="${product.getNameProduct()}"></span>
@@ -95,20 +149,7 @@ td{
 			</div>
 		</td>
 	</tr>
-	<tr th:if="${cat != null}">
-		<td>แก้ไขรายละเอียดเพิ่มเติม </td>
-		<td>
-			<form action="#" th:action="@{/updatecat}" th:object="${cat}" method="post" enctype="multipart/form-data">
-				<input style="float: right;" type="button" value="ลบ category">
-				<input type="hidden" th:value="${cat.getIdCategory()}" th:field="*{idCategory}">
-				<input type="hidden" th:value="${cat.getNameCat()}" th:field="*{nameCat}">
-				<textarea th:value="${cat.getDetailCat()}" rows="10" cols="20" th:field="*{detailCat}"></textarea><br>
-				<img style="width=200px;" alt="can't download" th:src="@{'data:image/jpeg;base64,'+${cat.getPhotoCat()}}">
-				<br><input type="file" name="imageFile"><br>
-				<input type="submit" value="Submit" name="button">
-			</form>
-		</td>
-	</tr>
+
 </table>
 
 </body>
