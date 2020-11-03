@@ -11,44 +11,47 @@
 	function adddelivery(){
 		var check = document.getElementById("choosedelivery");
 		var adddeliverybtn = document.getElementById("adddelivery").value;
-		if(check.innerHTML == "<select><option>xxx</option></select>"){
-			check.innerHTML = '<input type="text">';
-			adddeliverybtn = "เลือกบริการขนส่ง";;
+		if(check.innerHTML == '<select name="selectname"><option th:each="delivery: ${deliveryList}" th:value="${delivery.getNameDelivery()}"><p th:text="${delivery.getNameDelivery()}"></p></option></select><input type="hidden" name="hidden" value="select">'){
+			check.innerHTML = '<input type="text" name="textname"><input type="hidden" name="hidden" value="text">';
+			adddeliverybtn = "เลือกบริการขนส่ง";
 		}
 		else{
-			check.innerHTML = '<select><option>xxx</option></select>';
+			check.innerHTML = '<select name="selectname"><option th:each="delivery: ${deliveryList}" th:value="${delivery.getNameDelivery()}"><p th:text="${delivery.getNameDelivery()}"></p></option></select><input type="hidden" name="hidden" value="select">';
 			adddeliverybtn = "เพิ่มชื่อบริการขนส่ง";
 		}
 	}
 </script>
 </head>
 <body>
-<a href="/myinfo" class="back"><</a>
-<h3>เพิ่มราคาบริการขนส่งสินค้า </h3>
-<table>
-	<tr>
-		<td>ชื่อบริการขนส่ง </td>
-		<td>
-		<div id="choosedelivery">
-			<select>
-				<option>xxx</option>
-			</select>
-		</div>
-		</td>
-		<td><input id="adddelivery" type="button" onclick="adddelivery()" value="เพิ่มชื่อบริการขนส่ง "></td>
-	</tr>
-	<tr>
-		<td>น้ำหนักสูงสุด </td>
-		<td><input type="number"></td>
-	</tr>
-	<tr>
-		<td>ราคาขนส่ง </td>
-		<td><input type="number"></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><input style="float: right;" type="submit" value="ยืนยัน "></td>
-	</tr>
-</table>
+	<a href="/myinfo" class="back"><</a>
+	<h3>เพิ่มราคาบริการขนส่งสินค้า </h3>
+	<form action="#" th:action="@{/savedelivery}" th:object="${delivery}" method="post">
+		<table>
+			<tr>
+				<td>ชื่อบริการขนส่ง </td>
+				<td>
+				<div id="choosedelivery">
+					<select name="selectname">
+						<option th:each="delivery: ${deliveryList}" th:value="${delivery.getNameDelivery()}"><p th:text="${delivery.getNameDelivery()}"></p></option>
+					</select>
+					<input type="hidden" name="hidden" value="select">
+				</div>
+				</td>
+				<td><input id="adddelivery" type="button" onclick="adddelivery()" value="เพิ่มชื่อบริการขนส่ง "></td>
+			</tr>
+			<tr>
+				<td>น้ำหนักสูงสุด </td>
+				<td><input type="number" th:field="*{maxWeight}"></td>
+			</tr>
+			<tr>
+				<td>ราคาขนส่ง </td>
+				<td><input type="number" th:field="*{priceDelivery}"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input style="float: right;" type="submit" value="ยืนยัน "></td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>
