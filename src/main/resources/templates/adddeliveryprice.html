@@ -10,15 +10,18 @@
 <script type="text/javascript">
 	function adddelivery(){
 		var check = document.getElementById("choosedelivery");
-		var adddeliverybtn = document.getElementById("adddelivery").value;
-		if(check.innerHTML == '<select name="selectname"><option th:each="delivery: ${deliveryList}" th:value="${delivery.getNameDelivery()}"><p th:text="${delivery.getNameDelivery()}"></p></option></select><input type="hidden" name="hidden" value="select">'){
-			check.innerHTML = '<input type="text" name="textname"><input type="hidden" name="hidden" value="text">';
+		var adddeliverybtn = document.getElementById("adddeliver").value;
+		if(document.getElementById("choosedelivery1").style.visibility == "hidden"){
+			document.getElementById("choosedelivery1").style.visibility = "visible";
+			document.getElementById("choosedelivery2").style.visibility = "hidden";
 			adddeliverybtn = "เลือกบริการขนส่ง";
 		}
 		else{
-			check.innerHTML = '<select name="selectname"><option th:each="delivery: ${deliveryList}" th:value="${delivery.getNameDelivery()}"><p th:text="${delivery.getNameDelivery()}"></p></option></select><input type="hidden" name="hidden" value="select">';
+			document.getElementById("choosedelivery1").style.visibility = "hidden";
+			document.getElementById("choosedelivery2").style.visibility = "visible";
 			adddeliverybtn = "เพิ่มชื่อบริการขนส่ง";
 		}
+		console.log(document.getElementById("choosedelivery1").stlye.visibility)
 	}
 </script>
 </head>
@@ -30,14 +33,18 @@
 			<tr>
 				<td>ชื่อบริการขนส่ง </td>
 				<td>
-				<div id="choosedelivery">
+				<div id="choosedelivery1" style="visibility: hidden;">
+					<input type="text" name="textname">
+					<input type="hidden" name="hidden" value="text">
+				</div>
+				<div id="choosedelivery2" style="visibility: visible;">
 					<select name="selectname">
 						<option th:each="delivery: ${deliveryList}" th:value="${delivery.getNameDelivery()}"><p th:text="${delivery.getNameDelivery()}"></p></option>
 					</select>
 					<input type="hidden" name="hidden" value="select">
 				</div>
 				</td>
-				<td><input id="adddelivery" type="button" onclick="adddelivery()" value="เพิ่มชื่อบริการขนส่ง "></td>
+				<td><input id="adddeliver" type="button" onclick="adddelivery()" value="เพิ่มชื่อบริการขนส่ง "></td>
 			</tr>
 			<tr>
 				<td>น้ำหนักสูงสุด </td>
