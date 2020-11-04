@@ -48,7 +48,7 @@
 				</div>
 				<div id="choosedelivery2" style="visibility: visible;">
 					<select name="selectname">
-						<option th:each="deli: ${deliveryList}" th:value="${deli.getNameDelivery()}"><p th:text="${deli.getNameDelivery()}"></p></option>
+						<option th:each="namedeli: ${namedeliList}" th:value="${namedeli}"><p th:text="${namedeli}"></p></option>
 					</select>
 				</div>
 				</td>
@@ -56,21 +56,21 @@
 			</tr>
 			<tr>
 				<td>น้ำหนักสูงสุด </td>
-				<td><input type="number" th:field="*{maxWeight}"></td>
+				<td><input type="number" th:field="*{maxWeight}"><span> กรัม</span></td>
 			</tr>
 			<tr>
 				<td>ราคาขนส่ง </td>
-				<td><input type="number" th:field="*{priceDelivery}"></td>
+				<td><input type="number" th:field="*{priceDelivery}"><span> บาท</span></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td><input style="float: right;" type="submit" value="ยืนยัน "></td>
 			</tr>
-			<tr>
-				<td><p>บริการขนส่ง </p></td>
-				<td><p>น้ำหนักสูงสุด </p></td>
-				<td><p>ราคาขนส่ง </p></td>
-				<td><a href="#">ลบ </a></td>
+			<tr th:each="deli: ${deliveryList}">
+				<td><p th:text="${deli.getNameDelivery()}">บริการขนส่ง </p></td>
+				<td><p th:text="${deli.getMaxWeight()}">น้ำหนักสูงสุด </p></td>
+				<td><p th:text="${deli.getPriceDelivery()}">ราคาขนส่ง </p></td>
+				<td><a th:href="@{'/deletedelivery/' + ${deli.getIdDelivery()}}">ลบ </a></td>
 			</tr>
 		</table>
 	</form>

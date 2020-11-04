@@ -196,4 +196,10 @@ public class ProductController {
 		return "redirect:/editproduct";
 	}
 	
+	@GetMapping("/deletecategory/{idcategory}")
+	public String deleteaccount(@PathVariable("idcategory") int idcategory) {
+		categoryRepo.deleteByIdCategory(idcategory);
+		return "redirect:/editproduct";
+	}
+	
 }

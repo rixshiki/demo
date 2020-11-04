@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,9 +23,12 @@ public class DeliveryController {
 	
 	@GetMapping("/editdelivery")
 	public String editdelivery(Model model) {
+		List<String> namedeliList = new ArrayList<String>();
+		namedeliList = deliveryRepo.getAllNamedelivery();
 		List<delivery> deliveryList = new ArrayList<delivery>();
-		deliveryList = deliveryRepo.findAll();
+		deliveryList = deliveryRepo.findAllOrderByNameDeli();
 		model.addAttribute("delivery", new delivery());
+		model.addAttribute("namedeliList", namedeliList);
 		model.addAttribute("deliveryList", deliveryList);
 		return "adddeliveryprice";
 	}
@@ -40,6 +44,12 @@ public class DeliveryController {
 			delivery.setNameDelivery(selectname);
 		}
 		deliveryRepo.save(delivery);
+		return "redirect:/editdelivery";
+	}
+	
+	@GetMapping("/deletedelivery/{iddelivery}")
+	public String deleteaccount(@PathVariable("iddelivery") int iddelivery) {
+		deliveryRepo.deleteByIdDelivery(iddelivery);
 		return "redirect:/editdelivery";
 	}
 	

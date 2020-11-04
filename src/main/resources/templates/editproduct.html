@@ -145,7 +145,7 @@ font-family: 'Bai Jamjuree', sans-serif;
 		<td>
 			<p>แก้ไขรายละเอียดเพิ่มเติม </p>
 			<form action="#" th:action="@{/updatecat}" th:object="${cat}" method="post" enctype="multipart/form-data">
-				<a href="#catdelete" class="catdelete">ลบ category</a>
+				<a th:href="@{'/deletecategory/' + ${cat.getIdCategory()}}" class="catdelete">ลบ category</a>
 				<input type="hidden" th:value="${cat.getIdCategory()}" th:field="*{idCategory}">
 				<input type="hidden" th:value="${cat.getNameCat()}" th:field="*{nameCat}">
 				<textarea th:value="${cat.getDetailCat()}" rows="10" cols="20" th:field="*{detailCat}"></textarea><br>

@@ -23,7 +23,7 @@ public class AccountController {
 	@GetMapping("/editaccount")
 	public String editaccount(Model model) {
 		List<account> accountList = new ArrayList<account>();
-		accountList = accountRepo.findAll();
+		accountList = accountRepo.findAllOrderByNameBank();
 		model.addAttribute("account", new account());
 		model.addAttribute("accountList", accountList);
 		return "editaccount";
