@@ -37,12 +37,13 @@ body{
 .sellerheader{
 	position: fixed;
 	top: 0;
+	height: 60px;
+	width: 100%;
+	padding: 0 40pt;
 	left: 0;
 	background-color: var(--brown);
 	color: white;
 	font-size: 20pt;
-	height: 60px;
-	width: 100%;
 	box-shadow: 2px 2px 5px gray;
 }
 a.catheader{
@@ -56,7 +57,7 @@ a.catheader{
 	line-height: 40pt;
 }
 a.cataddheader{
-	color: var(--brown);
+	color: white;
 	text-decoration: none;
 	vertical-align: middle;
 	font-size: 30pt;
@@ -121,12 +122,10 @@ font-family: 'Bai Jamjuree', sans-serif;
 </head>
 
 <body>
-<div class="sellerheader center">
+<div class="sellerheader">
 	<div th:each="cat: ${catlist}" style="display: inline" th:if="${catlist != null}">
 		<a th:href="@{'/editproduct/' + ${cat.getIdCategory()}}" th:value="${cat.getNameCat()}" th:text="${cat.getNameCat()}"></a>
 	</div>
-	<a class="catheader" href="#">เสื้อ </a>
-	<a class="catheader" href="#">แก้ว </a>
 	<a class="cataddheader" href="/addcategory">+</a>
 </div>
 <a class="back" href="/firstpage"><</a>
