@@ -233,7 +233,9 @@ function off() {
 			<tr class="tableheader">
 				<th style="height:30pt; width: 10%" > รหัสสั่งซื้อ </th>
 				<th style="height:30pt; width: 60%">  รายการ </th>
+				<th style="height:30pt; width: 15%">ธนาคารผู้ขาย </th>
 				<th style="height:30pt; width: 15%">วันเวลาที่โอน </th>
+				<th style="height:30pt; width: 15%">จำนวนเงินที่โอน</th>
 				<th style="height:30pt; width: 15%">ตรวจสอบ </th>
 			</tr>
 			<tr th:each="userorder: ${userorders}">
@@ -246,7 +248,9 @@ function off() {
 			  			</li>
 					</ul>
 				</td>
+				<td th:text="${userorder.getSellerBank()}"></td>
 				<td th:text="${userorder.getPayTime()}"></td>
+				<td th:text="${userorder.getPayTotal()}"></td>
 				<td style="text-align: center;">
 					<button class="btncheck" onclick="on()">ตรวจสอบ </button>
 				</td>
