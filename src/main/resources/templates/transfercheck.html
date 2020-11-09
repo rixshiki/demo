@@ -191,7 +191,7 @@ function off() {
 	<table class="overlaytable">
 				<tr>
 					<th>รหัสสั่งซื้อ</th>
-					<td>#รหัสสั่งซื้อ</td>
+					<td th:text="${'#'+ userorder.getIdOrder()}"><td>
 				</tr>
 				<tr>
 					<th>ชื่อ-สกุล</th>
@@ -199,27 +199,27 @@ function off() {
 				</tr>
 				<tr>
 					<th>ยอดรวมที่ต้องโอน</th>
-					<td></td>
+					<td th:text="${userorder.getTotalOrder()}"></td>
 				</tr>
 				<tr>
 					<th>จำนวนเงินที่โอนมา</th>
-					<td></td>
+					<td th:text="${userorder.getPayTotal()}"></td>
 				</tr>
 				<tr>
 					<th>จากธนาคาร</th>
-					<td></td>
+					<td th:text="${userorder.getUserBank()}"></td>
 				</tr>
 				<tr>
 					<th>เข้าธนาคาร</th>
-					<td></td>
+					<td th:text="${userorder.getSellerBank()}"></td>
 				</tr>
 				<tr>
 					<th>วันเวลาที่โอน</th>
-					<td></td>
+					<td th:text="${userorder.getCratedOrder}"></td>
 				</tr>
 				<tr>
 					<th>บัญชี 4 ตัวท้าย</th>
-					<td></td>
+					<td th:text="${userorder.getLastNum}"></td>
 				</tr>
 			</table>
 			<div class="img"></div>
