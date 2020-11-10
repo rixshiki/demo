@@ -65,12 +65,13 @@ summary{
 .btncheck{
 	background-color: #79d70f;
 	color: white;
-	width: 60pt;
+	width: 40pt;
 	height: 22pt;
 	border: none;
 	border-radius: 22px;
 	box-shadow: 2px 2px 5px gray;
 	cursor: pointer;
+	display: inline-block;
 }
 
 .checked{
@@ -96,6 +97,75 @@ summary{
   background-color: rgba(0,0,0,0.5);
   z-index: 2;
   cursor: pointer;
+}
+.tabletrack{
+	width: 100%;
+	overflow-y: scroll;
+}
+.tabletrack>th, .tabletrack>td{
+	text-align: left;
+	padding: 2% 0 2% 0;
+}
+.img{
+	background-color: gray;
+	width: 200px;
+	height: 200px;
+}
+.overlayheader{
+	position: fixed;
+	top: 0;
+	left: 0;
+	font-size: 16pt;
+	text-align: center;
+	height: 50pt;
+	/*padding: 2% 0 2% 0;*/
+	width: 100%;
+	background-color: white/*var(--brown)*/;
+	color: gray/*white*/;
+	box-shadow: 2px 2px 2px gray;
+}
+.overlayconfirm{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	font-size: 16pt;
+	text-align: center;
+	height: 40pt;
+	width: 100%;
+	background-color:  #79d70f;
+	border: none;
+	color: white;
+	box-shadow: 2px -2px 2px gray;
+}
+
+.idproduct{
+	position: fixed;
+	top: 2pt;
+	left: 2pt;
+	color: gray;
+	z-index: 2;
+}
+.imgproduct{
+	border-radius: 50px;
+	background-color: white;
+	width: 50px;
+	height: 50px;
+	box-shadow: 2px 2px 5px gray; 
+}
+.right{
+	text-align: right;
+}
+.left{
+	text-align: left;
+}
+hr {
+  border: 0;
+  display: block;
+  background-color: gray;
+  height: 2px;
+}
+.container{
+	width: 80%;
 }
 .overlayheader{
 	position: absolute;
@@ -155,7 +225,28 @@ function off() {
 	<!-- List order from database -->
 	<div class="center" id="overlay" onclick="off()">
 		<div class="checked center">
-			<iframe src="ovlaytrack.html"></iframe>
+			<div class="idproduct">#รหัสสั่งซื้อ </div>
+	<div class="overlayheader center">รายการคำสั่งซื้อ </div>
+	<div class="container">
+	 <table class="tabletrack">
+				<tr>
+					<td style="width: 50px;"><img class="imgproduct" src=""> </td>
+					<td><ul>
+					  <li> Item one </li>
+					  <li> Item two </li>
+					 </ul></td>
+					<td style="text-align: right;">150 </td>
+				</tr>
+			</table>
+			<hr>
+			<div class="right">
+				ยอดรวม <price>150</price>
+			</div>
+			<div class="left">
+				ที่อยู่ <address>xxx xxx xxx</address>
+			</div>
+	</div>
+		<button class="overlayconfirm">เพิ่มเลข Track </button>
 		</div>
 	</div>
 	<details>
@@ -163,11 +254,13 @@ function off() {
 		<table class="maintable">
 		<tr class="tableheader">
 			<th style="height:30pt; width: 10%" > รหัสสั่งซื้อ </th>
-			<th style="height:30pt; width: 75%">  รายการ </th>
-			<th style="height:30pt; width: 15%">เพิ่ม Track </th>
+			<th style="height:30pt; width: 10%"> ชื่อผู้ซื้อ </th>
+			<th style="height:30pt; width: 60%">  รายการ </th>
+			<th style="height:30pt; width: 20%">เพิ่ม Track </th>
 		</tr>
 		<tr th:each="userorder: ${userorders}">
 				<td th:text="${'#'+ userorder.getIdOrder()}"></td>
+				<td></td>
 				<td style="position: relative;" >
 					<ul>
 						<li th:each="orderlist: ${orderlists}" th:if="${orderlist.getIdOrder()==userorder.getIdOrder()}"> 
@@ -177,7 +270,8 @@ function off() {
 					</ul>
 			</td>
 			<td style="text-align: center;">
-				<button class="btncheck" onclick="on()">+ Track </button>
+				<input style="width: 100pt;" type="text">
+				<button class="btncheck" onclick="on()">ยืนยัน </button>
 			</td>
 		</tr>
 		</table>

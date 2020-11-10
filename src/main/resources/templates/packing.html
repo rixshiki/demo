@@ -163,13 +163,13 @@ function off() {
 		<table class="maintable">
 		<tr class="tableheader">
 			<th style="height:30pt; width: 10%" > รหัสสั่งซื้อ </th>
-			<th style="height:30pt; width: 10%" > ชื่อผู้ซื้อ </th>
 			<th style="height:30pt; width: 70%">  รายการ </th>
-			<th style="height:30pt; width: 10%" > ผู้ซื้อได้รับแล้ว </th>
+			<th style="height:30pt; width: 10%" > วัน-เวลาที่โอน </th>
+			<th style="height:30pt; width: 10%" > ตรวจสอบ </th>
 		</tr>
 		<tr th:each="userorder: ${userorders}">
 			<td th:text="${'#'+ userorder.getIdOrder()}"></td>
-			<td>ชื่อ </td>
+			
 			<td style="position: relative;" >
 					<ul>
 						<li th:each="orderlist: ${orderlists}" th:if="${orderlist.getIdOrder()==userorder.getIdOrder()}"> 
@@ -178,7 +178,10 @@ function off() {
 			  			</li>
 					</ul>
 			</td>
-			<td>ได้รับแล้ว </td>
+			<td> </td>
+			<td style="flex-flow: column;" class="center">
+				<input type="checkbox">
+			</td>
 		</tr>
 		</table>
 	</details>
