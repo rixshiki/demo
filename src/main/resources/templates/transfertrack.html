@@ -200,6 +200,9 @@ hr {
 	text-decoration: underline;
 	cursor: pointer;
 }
+.tabledetail:first-child{
+	width: 20px;
+}
 .back{
 	position: absolute;
 	top: 0;
@@ -234,33 +237,32 @@ function offdetail() {
 	<div class="center" id="overlaydetail" onclick="offdetail()">
 		<div class="checked center">
 			<div class="overlayheader center">รายละเอียดเพิ่มเติม </div>
-			s
-		</div>
-	</div>
-	<div class="center" id="overlay" onclick="off()">
-		<div class="checked center">
-			<div class="idproduct">#รหัสสั่งซื้อ </div>
-			<div class="overlayheader center">รายการคำสั่งซื้อ </div>
-			<div class="container">
-	 			<table class="tabletrack">
+			<table class="tabledetail" style="width: 80%;">
 				<tr>
-					<td style="width: 50px;"><img class="imgproduct" src=""> </td>
-					<td><ul>
-					  <li> Item one </li>
-					  <li> Item two </li>
-					 </ul></td>
-					<td style="text-align: right;">150 </td>
+					<td>รหัส order</td>
+					<td></td>
 				</tr>
-				</table>
-				<hr>
-				<div class="right">
-					ยอดรวม <price>150</price>
-				</div>
-				<div class="left">
-					ที่อยู่ <address>xxx xxx xxx</address>
-				</div>
-		</div>
-		<button class="overlayconfirm">เพิ่มเลข Track </button>
+				<tr>
+					<td>ชื่อผู้ซื้อ </td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>รายการ </td>
+					<td>ราคา </td>
+				</tr>
+				<tr>
+					<td>ยอดรวม </td>
+					<td>รวม </td>
+				</tr>
+				<tr>
+					<td>ที่อยู่</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>เลข track</td>
+					<td></td>
+				</tr>
+			</table>
 		</div>
 	</div>
 	<details>
