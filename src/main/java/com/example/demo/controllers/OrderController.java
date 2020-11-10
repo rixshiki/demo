@@ -48,6 +48,21 @@ public class OrderController {
 		return "redirect:/checking";
 	}
 	
+	@GetMapping("/packing")
+	public String findpacking(Model model) {
+		List<userorder> userorders = new ArrayList<userorder>();
+		List<orderdetail> orderlists = new ArrayList<orderdetail>();
+		userorders = userorderRepo.getByStatus("packing");
+		for(userorder userorder : userorders) {
+			List<orderdetail> orderdetails = new ArrayList<orderdetail>();
+			orderdetails = orderdetailRepo.getByIdorder(userorder.getIdOrder());
+			orderlists.addAll(orderdetails);
+		}
+		model.addAttribute("orderlists", orderlists);
+		model.addAttribute("userorders", userorders);
+		return "packing";
+	}
+	
 	@GetMapping("/tracking")
 	public String findtracking(Model model) {
 		List<userorder> userorders = new ArrayList<userorder>();
