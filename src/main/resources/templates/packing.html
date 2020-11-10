@@ -86,7 +86,7 @@ summary{
 	height: 100%;
 	border: none;
 }
-#overlay {
+#overlay, #overlaydetail {
   position: fixed;
   visibility: hidden;
   width: 100%;
@@ -140,12 +140,12 @@ summary{
 }
 </style>
 <script>
-function on() {
-  document.getElementById("overlay").style.visibility = "visible";
+function ondetail() {
+  document.getElementById("overlaydetail").style.visibility = "visible";
 }
 
-function off() {
-  document.getElementById("overlay").style.visibility = "hidden";
+function offdetail() {
+  document.getElementById("overlaydetail").style.visibility = "hidden";
 }
 </script>
 </head>
@@ -153,9 +153,10 @@ function off() {
 	<div class="sellerheader center">จัดส่งแล้ว </div>
 	<a href="/firstpage" class="back"><</a>
 	<!-- List order from database -->
-	<div class="center" id="overlay" onclick="off()">
+	<div class="center" id="overlaydetail" onclick="offdetail()">
 		<div class="checked center">
-			<iframe src="ovlaytrack.html"></iframe>
+			<div class="overlayheader center">รายละเอียดเพิ่มเติม </div>
+			s
 		</div>
 	</div>
 	<details>
@@ -169,15 +170,14 @@ function off() {
 		</tr>
 		<tr th:each="userorder: ${userorders}">
 			<td th:text="${'#'+ userorder.getIdOrder()}"></td>
-			
 			<td style="position: relative;" >
-					<ul>
-						<li th:each="orderlist: ${orderlists}" th:if="${orderlist.getIdOrder()==userorder.getIdOrder()}"> 
-							<span th:text="${orderlist.getProductdetail().getNameProduct()}"></span>
-							<span th:text="${' x'+ orderlist.getNumber()}"></span>
-			  			</li>
-					</ul>
-			</td>
+				<ul>
+					<li th:each="orderlist: ${orderlists}" th:if="${orderlist.getIdOrder()==userorder.getIdOrder()}"> 
+						<span th:text="${orderlist.getProductdetail().getNameProduct()}"></span>
+						<span th:text="${' x'+ orderlist.getNumber()}"></span>
+			  		</li>
+				</ul>
+				<a onclick="ondetail()" id="detaildata">รายละเอียดเพิ่มเติม </a>
 			<td> </td>
 			<td style="flex-flow: column;" class="center">
 				<input type="checkbox">

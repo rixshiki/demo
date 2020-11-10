@@ -86,7 +86,7 @@ summary{
 	height: 100%;
 	border: none;
 }
-#overlay {
+#overlay, #overlaydetail {
   position: fixed;
   visibility: hidden;
   width: 100%;
@@ -198,12 +198,26 @@ function on() {
 function off() {
   document.getElementById("overlay").style.visibility = "hidden";
 }
+
+function ondetail() {
+	  document.getElementById("overlaydetail").style.visibility = "visible";
+}
+
+function offdetail() {
+	  document.getElementById("overlaydetail").style.visibility = "hidden";
+}
 </script>
 </head>
 <body>
 	<div class="sellerheader center">ตรวจสอบ </div>
 	<a href="/firstpage" class="back"><</a>
 	<!-- List order from database -->
+	<div class="center" id="overlaydetail" onclick="offdetail()">
+		<div class="checked center">
+			<div class="overlayheader center">รายละเอียดเพิ่มเติม </div>
+			s
+		</div>
+	</div>
 	<div class="center" id="overlay" onclick="off()">
 		<div class="checked center">
 			<div>
@@ -268,6 +282,7 @@ function off() {
 							<span th:text="${' x'+ orderlist.getNumber()}"></span>
 			  			</li>
 					</ul>
+					<a onclick="ondetail()" id="detaildata">รายละเอียดเพิ่มเติม </a>
 				</td>
 				<td th:text="${userorder.getSellerBank()}" id="valueTD6"></td>
 				<td th:text="${userorder.getPayTime()}" id="valueTD7"></td>
@@ -281,6 +296,7 @@ function off() {
 				<input type="hidden" th:value="${userorder.getLastNum()}" id="valueTD8">
 				<input type="hidden" th:value="${userorder.getPhotoPay()}" id="valueIMG">
 				<input type="hidden" th:value="${userorder.getIdOrder()}" id="valueLink">
+				
 			</tr>
 		</table>
 	</details>
