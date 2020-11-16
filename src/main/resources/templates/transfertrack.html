@@ -295,8 +295,10 @@ function offdetail() {
 					<a onclick="ondetail()" id="detaildata">รายละเอียดเพิ่มเติม </a>
 				</td>
 			<td style="text-align: center;">
-				<input style="width: 100pt;" type="text">
-				<button class="btncheck" onclick="on()">ยืนยัน </button>
+				<form action="#" th:action="@{'/trantocomplete/' + ${userorder.getIdOrder()}}" method="post">
+					<input style="width: 100pt;" type="text" name="numtrack">
+					<input type="submit" value="ยืนยัน">
+				</form>
 			</td>
 			<input type="hidden" th:value="${userorder.getTotalOrder()}" id="valueTD5">
 			<input type="hidden" th:value="${userorder.getUserprofile().getAddress()}" id="valueTD6">

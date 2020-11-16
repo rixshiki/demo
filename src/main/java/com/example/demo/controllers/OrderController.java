@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entities.orderdetail;
 import com.example.demo.entities.userorder;
@@ -39,7 +41,7 @@ public class OrderController {
 	}
 	
 	@GetMapping("/trantotracking/{idorder}")
-	public String trantopacking(@PathVariable("idorder") Integer idorder) {
+	public String trantotracking(@PathVariable("idorder") Integer idorder) {
 		userorder order = new userorder(); 
 		order = userorderRepo.findById(idorder).get();
 		order.setStatus("tracking");
@@ -63,6 +65,18 @@ public class OrderController {
 		return "packing";
 	}
 	
+	@PostMapping("/trantocomplete/{idorder}")
+	public String trantocomplete(@PathVariable("idorder") Integer idorder
+			,@RequestParam("numtrack") String numtrack) {
+		userorder order = new userorder(); 
+		order = userorderRepo.findById(idorder).get();
+		order.setTrack(numtrack);
+		order.setStatus("shipping");
+		order.setCratedOrder(LocalDateTime.now());
+		userorderRepo.save(order);
+		return "redirect:/checking";
+	}
+	
 	@GetMapping("/tracking")
 	public String findtracking(Model model) {
 		List<userorder> userorders = new ArrayList<userorder>();
@@ -82,7 +96,7 @@ public class OrderController {
 	public String findcomplete(Model model) {
 		List<userorder> userorders = new ArrayList<userorder>();
 		List<orderdetail> orderlists = new ArrayList<orderdetail>();
-		userorders = userorderRepo.getByStatus("complete");
+		userorders = userorderRepo.getByTwoStatus("shipping", "complete");
 		for(userorder userorder : userorders) {
 			List<orderdetail> orderdetails = new ArrayList<orderdetail>();
 			orderdetails = orderdetailRepo.getByIdorder(userorder.getIdOrder());
