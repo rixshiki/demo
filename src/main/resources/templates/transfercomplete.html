@@ -149,7 +149,17 @@ function offdetail() {
 }
 
 function ondetail() {
+	var valueTD1 = document.getElementById( "valueTD1" ).innerText;
+	var valueTD2 = document.getElementById("valueTD2").innerText;
+	var valueTD5 = document.getElementById("valueTD5").value;
+	var valueTD6 = document.getElementById("valueTD6").value;
+	var valueTD7 = document.getElementById("valueTD7").value;
 	document.getElementById("overlaydetail").style.visibility = "visible";
+	document.getElementById("overlaytableTD1").innerHTML = valueTD1;
+  	document.getElementById("overlaytableTD2").innerHTML = valueTD2;
+  	document.getElementById("overlaytableTD5").innerHTML = valueTD5;
+  	document.getElementById("overlaytableTD6").innerHTML = valueTD6;
+  	document.getElementById("overlaytableTD7").innerHTML = valueTD7;
 }
 
 function offdetail() {
@@ -164,7 +174,36 @@ function offdetail() {
 	<div class="center" id="overlaydetail" onclick="offdetail()">
 		<div class="checked center">
 			<div class="overlayheader center">รายละเอียดเพิ่มเติม </div>
-			s
+			<table class="tabledetail" style="width: 80%;">
+				<tr>
+					<td>รหัส order</td>
+					<td id="overlaytableTD1"></td>
+				</tr>
+				<tr>
+					<td>ชื่อผู้ซื้อ </td>
+					<td id="overlaytableTD2"></td>
+				</tr>
+				<tr>
+					<td>รายการ </td>
+					<td>ราคา </td>
+				</tr>
+				<tr id="overlaytableTD4"> <!-- each -->
+					<td>รายการ </td>
+					<td>ราคา </td>
+				</tr>
+				<tr>
+					<td>ยอดรวม </td>
+					<td id="overlaytableTD5"></td>
+				</tr>
+				<tr>
+					<td>ที่อยู่</td>
+					<td id="overlaytableTD6"></td>
+				</tr>
+				<tr>
+					<td>เลข track</td>
+					<td id="overlaytableTD7"></td>
+				</tr>
+			</table>
 		</div>
 	</div>
 	<details>
@@ -177,8 +216,8 @@ function offdetail() {
 			<th style="height:30pt; width: 10%" > ผู้ซื้อได้รับแล้ว </th>
 		</tr>
 		<tr th:each="userorder: ${userorders}">
-			<td th:text="${'#'+ userorder.getIdOrder()}"></td>
-			<td>ชื่อ </td>
+			<td th:text="${'#'+ userorder.getIdOrder()}" id="valueTD1"></td>
+			<td th:text="${userorder.getUserprofile().getName()}" id="valueTD2"></td>
 			<td style="position: relative;" >
 					<ul>
 						<li th:each="orderlist: ${orderlists}" th:if="${orderlist.getIdOrder()==userorder.getIdOrder()}"> 
@@ -189,6 +228,9 @@ function offdetail() {
 					<a onclick="ondetail()" id="detaildata">รายละเอียดเพิ่มเติม </a>
 			</td>
 			<td>ได้รับแล้ว </td>
+			<input type="hidden" th:value="${userorder.getTotalOrder()}" id="valueTD5">
+			<input type="hidden" th:value="${userorder.getUserprofile().getAddress()}" id="valueTD6">
+			<input type="hidden" th:value="${userorder.getTrack()}" id="valueTD7">
 		</tr>
 		</table>
 	</details>

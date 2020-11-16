@@ -222,7 +222,15 @@ function off() {
 }
 
 function ondetail() {
+	var valueTD1 = document.getElementById( "valueTD1" ).innerText;
+	var valueTD2 = document.getElementById("valueTD2").innerText;
+	var valueTD5 = document.getElementById("valueTD5").value;
+	var valueTD6 = document.getElementById("valueTD6").value;
 	document.getElementById("overlaydetail").style.visibility = "visible";
+	document.getElementById("overlaytableTD1").innerHTML = valueTD1;
+  	document.getElementById("overlaytableTD2").innerHTML = valueTD2;
+  	document.getElementById("overlaytableTD5").innerHTML = valueTD5;
+  	document.getElementById("overlaytableTD6").innerHTML = valueTD6;
 }
 
 function offdetail() {
@@ -240,27 +248,27 @@ function offdetail() {
 			<table class="tabledetail" style="width: 80%;">
 				<tr>
 					<td>รหัส order</td>
-					<td></td>
+					<td id="overlaytableTD1"></td>
 				</tr>
 				<tr>
 					<td>ชื่อผู้ซื้อ </td>
-					<td></td>
+					<td id="overlaytableTD2"></td>
 				</tr>
 				<tr>
 					<td>รายการ </td>
 					<td>ราคา </td>
 				</tr>
+				<tr id="overlaytableTD4"> <!-- each -->
+					<td>รายการ </td>
+					<td>ราคา </td>
+				</tr>
 				<tr>
 					<td>ยอดรวม </td>
-					<td>รวม </td>
+					<td id="overlaytableTD5"></td>
 				</tr>
 				<tr>
 					<td>ที่อยู่</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>เลข track</td>
-					<td></td>
+					<td id="overlaytableTD6"></td>
 				</tr>
 			</table>
 		</div>
@@ -275,8 +283,8 @@ function offdetail() {
 			<th style="height:30pt; width: 20%">เพิ่ม Track </th>
 		</tr>
 		<tr th:each="userorder: ${userorders}">
-				<td th:text="${'#'+ userorder.getIdOrder()}"></td>
-				<td></td>
+				<td th:text="${'#'+ userorder.getIdOrder()}" id="valueTD1"></td>
+				<td th:text="${userorder.getUserprofile().getName()}" id="valueTD2"></td>
 				<td style="position: relative;" >
 					<ul>
 						<li th:each="orderlist: ${orderlists}" th:if="${orderlist.getIdOrder()==userorder.getIdOrder()}"> 
@@ -290,6 +298,8 @@ function offdetail() {
 				<input style="width: 100pt;" type="text">
 				<button class="btncheck" onclick="on()">ยืนยัน </button>
 			</td>
+			<input type="hidden" th:value="${userorder.getTotalOrder()}" id="valueTD5">
+			<input type="hidden" th:value="${userorder.getUserprofile().getAddress()}" id="valueTD6">
 		</tr>
 		</table>
 	</details>

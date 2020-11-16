@@ -38,11 +38,11 @@ public class OrderController {
 		return "transfercheck";
 	}
 	
-	@GetMapping("/trantopacking/{idorder}")
+	@GetMapping("/trantotracking/{idorder}")
 	public String trantopacking(@PathVariable("idorder") Integer idorder) {
 		userorder order = new userorder(); 
 		order = userorderRepo.findById(idorder).get();
-		order.setStatus("packing");
+		order.setStatus("tracking");
 		order.setCratedOrder(LocalDateTime.now());
 		userorderRepo.save(order);
 		return "redirect:/checking";
