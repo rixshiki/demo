@@ -18,4 +18,7 @@ public interface UserOrderRepository extends JpaRepository<userorder, Integer> {
 
 	@Query("from userorder o where o.status = :status order by o.payTime asc, o.sellerBank asc")
 	List<userorder> getByStatusorderbySellerBank(@Param("status")String status);
+	
+	@Query("from userorder o where o.nameDelivery = :transport")
+	List<userorder> getByNamedelivery(@Param("transport")String transport);
 }

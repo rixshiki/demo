@@ -1,5 +1,7 @@
 package com.example.demo.controllers;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,10 @@ import com.example.demo.entities.orderdetail;
 import com.example.demo.entities.userorder;
 import com.example.demo.repositories.OrderDetailRepository;
 import com.example.demo.repositories.UserOrderRepository;
+import com.example.demo.services.CreatePDF;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.pdf.PdfWriter;
 
 @Controller
 public class OrderController {
@@ -24,6 +30,9 @@ public class OrderController {
 	
 	@Autowired
 	private OrderDetailRepository orderdetailRepo;
+	
+	@Autowired
+	private CreatePDF pdf;
 	
 	@GetMapping("/checking")
 	public String findchecking(Model model) {
@@ -105,5 +114,28 @@ public class OrderController {
 		model.addAttribute("orderlists", orderlists);
 		model.addAttribute("userorders", userorders);
 		return "transfercomplete";
+	}
+	
+	@GetMapping("/createPDF")
+	public String createPDF(@RequestParam("transport") String transport) throws IOException {
+		String filepath = "D:/filefromspring/" + transport + ".pdf";
+		List<userorder> userorders = new ArrayList<userorder>();
+		List<orderdetail> orderlists = new ArrayList<orderdetail>();
+		userorders = userorderRepo.getByNamedelivery(transport);
+		for(userorder userorder : userorders) {
+			List<orderdetail> orderdetails = new ArrayList<orderdetail>();
+			orderdetails = orderdetailRepo.getByIdorder(userorder.getIdOrder());
+			orderlists.addAll(orderdetails);
+		}
+		try {
+			Document document = new Document(PageSize.A4);
+			PdfWriter.getInstance(document, new FileOutputStream(filepath));
+			document.open();
+			pdf.printOrder(document, userorders, orderlists);
+			document.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "";
 	}
 }

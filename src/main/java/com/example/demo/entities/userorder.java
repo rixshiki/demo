@@ -21,6 +21,7 @@ public class userorder {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idOrder;
 	private int totalOrder;
+	private String nameDelivery;
 	private String track;
 	private String status;
 	private int totalWeight;
@@ -148,6 +149,13 @@ public class userorder {
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
+	
+	public String getNameDelivery() {
+		return nameDelivery;
+	}
+	public void setNameDelivery(String nameDelivery) {
+		this.nameDelivery = nameDelivery;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -156,6 +164,7 @@ public class userorder {
 		result = prime * result + idOrder;
 		result = prime * result + idUser;
 		result = prime * result + lastNum;
+		result = prime * result + ((nameDelivery == null) ? 0 : nameDelivery.hashCode());
 		result = prime * result + ((payTime == null) ? 0 : payTime.hashCode());
 		result = prime * result + payTotal;
 		result = prime * result + ((photoPay == null) ? 0 : photoPay.hashCode());
@@ -186,6 +195,11 @@ public class userorder {
 		if (idUser != other.idUser)
 			return false;
 		if (lastNum != other.lastNum)
+			return false;
+		if (nameDelivery == null) {
+			if (other.nameDelivery != null)
+				return false;
+		} else if (!nameDelivery.equals(other.nameDelivery))
 			return false;
 		if (payTime == null) {
 			if (other.payTime != null)
