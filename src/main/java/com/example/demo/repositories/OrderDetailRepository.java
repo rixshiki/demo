@@ -13,7 +13,7 @@ import com.example.demo.entities.orderdetailid;
 
 public interface OrderDetailRepository extends JpaRepository<orderdetail, orderdetailid> {
 	
-	@Query("from orderdetail d where d.idOrder = :idOrder")
+	@Query("from orderdetail d where d.idOrder = :idOrder order by d.noOrder")
 	List<orderdetail> getByIdorder(@Param("idOrder")int idOrder);
 	
 	@Modifying
