@@ -41,60 +41,61 @@ public class CreatePDF {
 		seller = sellerlist.get(0);
 		
 		while(userorders.size()<=i) {
-			if(userorders.size()-i>1) {
-				userorder userorder1 = new userorder();
-				userorder1 = userorders.get(i);
-				List<orderdetail> orderlist1 = new ArrayList<orderdetail>();
-				for(orderdetail order : orderlists) {
-					if(order.getIdOrder()==userorder1.getIdOrder()) {
-						orderlist1.add(order);
-					}
+			userorder userorder1 = new userorder();
+			userorder1 = userorders.get(i);
+			List<orderdetail> orderlist1 = new ArrayList<orderdetail>();
+			for(orderdetail order : orderlists) {
+				if(order.getIdOrder()==userorder1.getIdOrder()) {
+					orderlist1.add(order);
 				}
+			}
 				
-				Paragraph hpara = new Paragraph();
-				boldFont.setSize(45);
-				hpara.add(new Paragraph(userorder1.getNameDelivery(),boldFont));
+			Paragraph hpara = new Paragraph();
+			boldFont.setSize(45);
+			hpara.add(new Paragraph(userorder1.getNameDelivery(),boldFont));
+			
+			float [] userColumnWidths = {1f,4f};
+			PdfPTable table1 = new PdfPTable(userColumnWidths);
+			table1.setWidthPercentage(90f);
+			
+			textFont.setSize(16);
+			insertCell(table1,"ผู้ส่ง (from)",Element.ALIGN_LEFT,1,textFont);
+			insertCell(table1,seller.getAddress(),Element.ALIGN_LEFT,1,textFont);
+			
+			insertCell(table1,"ผู้รับ (to)",Element.ALIGN_LEFT,1,textFont);
+			insertCell(table1,userorder1.getUserprofile().getAddress(),Element.ALIGN_LEFT,1,textFont);
 				
-				float [] userColumnWidths = {1f,4f};
-				PdfPTable table1 = new PdfPTable(userColumnWidths);
-				table1.setWidthPercentage(90f);
-				
-				textFont.setSize(16);
-				insertCell(table1,"ผู้ส่ง (from)",Element.ALIGN_LEFT,1,textFont);
-				insertCell(table1,seller.getAddress(),Element.ALIGN_LEFT,1,textFont);
-				
-				insertCell(table1,"ผู้รับ (to)",Element.ALIGN_LEFT,1,textFont);
-				insertCell(table1,userorder1.getUserprofile().getAddress(),Element.ALIGN_LEFT,1,textFont);
-				
-				hpara.add(table1);
-				addEmptyLine(hpara, 1);
-				float [] orderColumnWidths = {1f,3f,1f};
-				PdfPTable table2 = new PdfPTable(orderColumnWidths);
-				table2.setWidthPercentage(90f);
-				boldFont.setSize(16);
-				insertCell(table1,"#",Element.ALIGN_CENTER,1,boldFont);
-				insertCell(table1,"รายการ",Element.ALIGN_CENTER,1,boldFont);
-				insertCell(table1,"จำนวน",Element.ALIGN_CENTER,1,boldFont);
-				
-				int Norder = 1;
-				for(orderdetail order : orderlist1) {
-					productdetail product = new productdetail();
-					product = productRepo.getOne(order.getIdProduct());
-					insertCell(table1,Integer.toString(Norder),Element.ALIGN_CENTER,1,textFont);
-					insertCell(table1,product.getNameProduct(),Element.ALIGN_LEFT,1,textFont);
-					insertCell(table1,Integer.toString(order.getNumber()),Element.ALIGN_CENTER,1,textFont);
-					Norder++;
-				}
-				hpara.add(table2);
-				
+			hpara.add(table1);
+			addEmptyLine(hpara, 1);
+			float [] orderColumnWidths = {1f,3f,1f};
+			PdfPTable table2 = new PdfPTable(orderColumnWidths);
+			table2.setWidthPercentage(90f);
+			boldFont.setSize(16);
+			insertCell(table1,"#",Element.ALIGN_CENTER,1,boldFont);
+			insertCell(table1,"รายการ",Element.ALIGN_CENTER,1,boldFont);
+			insertCell(table1,"จำนวน",Element.ALIGN_CENTER,1,boldFont);
+			
+			int Norder = 1;
+			for(orderdetail order : orderlist1) {
+				productdetail product = new productdetail();
+				product = productRepo.getOne(order.getIdProduct());
+				insertCell(table1,Integer.toString(Norder),Element.ALIGN_CENTER,1,textFont);
+				insertCell(table1,product.getNameProduct(),Element.ALIGN_LEFT,1,textFont);
+				insertCell(table1,Integer.toString(order.getNumber()),Element.ALIGN_CENTER,1,textFont);
+				Norder++;
+			}
+			hpara.add(table2);
+			
+			i++;
+			
+			if(i%2 == 0 && i < userorders.size()) {		//first order in page
+				document.newPage();
+			}else if(i < userorders.size()){
 				Paragraph text = new Paragraph("----------------------------------------------------",boldFont);
 				text.setAlignment(Element.ALIGN_CENTER);
 				hpara.add(text);
-				document.add(hpara);
-				i+=2;
-			}else{									//หน้าที่มีorderเดียว
-				
 			}
+			document.add(hpara);
 		}
 		
 	}
