@@ -2,8 +2,11 @@ package com.example.demo.controllers;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,11 +120,13 @@ public class OrderController {
 	}
 	
 	@GetMapping("/createPDF")
-	public String createPDF(@RequestParam("transport") String transport) throws IOException {
+	public String createPDF(@RequestParam("transport") String transport
+			,Model model) throws IOException {
 		String filepath = "D:/filefromspring/" + transport + ".pdf";
 		List<userorder> userorders = new ArrayList<userorder>();
 		List<orderdetail> orderlists = new ArrayList<orderdetail>();
 		userorders = userorderRepo.getByNamedelivery(transport);
+		String encoded = "";
 		for(userorder userorder : userorders) {
 			List<orderdetail> orderdetails = new ArrayList<orderdetail>();
 			orderdetails = orderdetailRepo.getByIdorder(userorder.getIdOrder());
@@ -133,9 +138,13 @@ public class OrderController {
 			document.open();
 			pdf.printOrder(document, userorders, orderlists);
 			document.close();
+			byte[] inFileBytes = Files.readAllBytes(Paths.get(filepath)); 
+			encoded = Base64.getEncoder().encodeToString(inFileBytes);
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return "";
+		model.addAttribute("pdf", encoded);
+		return "showPDF";
 	}
 }

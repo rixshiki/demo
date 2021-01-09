@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	embed , object{
+		position: fixed; 
+		width: 80%;
+		height: 680px;
+		left: 10%;
+	}
+	div{
+		padding: 20px;
+	}
+</style>
+</head>
+<body>
+	<div>
+		<a href="#">Back</a>
+		<br><br>
+		<object th:data="'data:application/pdf;base64,'+${pdf}" type="application/pdf">
+			<embed th:src="'data:application/pdf;base64,'+${pdf}" type="application/pdf" />
+		</object>
+	</div>
+</body>
+</html>
