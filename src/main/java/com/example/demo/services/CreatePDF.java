@@ -76,6 +76,7 @@ public class CreatePDF {
 			insertCell(table1,"จำนวน",Element.ALIGN_CENTER,1,boldFont);
 			
 			int Norder = 1;
+			int num = 0;
 			for(orderdetail order : orderlist1) {
 				productdetail product = new productdetail();
 				product = productRepo.getOne(order.getIdProduct());
@@ -83,7 +84,10 @@ public class CreatePDF {
 				insertCell(table1,product.getNameProduct(),Element.ALIGN_LEFT,1,textFont);
 				insertCell(table1,Integer.toString(order.getNumber()),Element.ALIGN_CENTER,1,textFont);
 				Norder++;
+				num+=order.getNumber();
 			}
+			insertCell(table1,"รวม",Element.ALIGN_CENTER,2,textFont);
+			insertCell(table1,Integer.toString(num),Element.ALIGN_CENTER,1,textFont);
 			hpara.add(table2);
 			
 			i++;
@@ -91,9 +95,11 @@ public class CreatePDF {
 			if(i%2 == 0 && i < userorders.size()) {		//first order in page
 				document.newPage();
 			}else if(i < userorders.size()){
+				addEmptyLine(hpara, 1);
 				Paragraph text = new Paragraph("----------------------------------------------------",boldFont);
 				text.setAlignment(Element.ALIGN_CENTER);
 				hpara.add(text);
+				addEmptyLine(hpara, 1);
 			}
 			document.add(hpara);
 		}
