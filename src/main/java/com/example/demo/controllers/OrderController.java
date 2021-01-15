@@ -119,18 +119,13 @@ public class OrderController {
 		LocalDate localDate = LocalDate.now();
 		int month = localDate.getMonthValue();
 		int year = localDate.getYear();
-		System.out.println(month);
-		System.out.println(year);
 		List<Monthgroup> monthlist = new ArrayList<Monthgroup>();
 		List<userorder> ul = new ArrayList<userorder>();
-		System.out.println(getMonth(month));
 		for(int i=1;i<=8;i++) {
 			Monthgroup monthgroup = new Monthgroup();
 			String monthname = getMonth(month)+ ' ' + year;
 			monthgroup.setMonthname(monthname);
 			monthgroup.setMonthnum(month);
-			System.out.println(monthgroup.getMonthname());
-			System.out.println(monthgroup.getMonthnum());
 			monthlist.add(monthgroup);
 			for(userorder uo : userorders) {
 				if(uo.getPayTime().getMonthValue()==month) {
@@ -150,8 +145,6 @@ public class OrderController {
 			orderdetails = orderdetailRepo.getByIdorder(userorder.getIdOrder());
 			orderlists.addAll(orderdetails);
 		}
-		System.out.println(ul);
-		System.out.println(monthlist);
 		model.addAttribute("userlist", ul);
 		model.addAttribute("monthlist", monthlist);
 		model.addAttribute("orderlists", orderlists);
