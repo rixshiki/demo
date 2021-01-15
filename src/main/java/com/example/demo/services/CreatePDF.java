@@ -10,7 +10,9 @@ import com.example.demo.entities.orderdetail;
 import com.example.demo.entities.productdetail;
 import com.example.demo.entities.userorder;
 import com.example.demo.entities.userprofile;
+import com.example.demo.repositories.OrderDetailRepository;
 import com.example.demo.repositories.ProductDetailRepository;
+import com.example.demo.repositories.UserOrderRepository;
 import com.example.demo.repositories.UserProfileRepository;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -30,7 +32,13 @@ public class CreatePDF {
 	@Autowired
 	private ProductDetailRepository productRepo;
 	
-	public void printOrder(Document document,List<userorder> userorders,List<orderdetail> orderlists)throws DocumentException {
+	@Autowired
+	private UserOrderRepository userorderRepo;
+	
+	@Autowired
+	private OrderDetailRepository orderdetailRepo;
+	
+	public void printOrder(Document document,String transport)throws DocumentException {
 		FontFactory.register("D:\\front\\THSarabunNew.ttf", "sarabun");
 		Font boldFont = FontFactory.getFont("sarabun", "TIS-620",true, Font.BOLD);
 		Font textFont = FontFactory.getFont("sarabun", "TIS-620",true, Font.NORMAL);
@@ -39,6 +47,15 @@ public class CreatePDF {
 		userprofile seller = new userprofile();
 		sellerlist = userprofileRepo.findOneByType("Seller");
 		seller = sellerlist.get(0);
+		List<userorder> userorders = new ArrayList<userorder>();
+		List<orderdetail> orderlists = new ArrayList<orderdetail>();
+		System.out.println(transport);
+		userorders = userorderRepo.getByTrackingNamedelivery(transport,"tracking");
+		for(userorder userorder : userorders) {
+			List<orderdetail> orderdetails = new ArrayList<orderdetail>();
+			orderdetails = orderdetailRepo.getByIdorder(userorder.getIdOrder());
+			orderlists.addAll(orderdetails);
+		}
 		
 		while(userorders.size()<=i) {
 			userorder userorder1 = new userorder();

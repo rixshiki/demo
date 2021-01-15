@@ -4,6 +4,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DateFormatSymbols;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -17,8 +19,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.Monthgroup;
 import com.example.demo.entities.orderdetail;
 import com.example.demo.entities.userorder;
+import com.example.demo.repositories.DeliveryRepository;
 import com.example.demo.repositories.OrderDetailRepository;
 import com.example.demo.repositories.UserOrderRepository;
 import com.example.demo.services.CreatePDF;
@@ -36,6 +40,9 @@ public class OrderController {
 	
 	@Autowired
 	private CreatePDF pdf;
+	
+	@Autowired
+	private DeliveryRepository deliRepo;
 	
 	@GetMapping("/checking")
 	public String findchecking(Model model) {
@@ -109,34 +116,62 @@ public class OrderController {
 		List<userorder> userorders = new ArrayList<userorder>();
 		List<orderdetail> orderlists = new ArrayList<orderdetail>();
 		userorders = userorderRepo.getByTwoStatus("shipping", "complete");
+		LocalDate localDate = LocalDate.now();
+		int month = localDate.getMonthValue();
+		int year = localDate.getYear();
+		System.out.println(month);
+		System.out.println(year);
+		List<Monthgroup> monthlist = new ArrayList<Monthgroup>();
+		List<userorder> ul = new ArrayList<userorder>();
+		System.out.println(getMonth(month));
+		for(int i=1;i<=8;i++) {
+			Monthgroup monthgroup = new Monthgroup();
+			String monthname = getMonth(month)+ ' ' + year;
+			monthgroup.setMonthname(monthname);
+			monthgroup.setMonthnum(month);
+			System.out.println(monthgroup.getMonthname());
+			System.out.println(monthgroup.getMonthnum());
+			monthlist.add(monthgroup);
+			for(userorder uo : userorders) {
+				if(uo.getPayTime().getMonthValue()==month) {
+					if(uo.getPayTime().getYear()==year) {
+						ul.add(uo);
+					}
+				}
+			}
+			month--;
+			if(month==0) {
+				month = 12;
+				year--;
+			}
+		}
 		for(userorder userorder : userorders) {
 			List<orderdetail> orderdetails = new ArrayList<orderdetail>();
 			orderdetails = orderdetailRepo.getByIdorder(userorder.getIdOrder());
 			orderlists.addAll(orderdetails);
 		}
+		System.out.println(ul);
+		System.out.println(monthlist);
+		model.addAttribute("userlist", ul);
+		model.addAttribute("monthlist", monthlist);
 		model.addAttribute("orderlists", orderlists);
 		model.addAttribute("userorders", userorders);
 		return "transfercomplete";
 	}
 	
 	@GetMapping("/createPDF")
-	public String createPDF(@RequestParam("transport") String transport
-			,Model model) throws IOException {
+	public String createPDF(Model model) throws IOException {
+		List<String> deliverylist = new ArrayList<String>();
+		deliverylist = deliRepo.getAllNamedelivery();
+		String transport = deliverylist.get(0);
 		String filepath = "D:/filefromspring/" + transport + ".pdf";
-		List<userorder> userorders = new ArrayList<userorder>();
-		List<orderdetail> orderlists = new ArrayList<orderdetail>();
-		userorders = userorderRepo.getByNamedelivery(transport);
 		String encoded = "";
-		for(userorder userorder : userorders) {
-			List<orderdetail> orderdetails = new ArrayList<orderdetail>();
-			orderdetails = orderdetailRepo.getByIdorder(userorder.getIdOrder());
-			orderlists.addAll(orderdetails);
-		}
+
 		try {
 			Document document = new Document(PageSize.A4);
 			PdfWriter.getInstance(document, new FileOutputStream(filepath));
 			document.open();
-			pdf.printOrder(document, userorders, orderlists);
+			pdf.printOrder(document, transport);
 			document.close();
 			byte[] inFileBytes = Files.readAllBytes(Paths.get(filepath)); 
 			encoded = Base64.getEncoder().encodeToString(inFileBytes);
@@ -144,7 +179,37 @@ public class OrderController {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		model.addAttribute("deliverylist", deliverylist);
 		model.addAttribute("pdf", encoded);
-		return "showPDF";
+		return "printall";
+	}
+	
+	@GetMapping("/createPDF/{transport}")
+	public String createPDF2(@PathVariable("transport") String transport
+			,Model model) throws IOException {
+		String filepath = "D:/filefromspring/" + transport + ".pdf";
+		List<String> deliverylist = new ArrayList<String>();
+		deliverylist = deliRepo.getAllNamedelivery();
+		String encoded = "";
+		
+		try {
+			Document document = new Document(PageSize.A4);
+			PdfWriter.getInstance(document, new FileOutputStream(filepath));
+			document.open();
+			pdf.printOrder(document, transport);
+			document.close();
+			byte[] inFileBytes = Files.readAllBytes(Paths.get(filepath)); 
+			encoded = Base64.getEncoder().encodeToString(inFileBytes);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		model.addAttribute("deliverylist", deliverylist);
+		model.addAttribute("pdf", encoded);
+		return "printall";
+	}
+	
+	public String getMonth(int month) {
+	    return new DateFormatSymbols().getMonths()[month-1];
 	}
 }

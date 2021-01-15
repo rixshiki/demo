@@ -84,43 +84,27 @@ body{
   border-top: none;
   background-color: white;
 }
-
+embed , object{
+		position: fixed; 
+		width: 80%;
+		height: 680px;
+		left: 10%;
+	}
+.pdf{
+		padding: 20px;
+	}
 </style>
 </head>
 <body>
-<a class="back" href="/firstpage"><</a>
-<div class="tab">
-  <button class="tablinks active" onclick="openCity(event, 'London')">ไปรษณีย์ไทย</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">EMS</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">KERRY</button>
+<a class="back" href="/tracking"><</a>
+<div th:each="delivery: ${deliverylist}">
+  <a th:href="@{'/createPDF/'+ ${delivery}}" th:value="${delivery}" th:text="${delivery}"></a>
 </div>
-
-<div id="London" class="tabcontent" style="display: block;">
-  <h3>ไปรษณีย์ไทย</h3>
+<div class="pdf">
+	<object th:data="'data:application/pdf;base64,'+${pdf}" type="application/pdf">
+			<embed th:src="'data:application/pdf;base64,'+${pdf}" type="application/pdf" />
+	</object>
 </div>
-
-<div id="Paris" class="tabcontent">
-  <h3>EMS</h3>
-</div>
-
-<div id="Tokyo" class="tabcontent">
-  <h3>KERRY</h3>
-</div>
-
-<script>
-function openCity(evt, delivery) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(delivery).style.display = "block";
-  evt.currentTarget.className += " active";
-}
-</script>
+	
 </body>
 </html>

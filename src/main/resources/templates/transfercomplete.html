@@ -208,8 +208,8 @@ function offdetail() {
 			</table>
 		</div>
 	</div>
-	<details>
-		<summary>กันยายน 2563</summary>
+	<details th:each="month : ${monthlist}">
+		<summary th:text="${month.getMonthname()}" th:value="${month.getMonthname()}"></summary>
 		<table class="maintable">
 		<tr class="tableheader">
 			<th style="height:30pt; width: 10%" > รหัสสั่งซื้อ </th>
@@ -217,7 +217,7 @@ function offdetail() {
 			<th style="height:30pt; width: 60%">  รายการ </th>
 			<th style="height:30pt; width: 10%" > ผู้ซื้อได้รับแล้ว </th>
 		</tr>
-		<tr th:each="userorder: ${userorders}">
+		<tr th:each="userorder: ${userlist}" th:if=${userorder.getPayTime().getMonthValue()==month.getMonthnum()}>
 			<td th:text="${'#'+ userorder.getIdOrder()}" id="valueTD1"></td>
 			<td th:text="${userorder.getUserprofile().getName()}" id="valueTD2"></td>
 			<td style="position: relative;" >
