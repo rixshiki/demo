@@ -19,6 +19,7 @@ body{
 	height: 100vh;
 	margin: 120px 10%;
 	display: flex;
+	flex-direction: column;
 	background-color: var(--brownbg);
 }
 
@@ -88,6 +89,72 @@ font-family: 'Bai Jamjuree', sans-serif;
 	border: 4pt solid var(--brown);
 	padding: 5%;
 }
+
+/* overlay */
+
+#overlay {
+  position: fixed;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+.checked{
+	position: relative;
+	background-color: white;
+	width: 50%;
+	height: 80%;
+	cursor: default;
+	flex-flow: column;
+}
+.centercol{
+  	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-flow: column;
+}
+
+.overlaytable{
+	width: 100%;
+	overflow-y: scroll;
+	position: relative;
+}
+.overlaytable > th, .overlaytable > td{
+	text-align: left;
+	padding: 2% 0 2% 14%;
+}
+.overlaytable > td{
+	width: 60%;
+}
+.overlayheader{
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 16pt;
+	text-align: center;
+	height: 50pt;
+	width: 100%;
+	background-color: var(--brown);
+	color: white;
+	box-shadow: 2px 2px 2px gray;
+}
+.overlayconfirm{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	font-size: 16pt;
+	text-align: center;
+	height: 40pt;
+	width: 100%;
+	background-color:  #79d70f;
+	border: none;
+	color: white;
+	box-shadow: 2px -2px 2px gray;
+}
 </style>
 </head>
 
@@ -128,10 +195,6 @@ font-family: 'Bai Jamjuree', sans-serif;
 			</div>
 		</td>
 	</tr>
-	<tr>
-		<td><input style="float: right;" type="button" value="ยืนยันสั่งสินค้า"></td>
-	</tr>
-
 </table>
 
 <!-- Loop all category & add id category -->
@@ -162,12 +225,38 @@ font-family: 'Bai Jamjuree', sans-serif;
 			</div>
 		</td>
 	</tr>
-	<tr>
-	<td><input style="float: right;" type="button" value="ยืนยันสั่งสินค้า"></td>
-	</tr>
-
 </table>
 
+<div>
+	<input style="float: right;" type="button" value="ยืนยันสั่งสินค้า" onclick="on()">
+</div>
+
+<div class="center" id="overlay" onclick="off()">
+		<div class="checked center">
+			<div>
+			<div class="overlayheader center">รายการสินค้า </div>
+			<table class="overlaytable">
+				<tr>
+						<th>รหัสสั่งซื้อ</th>
+						<td>รหัส</td>
+					</tr>
+					<tr>
+						<th>ชื่อ-สกุล</th>
+						<td>ชื่อ</td>
+					</tr>
+					<tr>
+						<th>จำนวนเงินที่ต้องโอน</th>
+						<td>เงิน</td>
+					</tr>
+					<tr>
+					<th>รูปสลิป</th>
+						<td><input type="file"></td>
+					</tr>
+			</table>
+			<a href="" class="overlayconfirm" id="overlayconfirm">ยืนยัน </a>
+			</div>
+		</div>
+	</div>
 <script>
 function catSelect(evt, catselected) {
   var i, tabcontent, tablinks;
@@ -182,6 +271,15 @@ function catSelect(evt, catselected) {
   document.getElementById(catselected).style.display = "block";
   evt.currentTarget.className += " active";
 }
+
+function on() {
+	  document.getElementById("overlay").style.visibility = "visible";
+}
+
+function off() {
+	  document.getElementById("overlay").style.visibility = "hidden";
+}
+
 </script>
 </body>
 </html>
