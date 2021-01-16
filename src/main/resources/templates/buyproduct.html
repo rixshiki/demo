@@ -47,37 +47,16 @@ a.catheader{
 	text-align: center;
 	line-height: 40pt;
 }
-a.cataddheader{
+td button.active {
+	background-color: var(--grey);
 	color: white;
-	text-decoration: none;
-	vertical-align: middle;
-	font-size: 30pt;
-	line-height: 40pt;
-	margin: 0 5pt 0 5pt;
 }
-a.catdelete{
-	background-color: red;
-	text-align: center;
-	text-decoration: none;
-	border-radius: 5pt;
-	width: 100pt;
-	height: 20pt;
-	line-height: 20pt;
-	color: white;
-	float: right;
-}
-a.catdelete:hover{
-	background-color: darkred;
-	width: 98pt;
-	height: 18pt;
-	line-height: 18pt;
-	font-weight: bolder;
-	border: outset 1pt white;
-}
+
 .tablecat{
 	/* margin: 80pt 10% 0 10%; */
 	width: 100%;
 	background-color: white;
+	display: none;
 }
 .imgproduct{
 	width: 60pt;
@@ -114,50 +93,95 @@ font-family: 'Bai Jamjuree', sans-serif;
 
 <body>
 
-<table class="tablecat">
-	<!-- <tr>
+<table>
+	<tr>
 		<td>
-			<div th:each="cat: ${catlist}" style="display: inline" th:if="${catlist != null}">
-				<a th:href="@{'/editproduct/' + ${cat.getIdCategory()}}" th:value="${cat.getNameCat()}" th:text="${cat.getNameCat()}"></a>
-			</div>
-			<a class="catheader" href="#">เสื้อ </a>
-			<a class="catheader" href="#">แก้ว </a>
-			<a class="cataddheader" href="/addcategory">+</a>
+			<button class="catheader active" onclick="catSelect(event, 'shirt')">เสื้อ </button>
+			<button class="catheader" onclick="catSelect(event, 'cup')">แก้ว </button>
 		</td>
-	</tr> -->
+	</tr>
+</table>
+
+<table id="shirt" class="tablecat" style="display: block;">
 	<tr class="sep" th:if="${cat != null}">
 		<td>
 			<p>รายละเอียดเพิ่มเติม </p>
-			<p>Category Detail</p>
+			<p>Category Shirt Detail</p>
 			<div>image</div>
 		</td>
 	</tr>
+	
 	<tr class="sep" th:if="${cat != null}">
 		<td>
 			<div th:each="product: ${products}">
 				<div th:if="${product.getEnable()==1}">
-					<a th:href="@{'/editoneproduct/' + ${product.getIdProduct()}}">
-						<img class="imgproduct" src="">
-						<!--<img class="imgproduct" style="width=100px;" th:if="${product.getPhotoProduct() == null}" alt="can't download" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/83968655_1508266912688925_789788986167001088_o.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_eui2=AeEmS9a7V_5EfIh3isYQehQUdnXS_5a1mcd2ddL_lrWZxwCZekQyIsKnHov1EeLDg-A_dWPuo1Ea4PKB91i3xWso&_nc_ohc=O0b9t4pD7DEAX8oKyDd&_nc_ht=scontent.fbkk22-2.fna&oh=abb0c36270eb66c217b41b3c3c035c2d&oe=5F85E625">
-						<img class="imgproduct" style="width=100px;" th:if="${product.getPhotoProduct() != null}" alt="can't download" th:src="@{'data:image/jpeg;base64,'+${product.getPhotoProduct()}}"> -->
-					</a>
-					<a th:href="@{'/editoneproduct/' + ${product.getIdProduct()}}">
-						<span th:text="${product.getNameProduct()}"></span>
-					</a>
 					<div th:if="${product.getNumberStock() == null}">
-						S <span th:text="${product.getS()}"></span><br>
-						M <span th:text="${product.getM()}"></span><br>
-						L <span th:text="${product.getL()}"></span><br>
-						XL <span th:text="${product.getXl()}"></span><br>
+						S <input th:if="${product.getS() > 0}" type="number"> <input th:if="${product.getS() == 0}" type="number" disabled> <br>
+						M <input th:if="${product.getM() > 0}" type="number"> <input th:if="${product.getM() == 0}" type="number" disabled> <br>
+						L <input th:if="${product.getL() > 0}" type="number"> <input th:if="${product.getL) == 0}" type="number" disabled> <br>
+						XL <input th:if="${product.getXL() > 0}" type="number"> <input th:if="${product.getXL() == 0}" type="number" disabled> <br>
 					</div>
 					<div th:if="${product.getNumberStock() != null}">
-						Stock <span th:text="${product.getNumberStock()}"></span><br>
+						Stock <input th:if="${product.getNumberStock() > 0}" type="number"> <input th:if="${product.getNumberStock() == 0}" type="number" disabled> <br>
 					</div>
 				</div>
 			</div>
 		</td>
 	</tr>
+	<tr>
+		<td><input style="float: right;" type="button" value="ยืนยันสั่งสินค้า"></td>
+	</tr>
 
 </table>
+
+<!-- Loop all category & add id category -->
+<table id="cup" class="tablecat">
+	<tr class="sep" th:if="${cat != null}">
+		<td>
+			<p>รายละเอียดเพิ่มเติม </p>
+			<p>Category Cup Detail</p>
+			<div>image</div>
+		</td>
+	</tr>
+	
+	<!-- Loop all product in category -->
+	<tr class="sep" th:if="${cat != null}">
+		<td>
+			<div th:each="product: ${products}">
+				<div th:if="${product.getEnable()==1}">
+					<div th:if="${product.getNumberStock() == null}">
+						S <input th:if="${product.getS() > 0}" type="number"> <input th:if="${product.getS() == 0}" type="number" disabled> <br>
+						M <input th:if="${product.getM() > 0}" type="number"> <input th:if="${product.getM() == 0}" type="number" disabled> <br>
+						L <input th:if="${product.getL() > 0}" type="number"> <input th:if="${product.getL) == 0}" type="number" disabled> <br>
+						XL <input th:if="${product.getXL() > 0}" type="number"> <input th:if="${product.getXL() == 0}" type="number" disabled> <br>
+					</div>
+					<div th:if="${product.getNumberStock() != null}">
+						Stock <input th:if="${product.getNumberStock() > 0}" type="number"> <input th:if="${product.getNumberStock() == 0}" type="number" disabled> <br>
+					</div>
+				</div>
+			</div>
+		</td>
+	</tr>
+	<tr>
+	<td><input style="float: right;" type="button" value="ยืนยันสั่งสินค้า"></td>
+	</tr>
+
+</table>
+
+<script>
+function catSelect(evt, catselected) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tablecat");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("catheader");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(catselected).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
 </body>
 </html>
