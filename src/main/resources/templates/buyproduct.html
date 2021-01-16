@@ -106,8 +106,10 @@ font-family: 'Bai Jamjuree', sans-serif;
 .checked{
 	position: relative;
 	background-color: white;
-	width: 50%;
-	height: 80%;
+	margin-top: 5%;
+	padding: 10px;
+	width: 40%;
+	height: 70%;
 	cursor: default;
 	flex-flow: column;
 }
@@ -130,18 +132,7 @@ font-family: 'Bai Jamjuree', sans-serif;
 .overlaytable > td{
 	width: 60%;
 }
-.overlayheader{
-	position: absolute;
-	top: 0;
-	left: 0;
-	font-size: 16pt;
-	text-align: center;
-	height: 50pt;
-	width: 100%;
-	background-color: var(--brown);
-	color: white;
-	box-shadow: 2px 2px 2px gray;
-}
+
 .overlayconfirm{
 	position: absolute;
 	bottom: 0;
@@ -232,26 +223,23 @@ font-family: 'Bai Jamjuree', sans-serif;
 </div>
 
 <div class="center" id="overlay" onclick="off()">
-		<div class="checked center">
-			<div>
-			<div class="overlayheader center">รายการสินค้า </div>
+		<div class="checked">
+			<div>รหัสสั่งซื้อ </div>
+			<div style="width: 80%; margin: 0 10%;">
 			<table class="overlaytable">
 				<tr>
-						<th>รหัสสั่งซื้อ</th>
-						<td>รหัส</td>
-					</tr>
-					<tr>
-						<th>ชื่อ-สกุล</th>
-						<td>ชื่อ</td>
-					</tr>
-					<tr>
-						<th>จำนวนเงินที่ต้องโอน</th>
-						<td>เงิน</td>
-					</tr>
-					<tr>
-					<th>รูปสลิป</th>
-						<td><input type="file"></td>
-					</tr>
+					<td style="text-align: center;" colspan="3">รายการสินค้า</td>
+				</tr>
+				<tr><td colspan="3"><hr><td></tr>
+				<tr>
+					<td style="width: 20%">รูป</td>
+					<td style="width: 80%">จำนวน</td>
+					<td style="width: 20%">ราคา</td>
+				</tr>
+				<tr><td colspan="3"><hr><td></tr>
+				<tr>
+					<td style="text-align: right;" colspan="3">ยอดรวม</td>
+				</tr>
 			</table>
 			<a href="" class="overlayconfirm" id="overlayconfirm">ยืนยัน </a>
 			</div>
