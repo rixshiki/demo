@@ -1,5 +1,6 @@
 package com.example.demo.repositories;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,4 +22,7 @@ public interface UserOrderRepository extends JpaRepository<userorder, Integer> {
 	
 	@Query("from userorder o where o.nameDelivery = :transport and o.status = :status")
 	List<userorder> getByTrackingNamedelivery(@Param("transport")String transport,@Param("status")String status);
+
+	@Query("select MIN(o.payTime) from userorder o where o.status = :status")
+	LocalDateTime findMinPaytime(@Param("status")String status);
 }

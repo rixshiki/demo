@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.Daygroup;
 import com.example.demo.Monthgroup;
 import com.example.demo.entities.orderdetail;
 import com.example.demo.entities.userorder;
@@ -49,11 +50,28 @@ public class OrderController {
 		List<userorder> userorders = new ArrayList<userorder>();
 		List<orderdetail> orderlists = new ArrayList<orderdetail>();
 		userorders = userorderRepo.getByStatusorderbySellerBank("checking");
+		LocalDateTime minDate = userorderRepo.findMinPaytime("checking");
+		LocalDate localDate = LocalDate.now();
+		int month = localDate.getMonthValue();
+		int year = localDate.getYear();
+		int day = localDate.getDayOfMonth();
+		List<Daygroup> daylist = new ArrayList<Daygroup>();
+		List<userorder> ul = new ArrayList<userorder>();
+		for(LocalDate date = minDate.toLocalDate(); date.isBefore(localDate); date = date.plusDays(1)) {
+			Daygroup daygroup = new Daygroup();
+			String mixname = date.getDayOfMonth()+' '+getMonth(date.getMonthValue())+' '+date.getYear(); 
+			daygroup.setDatenum(date.getDayOfMonth());
+			daygroup.setMonthnum(date.getMonthValue());
+			daygroup.setMixname(mixname);
+			daylist.add(0, daygroup);
+		}
 		for(userorder userorder : userorders) {
 			List<orderdetail> orderdetails = new ArrayList<orderdetail>();
 			orderdetails = orderdetailRepo.getByIdorder(userorder.getIdOrder());
 			orderlists.addAll(orderdetails);
 		}
+		model.addAttribute("userlist", ul);
+		//model.addAttribute("monthlist", monthlist);
 		model.addAttribute("orderlists", orderlists);
 		model.addAttribute("userorders", userorders);
 		return "transfercheck";
@@ -121,7 +139,7 @@ public class OrderController {
 		int year = localDate.getYear();
 		List<Monthgroup> monthlist = new ArrayList<Monthgroup>();
 		List<userorder> ul = new ArrayList<userorder>();
-		for(int i=1;i<=8;i++) {
+		for(int i=1;i<8;i++) {
 			Monthgroup monthgroup = new Monthgroup();
 			String monthname = getMonth(month)+ ' ' + year;
 			monthgroup.setMonthname(monthname);
