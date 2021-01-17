@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ร้านขายของน้องหมา </title>
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brown: #cbaf87;
+  --x: #c7b198;
+  --brownbg: #f4ebc1;
+  --browntab: #e8cca3;
+  --green: #79d70f;
+  --grey: #707070;
+}
+
+body{
+	font-family: 'Bai Jamjuree', sans-serif;
+	height: 100vh;
+	margin: 120px 10%;
+	display: flex;
+	flex-direction: column;
+	background-color: var(--brownbg);
+}
+
+.center{
+  	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.back{
+	position: fixed;
+	top: 0;
+	left: 10pt;
+	text-decoration: none;
+	font-size: 30pt;
+	color: white;
+}
+
+a.catheader{
+	text-decoration: none;
+	background-color: var(--brown);
+	color: white;
+	display: inline-block;
+	width: 40pt;
+	height: 40pt;
+	text-align: center;
+	line-height: 40pt;
+}
+td button.active {
+	background-color: var(--grey);
+	color: white;
+}
+
+.tablecat{
+	/* margin: 80pt 10% 0 10%; */
+	width: 100%;
+	background-color: white;
+	display: none;
+}
+.imgproduct{
+	width: 60pt;
+	height: 60pt;
+	border-radius: 60pt;
+	background-color: black;
+}
+.btnsubmit{
+font-family: 'Bai Jamjuree', sans-serif;
+	background-color: var(--green);
+	height: 20pt;
+	width: 50pt;
+	border-radius: 5pt;
+	text-align: center;
+	color: white;
+	border: none;
+	float: right;
+	cursor: pointer;
+}
+.btnsubmit:hover{
+	background-color: darkgreen;
+	width: 50pt;
+	height: 20pt;
+	line-height: 20pt;
+	font-weight: bolder;
+	border: outset 1pt white;
+}
+.sep>td{
+	border: 4pt solid var(--brown);
+	padding: 5%;
+}
+
+/* overlay */
+
+#overlay {
+  position: fixed;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+.checked{
+	position: relative;
+	background-color: white;
+	margin-top: 5%;
+	padding: 10px;
+	width: 40%;
+	height: 70%;
+	cursor: default;
+	flex-flow: column;
+}
+.centercol{
+  	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-flow: column;
+}
+
+.overlaytable{
+	width: 100%;
+	overflow-y: scroll;
+	position: relative;
+}
+.overlaytable > th, .overlaytable > td{
+	text-align: left;
+	padding: 2% 0 2% 14%;
+}
+.overlaytable > td{
+	width: 60%;
+}
+
+.overlayconfirm{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	font-size: 16pt;
+	text-align: center;
+	height: 40pt;
+	width: 100%;
+	background-color:  #79d70f;
+	border: none;
+	color: white;
+	box-shadow: 2px -2px 2px gray;
+}
+</style>
+</head>
+
+<body>
+
+<table>
+	<tr>
+		<td>
+			<button class="catheader active" onclick="catSelect(event, 'shirt')">เสื้อ </button>
+			<button class="catheader" onclick="catSelect(event, 'cup')">แก้ว </button>
+		</td>
+	</tr>
+</table>
+
+<table id="shirt" class="tablecat" style="display: block;">
+	<tr class="sep" th:if="${cat != null}">
+		<td>
+			<p>รายละเอียดเพิ่มเติม </p>
+			<p>Category Shirt Detail</p>
+			<div>image</div>
+		</td>
+	</tr>
+	
+	<tr class="sep" th:if="${cat != null}">
+		<td>
+			<div th:each="product: ${products}">
+				<div th:if="${product.getEnable()==1}">
+					<div th:if="${product.getNumberStock() == null}">
+						S <input th:if="${product.getS() > 0}" type="number"> <input th:if="${product.getS() == 0}" type="number" disabled> <br>
+						M <input th:if="${product.getM() > 0}" type="number"> <input th:if="${product.getM() == 0}" type="number" disabled> <br>
+						L <input th:if="${product.getL() > 0}" type="number"> <input th:if="${product.getL) == 0}" type="number" disabled> <br>
+						XL <input th:if="${product.getXL() > 0}" type="number"> <input th:if="${product.getXL() == 0}" type="number" disabled> <br>
+					</div>
+					<div th:if="${product.getNumberStock() != null}">
+						Stock <input th:if="${product.getNumberStock() > 0}" type="number"> <input th:if="${product.getNumberStock() == 0}" type="number" disabled> <br>
+					</div>
+				</div>
+			</div>
+		</td>
+	</tr>
+</table>
+
+<!-- Loop all category & add id category -->
+<table id="cup" class="tablecat">
+	<tr class="sep" th:if="${cat != null}">
+		<td>
+			<p>รายละเอียดเพิ่มเติม </p>
+			<p>Category Cup Detail</p>
+			<div>image</div>
+		</td>
+	</tr>
+	
+	<!-- Loop all product in category -->
+	<tr class="sep" th:if="${cat != null}">
+		<td>
+			<div th:each="product: ${products}">
+				<div th:if="${product.getEnable()==1}">
+					<div th:if="${product.getNumberStock() == null}">
+						S <input th:if="${product.getS() > 0}" type="number"> <input th:if="${product.getS() == 0}" type="number" disabled> <br>
+						M <input th:if="${product.getM() > 0}" type="number"> <input th:if="${product.getM() == 0}" type="number" disabled> <br>
+						L <input th:if="${product.getL() > 0}" type="number"> <input th:if="${product.getL) == 0}" type="number" disabled> <br>
+						XL <input th:if="${product.getXL() > 0}" type="number"> <input th:if="${product.getXL() == 0}" type="number" disabled> <br>
+					</div>
+					<div th:if="${product.getNumberStock() != null}">
+						Stock <input th:if="${product.getNumberStock() > 0}" type="number"> <input th:if="${product.getNumberStock() == 0}" type="number" disabled> <br>
+					</div>
+				</div>
+			</div>
+		</td>
+	</tr>
+</table>
+
+<div>
+	<input style="float: right;" type="button" value="ยืนยันสั่งสินค้า" onclick="on()">
+</div>
+
+<div class="center" id="overlay" onclick="off()">
+		<div class="checked">
+			<div>รหัสสั่งซื้อ </div>
+			<div style="width: 80%; margin: 0 10%;">
+			<table class="overlaytable">
+				<tr>
+					<td style="text-align: center;" colspan="3">รายการสินค้า</td>
+				</tr>
+				<tr><td colspan="3"><hr><td></tr>
+				<tr>
+					<td style="width: 20%">รูป</td>
+					<td style="width: 80%">จำนวน</td>
+					<td style="width: 20%">ราคา</td>
+				</tr>
+				<tr><td colspan="3"><hr><td></tr>
+				<tr>
+					<td style="text-align: right;" colspan="3">ยอดรวม</td>
+				</tr>
+			</table>
+			<a href="" class="overlayconfirm" id="overlayconfirm">ยืนยัน </a>
+			</div>
+		</div>
+	</div>
+<script>
+function catSelect(evt, catselected) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tablecat");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("catheader");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(catselected).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+function on() {
+	  document.getElementById("overlay").style.visibility = "visible";
+}
+
+function off() {
+	  document.getElementById("overlay").style.visibility = "hidden";
+}
+
+</script>
+</body>
+</html>
