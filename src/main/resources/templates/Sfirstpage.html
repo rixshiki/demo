@@ -11,7 +11,10 @@
 :root {
   --brown: #cbaf87;
   --x: #c7b198;
-  --brown2: #f4ebc1;
+  --brownbg: #f4ebc1;
+  --browntab: #e8cca3;
+  --green: #79d70f;
+  --grey: #707070;
 }
 
 body{
@@ -19,7 +22,7 @@ body{
 	height: 100vh;
 	margin: 0;
 	display: flex;
-	background-color: var(--brown2);
+	background-color: var(--brownbg);
 }
 
 .center{
@@ -39,6 +42,7 @@ ul {
 	overflow: hidden;
 	background-color: var(--brown);
 	box-shadow: 2px 2px 5px gray; 
+	z-index: 999;
 }
 li {
 	float: left;
@@ -188,7 +192,75 @@ li a {
 	padding: 4px 10px;
 	justify-content: space-around;
 }
+
+/* Style the tab */
+.tab {
+	position: fixed;
+	top: 60px;
+	left: 0;
+	width: 100%;
+	height: 30pt;
+    font-weight: bold;
+  	overflow: hidden;
+  	box-shadow: 2px 2px 5px gray;
+	background-color: var(--browntab);
+	z-index: 900;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  line-height: 30pt;
+  width: 100pt;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+	background-color: #bbb;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+	background-color: var(--grey);
+	color: white;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-top: none;
+  background-color: white;
+  z-index: 1;
+}
+
 </style>
+<script>
+function openTab(evt, buyerselect) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(buyerselect).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
 </head>
 <body class="center">
 	<ul>		
@@ -201,14 +273,24 @@ li a {
 		<li style="float:right"><a href="/myinfo" th:text="${session.user.getName()}"></a></li>
 		<a href="/logout" class="logout">logout</a>
 		<div class="white">
-		<a href="/editproduct" class="editproduct">แก้ไขรายการสินค้า </a>
 		</div>
 	</ul>
-	<div class="whitebg center">
-		<a href="/checking" class="btnfirstpage center">ตรวจสอบ </a><br>
-		<a href="/packing" class="btnfirstpage center">บรรจุสินค้า </a><br>
-		<a href="/tracking" class="btnfirstpage center">ต้องจัดส่ง </a><br>
-		<a href="/complete" class="btnfirstpage center">จัดส่งแล้ว </a><br>
+	<div class="tab">
+  		<button class="tablinks active" onclick="openTab(event, 'editproduct')">แก้ไขสินค้า </button>
+  		<button class="tablinks" onclick="openTab(event, 'transfercheck')">ตรวจสอบ </button>
+  		<button class="tablinks" onclick="openTab(event, 'transfertrack')">ต้องจัดส่ง </button>
+  		<button class="tablinks" onclick="openTab(event, 'transfercomplete')">จัดส่งแล้ว </button>
+  		<button class="tablinks" onclick="openTab(event, 'transfercancel')">สินค้าที่ถูกยกเลิก </button>
 	</div>
+	
+	<iframe id="editproduct" class="tabcontent" src="editproduct.html" style="display: block;"></iframe>
+	
+	<iframe id="transfercheck" class="tabcontent" src="transfercheck.html"></iframe>
+
+	<iframe id="transfertrack" class="tabcontent" src="transfertrack.html"></iframe>
+	
+	<iframe id="transfercomplete" class="tabcontent" src="transfercomplete.html"></iframe>
+	
+	<iframe id="transfercancel" class="tabcontent" src="transfercancel.html"></iframe>
 </body>
 </html>
