@@ -50,6 +50,7 @@ details {
 	margin-top: 100px;
 	width: 100%;
 	border: 2px gray solid;
+	margin-top: 150px;
 }
 summary{
 	background-color: #e7d39f;
@@ -285,8 +286,8 @@ function offdetail() {
 	<div class="tabheadersecond">
 		<a href="/createPDF">ปริ๊นชื่อ-ที่อยู่ผู้ซื้อทั้งหมด</a>
 	</div>
-	<details>
-		<summary>กันยายน 2563</summary>
+	<details th:each="day : ${daylist}">
+		<summary th:text="${day.getMixname()}" th:value="${day.getMixname()}"></summary>
 		<table class="maintable">
 		<tr class="tableheader">
 			<th style="height:30pt; width: 10%" > รหัสสั่งซื้อ </th>
@@ -294,7 +295,7 @@ function offdetail() {
 			<th style="height:30pt; width: 50%">  รายการ </th>
 			<th style="height:30pt; width: 20%">เพิ่ม Track </th>
 		</tr>
-		<tr th:each="userorder: ${userorders}">
+		<tr th:each="userorder: ${userorders}" th:if="${userorder.getPayTime().toLocalDate().isEqual(day.getLocaldate())}">
 				<td th:text="${'#'+ userorder.getIdOrder()}" id="valueTD1"></td>
 				<td th:text="${userorder.getUserprofile().getName()}" id="valueTD2"></td>
 				<td style="position: relative;" >

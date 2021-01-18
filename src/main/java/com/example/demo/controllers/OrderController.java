@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.text.DateFormatSymbols;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -52,26 +53,28 @@ public class OrderController {
 		userorders = userorderRepo.getByStatusorderbySellerBank("checking");
 		LocalDateTime minDate = userorderRepo.findMinPaytime("checking");
 		LocalDate localDate = LocalDate.now();
-		int month = localDate.getMonthValue();
-		int year = localDate.getYear();
-		int day = localDate.getDayOfMonth();
 		List<Daygroup> daylist = new ArrayList<Daygroup>();
-		List<userorder> ul = new ArrayList<userorder>();
+		localDate = localDate.plusDays(1);
 		for(LocalDate date = minDate.toLocalDate(); date.isBefore(localDate); date = date.plusDays(1)) {
 			Daygroup daygroup = new Daygroup();
-			String mixname = date.getDayOfMonth()+' '+getMonth(date.getMonthValue())+' '+date.getYear(); 
+			DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+			String mixname = format.format(date);
 			daygroup.setDatenum(date.getDayOfMonth());
 			daygroup.setMonthnum(date.getMonthValue());
+			daygroup.setLocaldate(date);
 			daygroup.setMixname(mixname);
-			daylist.add(0, daygroup);
+			for(userorder userorder : userorders) {
+				if(userorder.getPayTime().toLocalDate().isEqual(date)) {
+					daylist.add(0, daygroup);
+				}
+			}
 		}
 		for(userorder userorder : userorders) {
 			List<orderdetail> orderdetails = new ArrayList<orderdetail>();
 			orderdetails = orderdetailRepo.getByIdorder(userorder.getIdOrder());
 			orderlists.addAll(orderdetails);
 		}
-		model.addAttribute("userlist", ul);
-		//model.addAttribute("monthlist", monthlist);
+		model.addAttribute("daylist", daylist);
 		model.addAttribute("orderlists", orderlists);
 		model.addAttribute("userorders", userorders);
 		return "transfercheck";
@@ -119,11 +122,30 @@ public class OrderController {
 		List<userorder> userorders = new ArrayList<userorder>();
 		List<orderdetail> orderlists = new ArrayList<orderdetail>();
 		userorders = userorderRepo.getByStatus("tracking");
+		LocalDateTime minDate = userorderRepo.findMinPaytime("tracking");
+		LocalDate localDate = LocalDate.now();
+		List<Daygroup> daylist = new ArrayList<Daygroup>();
+		localDate = localDate.plusDays(1);
+		for(LocalDate date = minDate.toLocalDate(); date.isBefore(localDate); date = date.plusDays(1)) {
+			Daygroup daygroup = new Daygroup();
+			DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+			String mixname = format.format(date);
+			daygroup.setDatenum(date.getDayOfMonth());
+			daygroup.setMonthnum(date.getMonthValue());
+			daygroup.setLocaldate(date);
+			daygroup.setMixname(mixname);
+			for(userorder userorder : userorders) {
+				if(userorder.getPayTime().toLocalDate().isEqual(date)) {
+					daylist.add(0, daygroup);
+				}
+			}
+		}
 		for(userorder userorder : userorders) {
 			List<orderdetail> orderdetails = new ArrayList<orderdetail>();
 			orderdetails = orderdetailRepo.getByIdorder(userorder.getIdOrder());
 			orderlists.addAll(orderdetails);
 		}
+		model.addAttribute("daylist", daylist);
 		model.addAttribute("orderlists", orderlists);
 		model.addAttribute("userorders", userorders);
 		return "transfertrack";

@@ -1,17 +1,15 @@
 package com.example.demo;
 
+import java.time.LocalDate;
+
 public class Daygroup {
 
 	private int datenum;
 	private int monthnum;
 	private String mixname;
+	private LocalDate localdate; 
 	
 	public Daygroup() {
-	}
-	public Daygroup(int datenum, int monthnum, String mixname) {
-		this.datenum = datenum;
-		this.monthnum = monthnum;
-		this.mixname = mixname;
 	}
 	public int getDatenum() {
 		return datenum;
@@ -31,4 +29,11 @@ public class Daygroup {
 	public void setMixname(String mixname) {
 		this.mixname = mixname;
 	}
+	public LocalDate getLocaldate() {
+		return localdate;
+	}
+	public void setLocaldate(LocalDate localdate) {
+		this.localdate = localdate;
+	}
+	
 }
