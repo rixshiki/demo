@@ -283,14 +283,14 @@ function openTab(evt, buyerselect) {
   		<button class="tablinks" onclick="openTab(event, 'transfercancel')">สินค้าที่ถูกยกเลิก </button>
 	</div>
 	
-	<iframe id="editproduct" class="tabcontent" src="editproduct.html" style="display: block;"></iframe>
+	<iframe id="editproduct" class="tabcontent" src="editproduct.html" th:src="@{/editproduct}" style="display: block;"></iframe>
 	
-	<iframe id="transfercheck" class="tabcontent" src="transfercheck.html"></iframe>
+	<iframe id="transfercheck" class="tabcontent" src="transfercheck.html" th:src="@{/checking}"></iframe>
 
-	<iframe id="transfertrack" class="tabcontent" src="transfertrack.html"></iframe>
+	<iframe id="transfertrack" class="tabcontent" src="transfertrack.html" th:src="@{/tracking}"></iframe>
 	
-	<iframe id="transfercomplete" class="tabcontent" src="transfercomplete.html"></iframe>
+	<iframe id="transfercomplete" class="tabcontent" src="transfercomplete.html" th:src="@{/complete}"></iframe>
 	
-	<iframe id="transfercancel" class="tabcontent" src="transfercancel.html"></iframe>
+	<iframe id="transfercancel" class="tabcontent" src="transfercancel.html" th:src="@{/transfercancel}"></iframe>
 </body>
 </html>
