@@ -156,6 +156,13 @@ font-family: 'Bai Jamjuree', sans-serif;
 	padding: 5%;
 }
 </style>
+<script type="text/javascript">
+	function recheck(){
+		if(confirm("Do you want to delete this category?")){
+			window.location.href=url;
+		}
+	}
+</script>
 </head>
 
 <body>
@@ -173,6 +180,7 @@ font-family: 'Bai Jamjuree', sans-serif;
 	<a href="#transfercomplete">จัดส่งแล้ว</a>
 	<a href="#transferremove">สินค้าที่ยกเลิก</a>
 </div>
+<p id="confirmtxt"></p>
 <table class="tablecat">
 	<!-- <tr>
 		<td>
@@ -188,11 +196,12 @@ font-family: 'Bai Jamjuree', sans-serif;
 		<td>
 			<p>แก้ไขรายละเอียดเพิ่มเติม </p>
 			<form action="#" th:action="@{/updatecat}" th:object="${cat}" method="post" enctype="multipart/form-data">
-				<a th:href="@{'/deletecategory/' + ${cat.getIdCategory()}}" class="catdelete">ลบ category</a>
+				<a th:href="@{'/deletecategory/' + ${cat.getIdCategory()}}" th:data-confirm-delete="|ต้องการลบ Category ${cat.getNameCat()}?|"
+  onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false" class="catdelete">ลบ category</a>
 				<input type="hidden" th:value="${cat.getIdCategory()}" th:field="*{idCategory}">
 				<input type="hidden" th:value="${cat.getNameCat()}" th:field="*{nameCat}">
 				<textarea th:value="${cat.getDetailCat()}" rows="10" cols="20" th:field="*{detailCat}"></textarea><br>
-				<img style="width=200px;" alt="can't download" th:src="@{'data:image/jpeg;base64,'+${cat.getPhotoCat()}}">
+				<img style="width: 200px;" alt="can't download" th:src="@{'data:image/jpeg;base64,'+${cat.getPhotoCat()}}">
 				<br><input type="file" name="imageFile"><br>
 				<input class="btnsubmit" type="submit" value="Submit" name="button">
 			</form>
