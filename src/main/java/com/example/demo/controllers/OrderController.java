@@ -126,20 +126,23 @@ public class OrderController {
 		LocalDate localDate = LocalDate.now();
 		List<Daygroup> daylist = new ArrayList<Daygroup>();
 		localDate = localDate.plusDays(1);
-		for(LocalDate date = minDate.toLocalDate(); date.isBefore(localDate); date = date.plusDays(1)) {
-			Daygroup daygroup = new Daygroup();
-			DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-			String mixname = format.format(date);
-			daygroup.setDatenum(date.getDayOfMonth());
-			daygroup.setMonthnum(date.getMonthValue());
-			daygroup.setLocaldate(date);
-			daygroup.setMixname(mixname);
-			for(userorder userorder : userorders) {
-				if(userorder.getPayTime().toLocalDate().isEqual(date)) {
-					daylist.add(0, daygroup);
+		if(minDate != null) {
+			for(LocalDate date = minDate.toLocalDate(); date.isBefore(localDate); date = date.plusDays(1)) {
+				Daygroup daygroup = new Daygroup();
+				DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+				String mixname = format.format(date);
+				daygroup.setDatenum(date.getDayOfMonth());
+				daygroup.setMonthnum(date.getMonthValue());
+				daygroup.setLocaldate(date);
+				daygroup.setMixname(mixname);
+				for(userorder userorder : userorders) {
+					if(userorder.getPayTime().toLocalDate().isEqual(date)) {
+						daylist.add(0, daygroup);
+					}
 				}
 			}
 		}
+		
 		for(userorder userorder : userorders) {
 			List<orderdetail> orderdetails = new ArrayList<orderdetail>();
 			orderdetails = orderdetailRepo.getByIdorder(userorder.getIdOrder());
