@@ -248,40 +248,7 @@ function offdetail() {
 <body>
 	<div class="sellerheader center">ต้องจัดส่ง </div>
 	<a href="/firstpage" class="back"><</a>
-	<!-- List order from database -->
-	<div class="center" id="overlaydetail" onclick="offdetail()">
-		<div class="checked center">
-			<div class="overlayheader center">รายละเอียดเพิ่มเติม </div>
-			<table class="tabledetail" style="width: 80%;">
-				<tr>
-					<td>รหัส order</td>
-					<td id="overlaytableTD1"></td>
-				</tr>
-				<tr>
-					<td>ชื่อผู้ซื้อ </td>
-					<td id="overlaytableTD2"></td>
-				</tr>
-				<tr>
-					<td>รายการ </td>
-					<td>จำนวน</td>
-					<td>ราคา (ต่อชิ้น)</td>
-				</tr>
-				<tr id="overlaytableTD4">
-					<td>รายการ </td>
-					<td>จำนวน</td>
-					<td>ราคา </td>
-				</tr>
-				<tr>
-					<td>ยอดรวม </td>
-					<td id="overlaytableTD5"></td>
-				</tr>
-				<tr>
-					<td>ที่อยู่</td>
-					<td id="overlaytableTD6"></td>
-				</tr>
-			</table>
-		</div>
-	</div>
+	
 	<div class="tabheadersecond">
 		<a href="/createPDF">ปริ๊นชื่อ-ที่อยู่ผู้ซื้อทั้งหมด</a>
 	</div>
@@ -317,5 +284,40 @@ function offdetail() {
 		</tr>
 		</table>
 	</details>
+	
+	<!-- List order from database -->
+	<div class="center" id="overlaydetail" onclick="offdetail()">
+		<div class="checked center">
+			<div class="overlayheader center">รายละเอียดเพิ่มเติม </div>
+			<table class="tabledetail" style="width: 80%;">
+				<tr>
+					<td>รหัส order</td>
+					<td id="overlaytableTD1"></td>
+				</tr>
+				<tr>
+					<td>ชื่อผู้ซื้อ </td>
+					<td id="overlaytableTD2"></td>
+				</tr>
+				<tr>
+					<td>รายการ </td>
+					<td>จำนวน</td>
+					<td>ราคา (ต่อชิ้น)</td>
+				</tr>
+				<tr id="overlaytableTD4">
+					<td>รายการ </td>
+					<td>จำนวน</td>
+					<td>ราคา </td>
+				</tr>
+				<tr>
+					<td>ยอดรวม </td>
+					<td id="overlaytableTD5"></td>
+				</tr>
+				<tr>
+					<td>ที่อยู่</td>
+					<td id="overlaytableTD6"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
 </body>
 </html>

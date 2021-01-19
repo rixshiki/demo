@@ -150,17 +150,7 @@ function offdetail() {
 </script>
 </head>
 <body>
-	<input type="file">
 
-<!-- 
-	<div class="sellerheader center">จัดส่งแล้ว </div>
-	<a href="/firstpage" class="back"><</a>
-	<!-- List order from database -->
-	<div class="center" id="overlaydetail" onclick="offdetail()">
-		<div class="checked center">
-			<div class="overlayheader center">รายละเอียดเพิ่มเติม </div>
-		</div>
-	</div>
 	<details>
 		<summary>กันยายน 2563</summary>
 		<table class="maintable">
@@ -182,12 +172,19 @@ function offdetail() {
 			  		</li>
 				</ul>
 				<a onclick="ondetail()" id="detaildata">รายละเอียดเพิ่มเติม </a>
-			<td th:text="${userorder.getPayTime()}" id="valueTD7"></td>
+			<td th:text="${userorder.getPayTime()}" id="valueTD7"อ</td>
 			<td style="flex-flow: column;" class="center">
 				<input type="checkbox">
 			</td>
 		</tr>
 		</table>
-	</details> -->
+	</details>
+	
+	<!-- Detail : List order from database -->
+	<div class="center" id="overlaydetail" onclick="offdetail()">
+		<div class="checked center">
+			<div class="overlayheader center">รายละเอียดเพิ่มเติม </div>
+		</div>
+	</div>
 </body>
 </html>
