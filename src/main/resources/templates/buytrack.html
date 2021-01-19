@@ -16,7 +16,6 @@
 
 body{
 	font-family: 'Bai Jamjuree', sans-serif;
-	height: 100vh;
 	margin: 120px 10%;
 	display: flex;
 	background-color: var(--brownbg);
@@ -37,84 +36,141 @@ body{
 	color: white;
 }
 
-a.catheader{
-	text-decoration: none;
-	background-color: var(--brown);
-	color: white;
-	display: inline-block;
-	width: 40pt;
-	height: 40pt;
-	text-align: center;
-	line-height: 40pt;
-}
-a.cataddheader{
-	color: white;
-	text-decoration: none;
-	vertical-align: middle;
-	font-size: 30pt;
-	line-height: 40pt;
-	margin: 0 5pt 0 5pt;
-}
-a.catdelete{
-	background-color: red;
-	text-align: center;
-	text-decoration: none;
-	border-radius: 5pt;
-	width: 100pt;
-	height: 20pt;
-	line-height: 20pt;
-	color: white;
-	float: right;
-}
-a.catdelete:hover{
-	background-color: darkred;
-	width: 98pt;
-	height: 18pt;
-	line-height: 18pt;
-	font-weight: bolder;
-	border: outset 1pt white;
-}
-.tablecat{
-	/* margin: 80pt 10% 0 10%; */
+details {
 	width: 100%;
-	background-color: white;
+	border: 2px gray solid;
 }
-.imgproduct{
-	width: 60pt;
-	height: 60pt;
-	border-radius: 60pt;
-	background-color: black;
+summary{
+	background-color: #e7d39f;
+	height: 30pt;
+	display: flex;
+	align-items: center;
+	padding-left: 2%;
 }
-.btnsubmit{
-font-family: 'Bai Jamjuree', sans-serif;
-	background-color: var(--green);
-	height: 20pt;
-	width: 50pt;
-	border-radius: 5pt;
-	text-align: center;
-	color: white;
-	border: none;
-	float: right;
+#detaildata{
+	position: absolute;
+	font-size: 10pt;
+	right: 2%;
+	bottom: 2%;
+	text-decoration: underline;
 	cursor: pointer;
 }
-.btnsubmit:hover{
-	background-color: darkgreen;
-	width: 50pt;
-	height: 20pt;
-	line-height: 20pt;
-	font-weight: bolder;
-	border: outset 1pt white;
+/* overlay detail */
+.container{
+	width: 80%;
 }
-.sep>td{
-	border: 4pt solid var(--brown);
-	padding: 5%;
+.checked{
+	position: relative;
+	background-color: white;
+	width: 50%;
+	height: 80%;
+	cursor: default;
+	flex-flow: column;
+}
+.checked iframe{
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+#overlayaddslip, #overlaydetail {
+  position: fixed;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+#detaildata{
+	font-size: 10pt;
+	text-decoration: underline;
+	cursor: pointer;
+}
+.tabledetail{
+	width: 80%;
+	margin: 20px auto;
+}
+.tabledetail:first-child{
+	width: 20px;
+}
+hr {
+  border: 0;
+  display: block;
+  background-color: gray;
+  height: 2px;
 }
 </style>
+<script type="text/javascript">
+function ondetail() {
+	  document.getElementById("overlaydetail").style.visibility = "visible";
+}
+
+function offdetail() {
+	  document.getElementById("overlaydetail").style.visibility = "hidden";
+}
+</script>
 </head>
 
 <body>
 
-Buyer Track Checking
+<details th:each="day : ${daylist}">
+		<summary th:text="${day.getMixname()}" th:value="${day.getMixname()}"></summary>
+		<table class="maintable">
+			<tr class="tableheader">
+				<th style="height:30pt; width: 10%" > รหัสสั่งซื้อ </th>
+				<th style="height:30pt; width: 60%">  รายการ </th>
+				<th style="height:30pt; width: 10%">สถานะ </th>
+				<th style="height:30pt; width: 10%">เลขแทร็ก</th>
+				<th style="height:30pt; width: 10%">ยืนยันรับพัสดุ </th>
+			</tr>
+			<tr th:each="userorder: ${userorders}" th:if="${userorder.getPayTime().toLocalDate().isEqual(day.getLocaldate())}">
+				<td th:text="${'#'+ userorder.getIdOrder()}" id="valueTD1"></td>
+				<td style="position: relative;" >
+					<ul>
+						<li th:each="orderlist: ${orderlists}" th:if="${orderlist.getIdOrder()==userorder.getIdOrder()}"> 
+							<span th:text="${orderlist.getProductdetail().getNameProduct()}"></span>
+							<span th:text="${' x'+ orderlist.getNumber()}"></span>
+			  			</li>
+					</ul>
+					<a onclick="ondetail()" id="detaildata">รายละเอียด </a>
+				</td>
+				<td>สถานะ</td>
+				<td>เลขแทร็ก</td>
+				<td style="text-align: center;">
+					<button class="btncheck" onclick="on()">ยืนยัน </button>
+				</td>
+				
+			</tr>
+		</table>
+	</details>
 
+<div class="center" id="overlaydetail" onclick="offdetail()">
+		<div class="checked">
+			<div style="position: absolute; left: 0; top: 0;">รหัส order</div>
+			<table class="tabledetail">
+				<tr>
+					<td style="text-align: center;" colspan="3">รายการคำสั่งซื้อ </td>
+				</tr>
+				<tr>
+					<td colspan="3"><hr></td>
+				</tr>
+				<tr>
+					<td>รูป </td>
+					<td>จำนวน</td>
+					<td>ราคา</td>
+				</tr>
+				<tr>
+					<td colspan="3"><hr></td>
+				</tr>
+				<tr>
+					<td>ยอดรวม </td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+</div>
 </body>
 </html>

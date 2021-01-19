@@ -17,7 +17,7 @@
 body{
 	font-family: 'Bai Jamjuree', sans-serif;
 	height: 100vh;
-	margin: 0;
+	margin: 120px 10%;
 	display: flex;
 	background-color: var(--brownbg);
 }
@@ -36,51 +36,11 @@ body{
 	color: white;
 }
 
-.sellerheader{
-	position: fixed;
-	top: 0;
-	height: 60px;
-	width: 100%;
-	padding: 0 40pt;
-	left: 0;
-	background-color: var(--brown);
-	color: white;
-	font-size: 20pt;
-	box-shadow: 2px 2px 5px gray;
-	z-index: 999;
+.tabcat{
+	color: blue;
 }
-.tabheader{
-	position: fixed;
-	top: 60px;
-	left: 0;
-	height: 30pt;
-	width: 100%;
-	background-color: var(--browntab);
-	box-shadow: 2px 2px 5px gray;
-	display: flex;
-	z-index: 900;
-}
-.tabheader a{
-	display: block;
-    width: 100px;
-    height: 30pt;
-    text-decoration: none;
-    text-align: center;
-    color: var(--grey);
-    font-weight: bold;
-    line-height: 30pt;
-}
-
-#selected{
-	display: block;
-    width: 100px;
-    height: 30pt;
-    text-decoration: none;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-    line-height: 30pt;
-	background-color: var(--grey);
+.tabcat a:active{
+	color: red;
 }
 
 a.catheader{
@@ -121,7 +81,7 @@ a.catdelete:hover{
 	border: outset 1pt white;
 }
 .tablecat{
-	margin: 80pt 10% 0 10%;
+	margin: 60px 10% 0 10%;
 	width: 100%;
 	background-color: white;
 }
@@ -156,31 +116,21 @@ font-family: 'Bai Jamjuree', sans-serif;
 	padding: 5%;
 }
 </style>
-<script type="text/javascript">
-	function recheck(){
-		if(confirm("Do you want to delete this category?")){
-			window.location.href=url;
-		}
-	}
-</script>
+
 </head>
 
 <body>
-<div class="sellerheader">
-	<div th:each="cat: ${catlist}" style="display: inline" th:if="${catlist != null}">
-		<a th:href="@{'/editproduct/' + ${cat.getIdCategory()}}" th:value="${cat.getNameCat()}" th:text="${cat.getNameCat()}"></a>
-	</div>
-	<a class="cataddheader" href="/addcategory">+</a>
-</div>
+
+<table>
+	<tr>
+	<td class="tabcat" th:each="cat: ${catlist}" style="display: inline" th:if="${catlist != null}">
+		<a onclick="catselected(event)" th:href="@{'/editproduct/' + ${cat.getIdCategory()}}" th:value="${cat.getNameCat()}" th:text="${cat.getNameCat()}"></a>
+	</td>
+	</tr>
+</table>
+<a class="cataddheader" href="/addcategory">+</a>
+
 <a class="back" href="/firstpage"><</a>
-<div class="tabheader">
-	<a id="selected" href="#editproduct">แก้ไขสินค้า</a>
-	<a href="#transfercheck">ตรวจสอบ</a>
-	<a href="#transfertrack">ต้องจัดส่ง</a>
-	<a href="#transfercomplete">จัดส่งแล้ว</a>
-	<a href="#transferremove">สินค้าที่ยกเลิก</a>
-</div>
-<p id="confirmtxt"></p>
 <table class="tablecat">
 	<!-- <tr>
 		<td>
@@ -238,6 +188,18 @@ font-family: 'Bai Jamjuree', sans-serif;
 	</tr>
 
 </table>
+<script>
+var tabcat = document.getElementsByClassName("tabcat");
+tabcat[0].className += " active";
 
+function catselected(evt) {
+	var tabcat;
+	tabcat = document.getElementsByClassName("tabcat");
+  	for (i = 0; i < tabcat.length; i++) {
+    	tabcat[i].className = tabcat[i].className.replace(" active", "");
+  	}
+  evt.currentTarget.className += " active";
+}
+</script>
 </body>
 </html>
