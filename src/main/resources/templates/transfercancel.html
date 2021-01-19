@@ -16,6 +16,7 @@
 body{
 	font-family: 'Bai Jamjuree', sans-serif;
 	/*height: 100vh;*/
+	margin-top: 120px;
 	display: flex;
 	background-color: var(--brown2);
 	color: gray;
@@ -27,20 +28,7 @@ body{
 	justify-content: center;
 }
 
-
-.sellerheader{
-	position: fixed;
-	top: 0;
-	left: 0;
-	background-color: var(--brown);
-	color: white;
-	font-size: 20pt;
-	height: 60px;
-	width: 100%;
-	box-shadow: 2px 2px 5px gray;
-}
 details {
-	margin-top: 60px;
 	width: 100%;
 	border: 2px gray solid;
 }
@@ -150,15 +138,6 @@ function offdetail() {
 </script>
 </head>
 <body>
-<!-- 
-	<div class="sellerheader center">จัดส่งแล้ว </div>
-	<a href="/firstpage" class="back"><</a>
-	<!-- List order from database -->
-	<div class="center" id="overlaydetail" onclick="offdetail()">
-		<div class="checked center">
-			<div class="overlayheader center">รายละเอียดเพิ่มเติม </div>
-		</div>
-	</div>
 	<details>
 		<summary>กันยายน 2563</summary>
 		<table class="maintable">
@@ -186,6 +165,12 @@ function offdetail() {
 			</td>
 		</tr>
 		</table>
-	</details> -->
+		
+		<!-- List order from database -->
+		<div class="center" id="overlaydetail" onclick="offdetail()">
+			<div class="checked center">
+				<div class="overlayheader center">รายละเอียดเพิ่มเติม </div>
+			</div>
+		</div>
 </body>
 </html>

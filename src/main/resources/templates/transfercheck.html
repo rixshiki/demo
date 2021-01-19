@@ -15,7 +15,7 @@
 
 body{
 	font-family: 'Bai Jamjuree', sans-serif;
-	/*height: 100vh;*/
+	margin-top: 120px;
 	display: flex;
 	background-color: var(--brown2);
 	color: gray;
@@ -40,7 +40,6 @@ body{
 	box-shadow: 2px 2px 5px gray;
 }
 details {
-	margin-top: 120px;
 	width: 100%;
 	border: 2px gray solid;
 }
@@ -198,14 +197,6 @@ function offdetail() {
 </head>
 
 <body>
-	<div class="sellerheader center">ตรวจสอบ </div>
-	<a href="/firstpage" class="back"><</a>
-	<!-- List order from database -->
-	<div class="center" id="overlaydetail" onclick="offdetail()">
-		<div class="checked center">
-			<div class="overlayheader center">รายละเอียดเพิ่มเติม </div>
-		</div>
-	</div>
 	
 	<details th:each="day : ${daylist}">
 		<summary th:text="${day.getMixname()}" th:value="${day.getMixname()}"></summary>
@@ -246,6 +237,13 @@ function offdetail() {
 			</tr>
 		</table>
 	</details>
+	
+	<!-- List order from database -->
+	<div class="center" id="overlaydetail" onclick="offdetail()">
+		<div class="checked center">
+			<div class="overlayheader center">รายละเอียดเพิ่มเติม </div>
+		</div>
+	</div>
 	
 	<div class="center" id="overlay" onclick="off()">
 		<div class="checked center">

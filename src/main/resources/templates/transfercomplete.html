@@ -168,8 +168,37 @@ function offdetail() {
 </script>
 </head>
 <body>
-	<div class="sellerheader center">จัดส่งแล้ว </div>
-	<a href="/firstpage" class="back"><</a>
+
+	<details th:each="month : ${monthlist}">
+		<summary th:text="${month.getMonthname()}" th:value="${month.getMonthname()}"></summary>
+		<table class="maintable">
+		<tr class="tableheader">
+			<th style="height:30pt; width: 10%" > รหัสสั่งซื้อ </th>
+			<th style="height:30pt; width: 20%" > ชื่อผู้ซื้อ </th>
+			<th style="height:30pt; width: 60%">  รายการ </th>
+			<th style="height:30pt; width: 10%" > ผู้ซื้อได้รับแล้ว </th>
+		</tr>
+		<tr th:each="userorder: ${userlist}" th:if=${userorder.getPayTime().getMonthValue()==month.getMonthnum()}>
+			<td th:text="${'#'+ userorder.getIdOrder()}" id="valueTD1"></td>
+			<td th:text="${userorder.getUserprofile().getName()}" id="valueTD2"></td>
+			<td style="position: relative;" >
+					<ul>
+						<li th:each="orderlist: ${orderlists}" th:if="${orderlist.getIdOrder()==userorder.getIdOrder()}"> 
+							<span th:text="${orderlist.getProductdetail().getNameProduct()}"></span>
+							<span th:text="${' x'+ orderlist.getNumber()}"></span>
+			  			</li>
+					</ul>
+					<a onclick="ondetail()" id="detaildata">รายละเอียดเพิ่มเติม </a>
+			</td>
+			<td th:if="${userorder.getStatus().equalsIgnoreCase('shipping')}">กำลังขนส่ง</td>
+			<td th:if="${userorder.getStatus().equalsIgnoreCase('complete')}">ได้รับแล้ว</td>
+			<input type="hidden" th:value="${userorder.getTotalOrder()}" id="valueTD5">
+			<input type="hidden" th:value="${userorder.getUserprofile().getAddress()}" id="valueTD6">
+			<input type="hidden" th:value="${userorder.getTrack()}" id="valueTD7">
+		</tr>
+		</table>
+	</details>
+	
 	<!-- List order from database -->
 	<div class="center" id="overlaydetail" onclick="offdetail()">
 		<div class="checked center">
@@ -208,34 +237,6 @@ function offdetail() {
 			</table>
 		</div>
 	</div>
-	<details th:each="month : ${monthlist}">
-		<summary th:text="${month.getMonthname()}" th:value="${month.getMonthname()}"></summary>
-		<table class="maintable">
-		<tr class="tableheader">
-			<th style="height:30pt; width: 10%" > รหัสสั่งซื้อ </th>
-			<th style="height:30pt; width: 20%" > ชื่อผู้ซื้อ </th>
-			<th style="height:30pt; width: 60%">  รายการ </th>
-			<th style="height:30pt; width: 10%" > ผู้ซื้อได้รับแล้ว </th>
-		</tr>
-		<tr th:each="userorder: ${userlist}" th:if=${userorder.getPayTime().getMonthValue()==month.getMonthnum()}>
-			<td th:text="${'#'+ userorder.getIdOrder()}" id="valueTD1"></td>
-			<td th:text="${userorder.getUserprofile().getName()}" id="valueTD2"></td>
-			<td style="position: relative;" >
-					<ul>
-						<li th:each="orderlist: ${orderlists}" th:if="${orderlist.getIdOrder()==userorder.getIdOrder()}"> 
-							<span th:text="${orderlist.getProductdetail().getNameProduct()}"></span>
-							<span th:text="${' x'+ orderlist.getNumber()}"></span>
-			  			</li>
-					</ul>
-					<a onclick="ondetail()" id="detaildata">รายละเอียดเพิ่มเติม </a>
-			</td>
-			<td th:if="${userorder.getStatus().equalsIgnoreCase('shipping')}">กำลังขนส่ง</td>
-			<td th:if="${userorder.getStatus().equalsIgnoreCase('complete')}">ได้รับแล้ว</td>
-			<input type="hidden" th:value="${userorder.getTotalOrder()}" id="valueTD5">
-			<input type="hidden" th:value="${userorder.getUserprofile().getAddress()}" id="valueTD6">
-			<input type="hidden" th:value="${userorder.getTrack()}" id="valueTD7">
-		</tr>
-		</table>
-	</details>
+	
 </body>
 </html>
